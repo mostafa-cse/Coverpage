@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+  }
+}
+
+/* Print styles — hide everything except the preview */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #cover-preview,
+  #cover-preview * {
+    visibility: visible;
+  }
+  #cover-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
