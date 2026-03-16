@@ -2,7 +2,6 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CoverPageData, defaultCoverPageData } from '@/types/CoverPageData'
 import { saveFormData, loadFormData } from '@/utils/localStorage'
-import TemplateSelector from '@/components/TemplateSelector/TemplateSelector'
 import CoverForm from '@/components/CoverForm/CoverForm'
 import PreviewPanel from '@/components/PreviewPanel/PreviewPanel'
 import ExportBar from '@/components/ExportBar/ExportBar'
@@ -23,7 +22,6 @@ export default function Editor() {
 
   useEffect(() => { saveFormData(formData) }, [formData])
 
-  // Compute scale so A4 (794px wide) fits the preview container
   useEffect(() => {
     function calcScale() {
       if (previewContainerRef.current) {
@@ -50,7 +48,7 @@ export default function Editor() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
 
-      {/* ── Header ── */}
+      {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex items-center justify-between sticky top-0 z-30 shadow-sm">
         <div className="flex items-center gap-2 md:gap-3 min-w-0">
           <button
@@ -68,7 +66,6 @@ export default function Editor() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Mobile: toggle preview */}
           <button
             onClick={() => setShowPreview(!showPreview)}
             className="flex md:hidden items-center gap-1 text-xs border border-gray-300 px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-50 transition"
@@ -88,36 +85,37 @@ export default function Editor() {
         </div>
       </header>
 
-      {/* ── Main layout ── */}
+      {/* Main layout */}
       <div className="flex flex-1 overflow-hidden">
 
-        {/* Left panel — form (hidden on mobile when preview is shown) */}
+        {/* Left panel — scrollable form, no steps */}
         <aside className={`
           ${showPreview ? 'hidden' : 'flex'} md:flex
           w-full md:w-80 xl:w-96 bg-white border-r border-gray-200
-          flex-col overflow-y-auto shrink-0
+          flex-col overflow-hidden shrink-0
         `}>
-          <div className="p-4 border-b border-gray-100">
-            <TemplateSelector
-              selectedId={selectedTemplate}
-              onSelect={(id) => { setSelectedTemplate(id); setCustomHtml(undefined) }}
+          {/* Mobile custom import */}
+          <div className="flex sm:hidden px-4 pt-3 pb-1">
+            <CustomTemplateImport
+              data={formData}
+              onLoad={setCustomHtml}
+              onClear={() => setCustomHtml(undefined)}
+              hasCustom={!!customHtml}
             />
           </div>
-          <div className="p-4 sm:p-5">
-            {/* Mobile custom import */}
-            <div className="flex sm:hidden mb-4">
-              <CustomTemplateImport
-                data={formData}
-                onLoad={setCustomHtml}
-                onClear={() => setCustomHtml(undefined)}
-                hasCustom={!!customHtml}
-              />
-            </div>
-            <CoverForm data={formData} onChange={handleChange} />
+
+          {/* Full-height scrolling form with template selector embedded */}
+          <div className="flex-1 overflow-y-auto">
+            <CoverForm
+              data={formData}
+              onChange={handleChange}
+              selectedTemplate={selectedTemplate}
+              onSelectTemplate={(id) => { setSelectedTemplate(id); setCustomHtml(undefined) }}
+            />
           </div>
         </aside>
 
-        {/* Right panel — preview (hidden on mobile when form is shown) */}
+        {/* Right panel — preview */}
         <main
           ref={previewContainerRef}
           className={`
@@ -125,7 +123,7 @@ export default function Editor() {
             flex-1 overflow-auto bg-gray-100 flex-col items-center p-4 md:p-8
           `}
         >
-          <p className="text-xs text-gray-400 mb-3 shrink-0">A4 Preview (210mm × 297mm)</p>
+          <p className="text-xs text-gray-400 mb-3 shrink-0">A4 Preview (210mm \u00d7 297mm)</p>
           <div
             className="preview-scaler shrink-0"
             style={{
@@ -144,7 +142,6 @@ export default function Editor() {
         </main>
       </div>
 
-      {/* ── Footer ── */}
       <div className="bg-gray-800 py-1.5">
         <Footer />
       </div>
