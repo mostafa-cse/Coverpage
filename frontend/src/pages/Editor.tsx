@@ -7,6 +7,7 @@ import CoverForm from '@/components/CoverForm/CoverForm'
 import PreviewPanel from '@/components/PreviewPanel/PreviewPanel'
 import ExportBar from '@/components/ExportBar/ExportBar'
 import CustomTemplateImport from '@/components/CustomTemplateImport/CustomTemplateImport'
+import Footer from '@/components/Footer/Footer'
 import { FileText, ArrowLeft } from 'lucide-react'
 
 export default function Editor() {
@@ -17,7 +18,6 @@ export default function Editor() {
   const [selectedTemplate, setSelectedTemplate] = useState('classic')
   const [customHtml, setCustomHtml] = useState<string | undefined>(undefined)
 
-  // Auto-save on every change
   useEffect(() => {
     saveFormData(formData)
   }, [formData])
@@ -62,14 +62,14 @@ export default function Editor() {
 
       {/* Main layout */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Left panel — form + template selector */}
+        {/* Left panel */}
         <aside className="w-80 xl:w-96 bg-white border-r border-gray-200 flex flex-col overflow-y-auto">
           <div className="p-5 border-b border-gray-100">
             <TemplateSelector
               selectedId={selectedTemplate}
               onSelect={(id) => {
                 setSelectedTemplate(id)
-                setCustomHtml(undefined) // reset custom when built-in selected
+                setCustomHtml(undefined)
               }}
             />
           </div>
@@ -78,10 +78,9 @@ export default function Editor() {
           </div>
         </aside>
 
-        {/* Right panel — preview */}
+        {/* Right panel */}
         <main className="flex-1 overflow-auto bg-gray-100 flex items-start justify-center p-8">
           <div className="flex flex-col items-center gap-4">
-            {/* Scale hint */}
             <p className="text-xs text-gray-400">A4 Preview (210mm × 297mm)</p>
             <div style={{ transform: 'scale(0.7)', transformOrigin: 'top center' }}>
               <PreviewPanel
@@ -94,6 +93,12 @@ export default function Editor() {
           </div>
         </main>
       </div>
+
+      {/* Footer */}
+      <div className="bg-gray-800 py-2">
+        <Footer />
+      </div>
+      <div className="bg-gray-800 py-1"><Footer /></div>
     </div>
   )
 }

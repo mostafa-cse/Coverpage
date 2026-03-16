@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { FileText, Zap, Download, Upload } from 'lucide-react'
+import Footer from '@/components/Footer/Footer'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -54,6 +55,9 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      <Footer />
+      <Footer />
     </div>
   )
 }
