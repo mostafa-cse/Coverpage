@@ -1,112 +1,98 @@
 import { CoverPageData } from '@/types/CoverPageData'
 
-interface Props {
-  data: CoverPageData
-}
+interface Props { data: CoverPageData }
 
 export default function ModernTemplate({ data }: Props) {
   const isLab = data.docType === 'lab_report'
 
   return (
-    <div
-      className="w-full min-h-[297mm] bg-white flex flex-col text-black"
-      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-    >
-      {/* Gradient accent header bar */}
-      <div
-        className="w-full py-6 px-10 text-white"
-        style={{
-          background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
-        }}
-      >
-        <div className="flex items-center gap-4">
-          {data.university.logoUrl && (
-            <img
-              src={data.university.logoUrl}
-              alt="Logo"
-              className="w-14 h-14 object-contain bg-white rounded-full p-1"
-            />
-          )}
-          <div>
-            <h1 className="text-xl font-bold uppercase tracking-wide">
-              {data.university.name || 'University Name'}
-            </h1>
-            <p className="text-sm opacity-80">
-              Department of {data.university.dept || 'Department'}
-            </p>
+    <div style={{
+      width: '210mm', minHeight: '297mm',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      fontSize: '12pt', color: '#000', backgroundColor: '#fff',
+      boxSizing: 'border-box', display: 'flex', flexDirection: 'column',
+    }}>
+      {/* Gradient header */}
+      <div style={{ background: 'linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%)', padding: '20px 28px', color: '#fff', display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {data.university.logoUrl ? (
+          <img src={data.university.logoUrl} alt="Logo" style={{ width: '64px', height: '64px', objectFit: 'contain', background: '#fff', borderRadius: '50%', padding: '4px' }} />
+        ) : (
+          <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: 'rgba(255,255,255,0.7)', border: '1px dashed rgba(255,255,255,0.5)', flexShrink: 0 }}>
+            Logo
+          </div>
+        )}
+        <div>
+          <div style={{ fontSize: '14pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            {data.university.name || 'University Name'}
+          </div>
+          <div style={{ fontSize: '10pt', opacity: 0.85, marginTop: '2px' }}>
+            Department of {data.university.dept || 'Department'}
           </div>
         </div>
       </div>
 
       {/* Body */}
-      <div className="flex-1 px-10 py-8 flex flex-col">
+      <div style={{ flex: 1, padding: '24px 28px', display: 'flex', flexDirection: 'column' }}>
         {/* Doc type pill */}
-        <div className="mb-6">
-          <span
-            className="inline-block px-4 py-1 rounded-full text-sm font-semibold text-white"
-            style={{ background: '#1e3a8a' }}
-          >
+        <div style={{ marginBottom: '18px' }}>
+          <span style={{ background: '#1e3a8a', color: '#fff', padding: '4px 16px', borderRadius: '20px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
             {isLab ? 'Lab Report' : 'Assignment'}
           </span>
         </div>
 
-        {/* Subject card */}
-        <div className="border-l-4 border-blue-600 pl-4 mb-8">
-          <h2 className="text-xl font-bold">{data.subject.name || 'Course Name'}</h2>
-          <p className="text-sm text-gray-500 mt-1">
-            {data.subject.courseCode} &bull; {data.subject.courseType} &bull; {data.subject.session}
-          </p>
+        {/* Subject */}
+        <div style={{ borderLeft: '4px solid #3b82f6', paddingLeft: '14px', marginBottom: '20px' }}>
+          <div style={{ fontSize: '14pt', fontWeight: 'bold', marginBottom: '4px' }}>
+            {data.subject.name || 'Course Name'}
+          </div>
+          <div style={{ fontSize: '10pt', color: '#555' }}>
+            {[data.subject.courseCode, data.subject.courseType, data.subject.session].filter(Boolean).join(' • ')}
+          </div>
           {isLab && (
-            <div className="mt-2 text-sm text-gray-700 space-y-0.5">
-              {data.experimentNo && <p>Experiment No: <strong>{data.experimentNo}</strong></p>}
-              {data.experimentTitle && <p>Experiment: <strong>{data.experimentTitle}</strong></p>}
-              {data.experimentDate && <p>Date of Exp.: <strong>{data.experimentDate}</strong></p>}
+            <div style={{ marginTop: '8px', fontSize: '10.5pt', color: '#333' }}>
+              {data.experimentNo && <div>Experiment No: <strong>{data.experimentNo}</strong></div>}
+              {data.experimentTitle && <div>Title: <strong>{data.experimentTitle}</strong></div>}
+              {data.experimentDate && <div>Date of Exp.: <strong>{data.experimentDate}</strong></div>}
             </div>
           )}
         </div>
 
-        {/* People */}
-        <div className="flex gap-6 mb-8">
+        {/* People cards */}
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
           {/* Submitted By */}
-          <div className="flex-1 bg-gray-50 rounded-lg p-4 border border-gray-200">
-            <p className="text-xs uppercase font-bold text-blue-700 tracking-wider mb-2">Submitted By</p>
-            <p className="font-semibold text-sm">{data.submittedBy.name || '—'}</p>
-            <p className="text-xs text-gray-500 mt-0.5">Roll: {data.submittedBy.roll || '—'}</p>
-            <p className="text-xs text-gray-500">Reg: {data.submittedBy.regNo || '—'}</p>
-            <p className="text-xs text-gray-500">
-              {data.submittedBy.year} Year &bull; {data.submittedBy.semester} Sem
-            </p>
-            {data.submittedBy.groupNo && (
-              <p className="text-xs text-gray-500">Group: {data.submittedBy.groupNo}</p>
-            )}
+          <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '14px' }}>
+            <div style={{ fontSize: '8.5pt', fontWeight: 'bold', color: '#1e40af', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '6px' }}>
+              Submitted By
+            </div>
+            {[['Name', data.submittedBy.name], ['Roll No.', data.submittedBy.roll], ['Reg. No.', data.submittedBy.regNo], ['Year', data.submittedBy.year], ['Semester', data.submittedBy.semester], ['Group', data.submittedBy.groupNo]].map(([l, v]) => v ? (
+              <div key={l} style={{ fontSize: '10pt', margin: '2px 0' }}><span style={{ color: '#555' }}>{l}: </span><strong>{v}</strong></div>
+            ) : null)}
           </div>
 
           {/* Submitted To */}
-          <div className="flex-1 bg-gray-50 rounded-lg p-4 border border-gray-200">
-            <p className="text-xs uppercase font-bold text-blue-700 tracking-wider mb-2">Submitted To</p>
-            <p className="font-semibold text-sm">{data.submittedTo.name || '—'}</p>
-            <p className="text-xs text-gray-500 mt-0.5">{data.submittedTo.designation}</p>
-            <p className="text-xs text-gray-500">Dept. of {data.submittedTo.dept || '—'}</p>
-            <p className="text-xs text-gray-500">{data.submittedTo.university || '—'}</p>
+          <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '14px' }}>
+            <div style={{ fontSize: '8.5pt', fontWeight: 'bold', color: '#1e40af', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '6px' }}>
+              Submitted To
+            </div>
+            {[['Name', data.submittedTo.name], ['Designation', data.submittedTo.designation], ['Department', data.submittedTo.dept], ['University', data.submittedTo.university]].map(([l, v]) => v ? (
+              <div key={l} style={{ fontSize: '10pt', margin: '2px 0' }}><span style={{ color: '#555' }}>{l}: </span><strong>{v}</strong></div>
+            ) : null)}
           </div>
         </div>
 
-        <div className="flex-1" />
+        <div style={{ flex: 1 }} />
 
         {/* Footer dates */}
-        <div className="pt-4 border-t border-gray-200 flex justify-between text-xs text-gray-500">
-          <span>Submission Date: <strong className="text-gray-800">{data.submissionDate || '—'}</strong></span>
+        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '10pt', color: '#555' }}>
+          <span>Submission Date: <strong style={{ color: '#000' }}>{data.submissionDate || '—'}</strong></span>
           {isLab && data.experimentDate && (
-            <span>Experiment Date: <strong className="text-gray-800">{data.experimentDate}</strong></span>
+            <span>Experiment Date: <strong style={{ color: '#000' }}>{data.experimentDate}</strong></span>
           )}
         </div>
       </div>
 
-      {/* Bottom accent */}
-      <div
-        className="h-2 w-full"
-        style={{ background: 'linear-gradient(90deg, #1e3a8a, #3b82f6)' }}
-      />
+      {/* Bottom accent bar */}
+      <div style={{ height: '6px', background: 'linear-gradient(90deg,#1e3a8a,#3b82f6)' }} />
     </div>
   )
 }

@@ -1,122 +1,96 @@
 import { CoverPageData } from '@/types/CoverPageData'
 
-interface Props {
-  data: CoverPageData
-}
+interface Props { data: CoverPageData }
 
 export default function ClassicTemplate({ data }: Props) {
   const isLab = data.docType === 'lab_report'
 
   return (
     <div
-      className="w-full min-h-[297mm] bg-white flex flex-col items-center px-12 py-10 font-serif text-black"
-      style={{ fontFamily: "'Times New Roman', Georgia, serif" }}
+      style={{
+        width: '210mm', minHeight: '297mm',
+        padding: '20mm 22mm',
+        fontFamily: '"Times New Roman", Times, serif',
+        fontSize: '12pt', color: '#000', backgroundColor: '#fff',
+        boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center',
+      }}
     >
-      {/* University Logo */}
-      {data.university.logoUrl && (
-        <img
-          src={data.university.logoUrl}
-          alt="University Logo"
-          className="w-24 h-24 object-contain mb-4"
-        />
-      )}
+      {/* Logo */}
+      <div style={{ marginBottom: '10px' }}>
+        {data.university.logoUrl ? (
+          <img src={data.university.logoUrl} alt="Logo" style={{ height: '80px', width: '80px', objectFit: 'contain' }} />
+        ) : (
+          <div style={{ height: '80px', width: '80px', borderRadius: '50%', border: '1px dashed #aaa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#aaa' }}>
+            Logo
+          </div>
+        )}
+      </div>
 
-      {/* University Name */}
-      <h1 className="text-2xl font-bold text-center uppercase tracking-wide">
+      {/* University */}
+      <h1 style={{ fontSize: '16pt', fontWeight: 'bold', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 4px' }}>
         {data.university.name || 'University Name'}
       </h1>
-      <p className="text-base text-center mt-1">
+      <p style={{ fontSize: '12pt', textAlign: 'center', margin: '0 0 14px' }}>
         Department of {data.university.dept || 'Department'}
       </p>
 
-      <div className="w-full border-t-2 border-black my-6" />
+      <div style={{ width: '100%', borderTop: '2px solid #000', marginBottom: '14px' }} />
 
-      {/* Document Type Badge */}
-      <div className="border border-black px-6 py-2 mb-6">
-        <p className="text-lg font-semibold tracking-widest uppercase text-center">
+      {/* Doc type */}
+      <div style={{ border: '1px solid #000', padding: '6px 24px', marginBottom: '16px' }}>
+        <p style={{ fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', margin: 0 }}>
           {isLab ? 'Lab Report' : 'Assignment'}
         </p>
       </div>
 
-      {/* Subject Info */}
-      <div className="text-center mb-6 space-y-1">
-        <p className="text-base">
-          <span className="font-semibold">Course Title: </span>
-          {data.subject.name || '—'}
-        </p>
-        <p className="text-base">
-          <span className="font-semibold">Course Code: </span>
-          {data.subject.courseCode || '—'}
-        </p>
-        <p className="text-base">
-          <span className="font-semibold">Course Type: </span>
-          {data.subject.courseType}
-        </p>
-        {data.subject.session && (
-          <p className="text-base">
-            <span className="font-semibold">Session: </span>
-            {data.subject.session}
-          </p>
-        )}
-      </div>
+      {/* Subject info */}
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5pt', marginBottom: '12px' }}>
+        <tbody>
+          {[
+            ['Course Title', data.subject.name],
+            ['Course Code', data.subject.courseCode],
+            ['Session', data.subject.session],
+          ].map(([label, val]) => (
+            <tr key={label}>
+              <td style={{ padding: '3px 0', fontWeight: 'bold', width: '40%' }}>{label}</td>
+              <td style={{ padding: '3px 4px', width: '4%' }}>:</td>
+              <td style={{ padding: '3px 0' }}>{val || '—'}</td>
+            </tr>
+          ))}
+          {isLab && [
+            ['Experiment No.', data.experimentNo],
+            ['Experiment Title', data.experimentTitle],
+            ['Date of Experiment', data.experimentDate],
+          ].map(([label, val]) => (
+            <tr key={label}>
+              <td style={{ padding: '3px 0', fontWeight: 'bold' }}>{label}</td>
+              <td style={{ padding: '3px 4px' }}>:</td>
+              <td style={{ padding: '3px 0' }}>{val || '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-      {/* Lab-only fields */}
-      {isLab && (
-        <div className="text-center mb-6 space-y-1 border border-dashed border-gray-400 px-6 py-3 rounded">
-          {data.experimentNo && (
-            <p className="text-base">
-              <span className="font-semibold">Experiment No: </span>
-              {data.experimentNo}
-            </p>
-          )}
-          {data.experimentTitle && (
-            <p className="text-base">
-              <span className="font-semibold">Experiment Title: </span>
-              {data.experimentTitle}
-            </p>
-          )}
-          {data.experimentDate && (
-            <p className="text-base">
-              <span className="font-semibold">Date of Experiment: </span>
-              {data.experimentDate}
-            </p>
-          )}
+      <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '14px' }} />
+
+      {/* Submitted By / To */}
+      <div style={{ width: '100%', display: 'flex', gap: '12px', marginTop: 'auto' }}>
+        <div style={{ flex: 1, border: '1px solid #000', padding: '10px 12px' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', borderBottom: '1px solid #000', paddingBottom: '5px', marginBottom: '8px', textAlign: 'center' }}>Submitted By</p>
+          {[['Name', data.submittedBy.name], ['Roll No.', data.submittedBy.roll], ['Reg. No.', data.submittedBy.regNo], ['Year', data.submittedBy.year], ['Semester', data.submittedBy.semester], ['Group', data.submittedBy.groupNo]].map(([l, v]) => v ? (
+            <p key={l} style={{ fontSize: '10.5pt', margin: '3px 0' }}><strong>{l}: </strong>{v}</p>
+          ) : null)}
         </div>
-      )}
-
-      <div className="flex w-full gap-8 mt-auto">
-        {/* Submitted By */}
-        <div className="flex-1 border border-black p-4">
-          <p className="font-bold text-base uppercase mb-2 border-b border-black pb-1">
-            Submitted By
-          </p>
-          <p className="text-sm mt-1"><span className="font-semibold">Name: </span>{data.submittedBy.name || '—'}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">Roll No: </span>{data.submittedBy.roll || '—'}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">Reg. No: </span>{data.submittedBy.regNo || '—'}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">Year: </span>{data.submittedBy.year || '—'}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">Semester: </span>{data.submittedBy.semester || '—'}</p>
-          {data.submittedBy.groupNo && (
-            <p className="text-sm mt-1"><span className="font-semibold">Group: </span>{data.submittedBy.groupNo}</p>
-          )}
-        </div>
-
-        {/* Submitted To */}
-        <div className="flex-1 border border-black p-4">
-          <p className="font-bold text-base uppercase mb-2 border-b border-black pb-1">
-            Submitted To
-          </p>
-          <p className="text-sm mt-1"><span className="font-semibold">Name: </span>{data.submittedTo.name || '—'}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">Designation: </span>{data.submittedTo.designation}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">Dept: </span>{data.submittedTo.dept || '—'}</p>
-          <p className="text-sm mt-1"><span className="font-semibold">University: </span>{data.submittedTo.university || '—'}</p>
+        <div style={{ flex: 1, border: '1px solid #000', padding: '10px 12px' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', borderBottom: '1px solid #000', paddingBottom: '5px', marginBottom: '8px', textAlign: 'center' }}>Submitted To</p>
+          {[['Name', data.submittedTo.name], ['Designation', data.submittedTo.designation], ['Dept.', data.submittedTo.dept], ['University', data.submittedTo.university]].map(([l, v]) => v ? (
+            <p key={l} style={{ fontSize: '10.5pt', margin: '3px 0' }}><strong>{l}: </strong>{v}</p>
+          ) : null)}
         </div>
       </div>
 
-      <div className="w-full border-t-2 border-black mt-6 pt-3 text-center">
-        <p className="text-sm">
-          <span className="font-semibold">Date of Submission: </span>
-          {data.submissionDate || '—'}
-        </p>
+      <div style={{ width: '100%', borderTop: '2px solid #000', marginTop: '14px', paddingTop: '8px', textAlign: 'center', fontSize: '11pt' }}>
+        <strong>Date of Submission: </strong>{data.submissionDate || '—'}
       </div>
     </div>
   )

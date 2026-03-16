@@ -3,44 +3,28 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
+  html { font-family: 'Inter', system-ui, sans-serif; }
+  * { box-sizing: border-box; }
 }
 
 @layer utilities {
-  .scrollbar-thin {
-    scrollbar-width: thin;
-  }
-
-  .scrollbar-track-gray {
-    scrollbar-color: #9ca3af #f3f4f6;
-  }
+  .scrollbar-thin { scrollbar-width: thin; }
+  .scrollbar-track-gray { scrollbar-color: #9ca3af #f3f4f6; }
 }
 
-/* Print styles — hides everything except the preview panel */
+/* A4 preview scaling — fits container width */
+.preview-scaler {
+  transform-origin: top center;
+}
+
 @media print {
-  body * {
-    visibility: hidden;
-  }
-
-  #printable-area,
-  #printable-area * {
-    visibility: visible;
-  }
-
+  body * { visibility: hidden; }
+  #printable-area, #printable-area * { visibility: visible; }
   #printable-area {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0;
-    padding: 0;
-    z-index: 9999;
+    position: fixed; top: 0; left: 0;
+    width: 210mm; min-height: 297mm;
+    margin: 0; padding: 0; z-index: 9999;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 }

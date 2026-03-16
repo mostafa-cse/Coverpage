@@ -8,97 +8,146 @@ import PreviewPanel from '@/components/PreviewPanel/PreviewPanel'
 import ExportBar from '@/components/ExportBar/ExportBar'
 import CustomTemplateImport from '@/components/CustomTemplateImport/CustomTemplateImport'
 import Footer from '@/components/Footer/Footer'
-import { FileText, ArrowLeft } from 'lucide-react'
+import { FileText, ArrowLeft, Eye, EyeOff } from 'lucide-react'
 
 export default function Editor() {
   const navigate = useNavigate()
   const printRef = useRef<HTMLDivElement>(null)
+  const previewContainerRef = useRef<HTMLDivElement>(null)
 
   const [formData, setFormData] = useState<CoverPageData>(loadFormData)
   const [selectedTemplate, setSelectedTemplate] = useState('classic')
   const [customHtml, setCustomHtml] = useState<string | undefined>(undefined)
+  const [showPreview, setShowPreview] = useState(false)
+  const [previewScale, setPreviewScale] = useState(0.5)
 
+  useEffect(() => { saveFormData(formData) }, [formData])
+
+  // Compute scale so A4 (794px wide) fits the preview container
   useEffect(() => {
-    saveFormData(formData)
-  }, [formData])
+    function calcScale() {
+      if (previewContainerRef.current) {
+        const w = previewContainerRef.current.offsetWidth - 48
+        setPreviewScale(Math.min(w / 794, 0.85))
+      }
+    }
+    calcScale()
+    window.addEventListener('resize', calcScale)
+    return () => window.removeEventListener('resize', calcScale)
+  }, [showPreview])
 
   const handleChange = useCallback((updated: Partial<CoverPageData>) => {
     setFormData((prev) => ({ ...prev, ...updated }))
   }, [])
 
   function handleClear() {
-    setFormData(defaultCoverPageData)
-    setCustomHtml(undefined)
+    if (confirm('Clear all form data?')) {
+      setFormData(defaultCoverPageData)
+      setCustomHtml(undefined)
+    }
   }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Top bar */}
-      <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-20">
-        <div className="flex items-center gap-3">
+
+      {/* ── Header ── */}
+      <header className="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 transition"
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 transition shrink-0"
           >
-            <ArrowLeft size={15} /> Home
+            <ArrowLeft size={15} />
+            <span className="hidden sm:inline">Home</span>
           </button>
-          <span className="text-gray-300">|</span>
-          <div className="flex items-center gap-2">
-            <FileText className="text-blue-600" size={18} />
-            <span className="font-semibold text-gray-800 text-sm">CoverPage Generator</span>
+          <span className="text-gray-200 hidden sm:inline">|</span>
+          <div className="flex items-center gap-1.5 min-w-0">
+            <FileText className="text-blue-600 shrink-0" size={17} />
+            <span className="font-semibold text-gray-800 text-sm truncate">CoverPage Generator</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <CustomTemplateImport
-            data={formData}
-            onLoad={setCustomHtml}
-            onClear={() => setCustomHtml(undefined)}
-            hasCustom={!!customHtml}
-          />
+        <div className="flex items-center gap-2">
+          {/* Mobile: toggle preview */}
+          <button
+            onClick={() => setShowPreview(!showPreview)}
+            className="flex md:hidden items-center gap-1 text-xs border border-gray-300 px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-50 transition"
+          >
+            {showPreview ? <EyeOff size={14} /> : <Eye size={14} />}
+            {showPreview ? 'Form' : 'Preview'}
+          </button>
+          <div className="hidden sm:flex items-center gap-2">
+            <CustomTemplateImport
+              data={formData}
+              onLoad={setCustomHtml}
+              onClear={() => setCustomHtml(undefined)}
+              hasCustom={!!customHtml}
+            />
+          </div>
           <ExportBar printRef={printRef} onClear={handleClear} />
         </div>
       </header>
 
-      {/* Main layout */}
+      {/* ── Main layout ── */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Left panel */}
-        <aside className="w-80 xl:w-96 bg-white border-r border-gray-200 flex flex-col overflow-y-auto">
-          <div className="p-5 border-b border-gray-100">
+
+        {/* Left panel — form (hidden on mobile when preview is shown) */}
+        <aside className={`
+          ${showPreview ? 'hidden' : 'flex'} md:flex
+          w-full md:w-80 xl:w-96 bg-white border-r border-gray-200
+          flex-col overflow-y-auto shrink-0
+        `}>
+          <div className="p-4 border-b border-gray-100">
             <TemplateSelector
               selectedId={selectedTemplate}
-              onSelect={(id) => {
-                setSelectedTemplate(id)
-                setCustomHtml(undefined)
-              }}
+              onSelect={(id) => { setSelectedTemplate(id); setCustomHtml(undefined) }}
             />
           </div>
-          <div className="flex-1 p-5">
+          <div className="p-4 sm:p-5">
+            {/* Mobile custom import */}
+            <div className="flex sm:hidden mb-4">
+              <CustomTemplateImport
+                data={formData}
+                onLoad={setCustomHtml}
+                onClear={() => setCustomHtml(undefined)}
+                hasCustom={!!customHtml}
+              />
+            </div>
             <CoverForm data={formData} onChange={handleChange} />
           </div>
         </aside>
 
-        {/* Right panel */}
-        <main className="flex-1 overflow-auto bg-gray-100 flex items-start justify-center p-8">
-          <div className="flex flex-col items-center gap-4">
-            <p className="text-xs text-gray-400">A4 Preview (210mm × 297mm)</p>
-            <div style={{ transform: 'scale(0.7)', transformOrigin: 'top center' }}>
-              <PreviewPanel
-                ref={printRef}
-                data={formData}
-                templateId={selectedTemplate}
-                customHtml={customHtml}
-              />
-            </div>
+        {/* Right panel — preview (hidden on mobile when form is shown) */}
+        <main
+          ref={previewContainerRef}
+          className={`
+            ${showPreview ? 'flex' : 'hidden'} md:flex
+            flex-1 overflow-auto bg-gray-100 flex-col items-center p-4 md:p-8
+          `}
+        >
+          <p className="text-xs text-gray-400 mb-3 shrink-0">A4 Preview (210mm × 297mm)</p>
+          <div
+            className="preview-scaler shrink-0"
+            style={{
+              transform: `scale(${previewScale})`,
+              transformOrigin: 'top center',
+              marginBottom: `${(1130 * previewScale) - 1130 + 32}px`,
+            }}
+          >
+            <PreviewPanel
+              ref={printRef}
+              data={formData}
+              templateId={selectedTemplate}
+              customHtml={customHtml}
+            />
           </div>
         </main>
       </div>
 
-      {/* Footer */}
-      <div className="bg-gray-800 py-2">
+      {/* ── Footer ── */}
+      <div className="bg-gray-800 py-1.5">
         <Footer />
       </div>
-      <div className="bg-gray-800 py-1"><Footer /></div>
     </div>
   )
 }
