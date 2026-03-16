@@ -1,6 +1,17 @@
 import { forwardRef } from 'react'
 import { CoverPageData } from '@/types/CoverPageData'
-import { ClassicTemplate, BUETTemplate, DUTemplate, ModernTemplate, KUETTemplate, RUETTemplate, NSUTemplate, ElegantTemplate } from '@/components/templates'
+import {
+  ClassicTemplate,
+  BUETTemplate,
+  DUTemplate,
+  ModernTemplate,
+  KUETTemplate,
+  RUETTemplate,
+  NSUTemplate,
+  ElegantTemplate,
+  JUSTStyle1Template,
+  JUSTStyle2Template,
+} from '@/components/templates'
 
 interface Props {
   data: CoverPageData
@@ -18,6 +29,8 @@ function renderTemplate(templateId: string, data: CoverPageData, customHtml?: st
     case 'nsu':     return <NSUTemplate data={data} />
     case 'elegant': return <ElegantTemplate data={data} />
     case 'modern':  return <ModernTemplate data={data} />
+    case 'just1':   return <JUSTStyle1Template data={data} />
+    case 'just2':   return <JUSTStyle2Template data={data} />
     default:        return <ClassicTemplate data={data} />
   }
 }
