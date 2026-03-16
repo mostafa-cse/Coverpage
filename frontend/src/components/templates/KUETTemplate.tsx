@@ -11,7 +11,7 @@ export default function KUETTemplate({ data }: Props) {
       fontFamily: '"Times New Roman", Times, serif',
       fontSize: '12pt', color: '#000', backgroundColor: '#fff',
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center',
-      border: '3px solid #1a3c6e', position: 'relative',
+      border: '3px solid #000', position: 'relative',
     }}>
       {/* Corner decorations */}
       {['top:4mm;left:4mm', 'top:4mm;right:4mm', 'bottom:4mm;left:4mm', 'bottom:4mm;right:4mm'].map((pos, i) => (
@@ -19,10 +19,10 @@ export default function KUETTemplate({ data }: Props) {
           position: 'absolute',
           ...(Object.fromEntries(pos.split(';').map(p => p.split(':')))),
           width: '12mm', height: '12mm',
-          borderTop: i < 2 ? '2px solid #1a3c6e' : 'none',
-          borderBottom: i >= 2 ? '2px solid #1a3c6e' : 'none',
-          borderLeft: i % 2 === 0 ? '2px solid #1a3c6e' : 'none',
-          borderRight: i % 2 === 1 ? '2px solid #1a3c6e' : 'none',
+          borderTop: i < 2 ? '2px solid #000' : 'none',
+          borderBottom: i >= 2 ? '2px solid #000' : 'none',
+          borderLeft: i % 2 === 0 ? '2px solid #000' : 'none',
+          borderRight: i % 2 === 1 ? '2px solid #000' : 'none',
         }} />
       ))}
 
@@ -31,13 +31,13 @@ export default function KUETTemplate({ data }: Props) {
         {university.logoUrl ? (
           <img src={university.logoUrl} alt="Logo" style={{ height: '100px', width: '100px', objectFit: 'contain' }} />
         ) : (
-          <div style={{ height: '100px', width: '100px', borderRadius: '50%', border: '2px dashed #1a3c6e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#1a3c6e' }}>Logo</div>
+          <div style={{ height: '100px', width: '100px', borderRadius: '50%', border: '2px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999' }}>Logo</div>
         )}
       </div>
 
       {/* University */}
       <div style={{ textAlign: 'center', marginBottom: '6px' }}>
-        <div style={{ fontSize: '16pt', fontWeight: 'bold', textTransform: 'uppercase', color: '#1a3c6e', letterSpacing: '0.5px' }}>
+        <div style={{ fontSize: '16pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           {university.name || 'Khulna University of Engineering & Technology'}
         </div>
         <div style={{ fontSize: '11.5pt', marginTop: '3px', color: '#333' }}>
@@ -45,16 +45,16 @@ export default function KUETTemplate({ data }: Props) {
         </div>
       </div>
 
-      {/* Blue rule */}
-      <div style={{ width: '100%', height: '3px', background: 'linear-gradient(90deg,#1a3c6e,#4a7cc7,#1a3c6e)', margin: '12px 0' }} />
+      {/* Double rule */}
+      <div style={{ width: '100%', borderTop: '3px double #000', margin: '12px 0' }} />
 
       {/* Doc type */}
-      <div style={{ background: '#1a3c6e', color: '#fff', padding: '7px 30px', marginBottom: '18px', letterSpacing: '2px', fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase' }}>
+      <div style={{ border: '2px solid #000', padding: '7px 30px', marginBottom: '18px', letterSpacing: '2px', fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase' }}>
         {isLab ? 'Laboratory Report' : 'Assignment'}
       </div>
 
       {/* Subject info */}
-      <div style={{ width: '100%', border: '1px solid #1a3c6e', padding: '12px 16px', marginBottom: '20px', borderRadius: '2px' }}>
+      <div style={{ width: '100%', border: '1px solid #000', padding: '12px 16px', marginBottom: '20px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11pt' }}>
           <tbody>
             {[
@@ -68,7 +68,7 @@ export default function KUETTemplate({ data }: Props) {
               ] : []),
             ].map(([label, val]) => (
               <tr key={label}>
-                <td style={{ padding: '4px 0', fontWeight: 'bold', width: '44%', color: '#1a3c6e' }}>{label}</td>
+                <td style={{ padding: '4px 0', fontWeight: 'bold', width: '44%' }}>{label}</td>
                 <td style={{ padding: '4px 4px', width: '4%' }}>:</td>
                 <td style={{ padding: '4px 0' }}>{val || '—'}</td>
               </tr>
@@ -83,8 +83,8 @@ export default function KUETTemplate({ data }: Props) {
           { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
           { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
         ].map(({ title, rows }) => (
-          <div key={title} style={{ flex: 1, border: '1px solid #1a3c6e', padding: '12px 14px', borderRadius: '2px' }}>
-            <div style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', color: '#fff', background: '#1a3c6e', margin: '-12px -14px 10px', padding: '6px 14px', letterSpacing: '0.5px' }}>
+          <div key={title} style={{ flex: 1, border: '1px solid #000', padding: '12px 14px' }}>
+            <div style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', background: '#f0f0f0', margin: '-12px -14px 10px', padding: '6px 14px', letterSpacing: '0.5px', borderBottom: '1px solid #000', textAlign: 'center' }}>
               {title}
             </div>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>
@@ -102,8 +102,8 @@ export default function KUETTemplate({ data }: Props) {
         ))}
       </div>
 
-      {/* Blue rule + date */}
-      <div style={{ width: '100%', height: '3px', background: 'linear-gradient(90deg,#1a3c6e,#4a7cc7,#1a3c6e)', marginBottom: '10px' }} />
+      {/* Double rule + date */}
+      <div style={{ width: '100%', borderTop: '3px double #000', marginBottom: '10px' }} />
       <div style={{ textAlign: 'center', fontSize: '11pt' }}>
         <strong>Date of Submission:</strong> {submissionDate || '—'}
       </div>

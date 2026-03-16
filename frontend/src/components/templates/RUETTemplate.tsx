@@ -13,15 +13,15 @@ export default function RUETTemplate({ data }: Props) {
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center',
       border: '2px solid #000',
     }}>
-      {/* Green accent top bar */}
-      <div style={{ width: 'calc(100% + 48mm)', marginLeft: '-24mm', marginTop: '-20mm', marginBottom: '20px', height: '8px', background: 'linear-gradient(90deg,#1a6e3c,#2ecc71,#1a6e3c)' }} />
+      {/* Top accent bar */}
+      <div style={{ width: 'calc(100% + 48mm)', marginLeft: '-24mm', marginTop: '-20mm', marginBottom: '20px', height: '6px', background: '#000' }} />
 
       {/* Logo */}
       <div style={{ marginBottom: '12px' }}>
         {university.logoUrl ? (
           <img src={university.logoUrl} alt="Logo" style={{ height: '100px', width: '100px', objectFit: 'contain' }} />
         ) : (
-          <div style={{ height: '100px', width: '100px', borderRadius: '50%', border: '2px dashed #1a6e3c', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#1a6e3c' }}>Logo</div>
+          <div style={{ height: '100px', width: '100px', borderRadius: '50%', border: '2px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999' }}>Logo</div>
         )}
       </div>
 
@@ -35,12 +35,12 @@ export default function RUETTemplate({ data }: Props) {
         </div>
       </div>
 
-      <div style={{ width: '100%', borderTop: '2px solid #1a6e3c', marginBottom: '2px', marginTop: '12px' }} />
+      <div style={{ width: '100%', borderTop: '2px solid #000', marginBottom: '2px', marginTop: '12px' }} />
       <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '16px' }} />
 
       {/* Doc type */}
-      <div style={{ border: '2px solid #1a6e3c', padding: '6px 28px', marginBottom: '18px' }}>
-        <div style={{ fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', color: '#1a6e3c' }}>
+      <div style={{ border: '2px solid #000', padding: '6px 28px', marginBottom: '18px' }}>
+        <div style={{ fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center' }}>
           {isLab ? 'Laboratory Report' : 'Assignment'}
         </div>
       </div>
@@ -58,7 +58,7 @@ export default function RUETTemplate({ data }: Props) {
               ['Date of Experiment', experimentDate],
             ] : []),
           ].map(([label, val]) => (
-            <tr key={label} style={{ borderBottom: '1px solid #e5e7eb' }}>
+            <tr key={label} style={{ borderBottom: '1px solid #ddd' }}>
               <td style={{ padding: '5px 0', fontWeight: 'bold', width: '44%' }}>{label}</td>
               <td style={{ padding: '5px 4px', width: '4%' }}>:</td>
               <td style={{ padding: '5px 0' }}>{val || '—'}</td>
@@ -73,8 +73,8 @@ export default function RUETTemplate({ data }: Props) {
           { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
           { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
         ].map(({ title, rows }) => (
-          <div key={title} style={{ flex: 1, border: '1px solid #1a6e3c', padding: '12px 14px' }}>
-            <div style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid #1a6e3c', paddingBottom: '6px', marginBottom: '10px', color: '#1a6e3c' }}>
+          <div key={title} style={{ flex: 1, border: '1px solid #000', padding: '12px 14px' }}>
+            <div style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid #000', paddingBottom: '6px', marginBottom: '10px' }}>
               {title}
             </div>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>
@@ -92,7 +92,7 @@ export default function RUETTemplate({ data }: Props) {
         ))}
       </div>
 
-      <div style={{ width: '100%', borderTop: '2px solid #1a6e3c', marginBottom: '2px' }} />
+      <div style={{ width: '100%', borderTop: '2px solid #000', marginBottom: '2px' }} />
       <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '10px' }} />
       <div style={{ textAlign: 'center', fontSize: '11pt' }}>
         <strong>Date of Submission:</strong> {submissionDate || '—'}

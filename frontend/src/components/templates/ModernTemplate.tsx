@@ -11,13 +11,17 @@ export default function ModernTemplate({ data }: Props) {
       fontFamily: 'Inter, system-ui, sans-serif',
       fontSize: '12pt', color: '#000', backgroundColor: '#fff',
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column',
+      border: '1px solid #000',
     }}>
-      {/* Gradient header */}
-      <div style={{ background: 'linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%)', padding: '20px 28px', color: '#fff', display: 'flex', alignItems: 'center', gap: '14px' }}>
+      {/* Top accent bar */}
+      <div style={{ height: '5px', background: '#000' }} />
+
+      {/* Header */}
+      <div style={{ padding: '20px 28px', display: 'flex', alignItems: 'center', gap: '14px', borderBottom: '1px solid #000' }}>
         {data.university.logoUrl ? (
-          <img src={data.university.logoUrl} alt="Logo" style={{ width: '64px', height: '64px', objectFit: 'contain', background: '#fff', borderRadius: '50%', padding: '4px' }} />
+          <img src={data.university.logoUrl} alt="Logo" style={{ width: '64px', height: '64px', objectFit: 'contain', flexShrink: 0 }} />
         ) : (
-          <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: 'rgba(255,255,255,0.7)', border: '1px dashed rgba(255,255,255,0.5)', flexShrink: 0 }}>
+          <div style={{ width: '64px', height: '64px', borderRadius: '50%', border: '1px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999', flexShrink: 0 }}>
             Logo
           </div>
         )}
@@ -25,7 +29,7 @@ export default function ModernTemplate({ data }: Props) {
           <div style={{ fontSize: '14pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             {data.university.name || 'University Name'}
           </div>
-          <div style={{ fontSize: '10pt', opacity: 0.85, marginTop: '2px' }}>
+          <div style={{ fontSize: '10pt', color: '#444', marginTop: '2px' }}>
             Department of {data.university.dept || 'Department'}
           </div>
         </div>
@@ -33,15 +37,15 @@ export default function ModernTemplate({ data }: Props) {
 
       {/* Body */}
       <div style={{ flex: 1, padding: '24px 28px', display: 'flex', flexDirection: 'column' }}>
-        {/* Doc type pill */}
+        {/* Doc type */}
         <div style={{ marginBottom: '18px' }}>
-          <span style={{ background: '#1e3a8a', color: '#fff', padding: '4px 16px', borderRadius: '20px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <span style={{ border: '1.5px solid #000', padding: '4px 18px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
             {isLab ? 'Lab Report' : 'Assignment'}
           </span>
         </div>
 
         {/* Subject */}
-        <div style={{ borderLeft: '4px solid #3b82f6', paddingLeft: '14px', marginBottom: '20px' }}>
+        <div style={{ borderLeft: '3px solid #000', paddingLeft: '14px', marginBottom: '20px' }}>
           <div style={{ fontSize: '14pt', fontWeight: 'bold', marginBottom: '4px' }}>
             {data.subject.name || 'Course Name'}
           </div>
@@ -59,9 +63,8 @@ export default function ModernTemplate({ data }: Props) {
 
         {/* People cards */}
         <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
-          {/* Submitted By */}
-          <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '14px' }}>
-            <div style={{ fontSize: '8.5pt', fontWeight: 'bold', color: '#1e40af', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '6px' }}>
+          <div style={{ flex: 1, border: '1px solid #ccc', padding: '14px' }}>
+            <div style={{ fontSize: '8.5pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', borderBottom: '1px solid #ccc', paddingBottom: '6px' }}>
               Submitted By
             </div>
             {[['Name', data.submittedBy.name], ['Roll No.', data.submittedBy.roll], ['Reg. No.', data.submittedBy.regNo], ['Year', data.submittedBy.year], ['Semester', data.submittedBy.semester], ['Group', data.submittedBy.groupNo]].map(([l, v]) => v ? (
@@ -69,9 +72,8 @@ export default function ModernTemplate({ data }: Props) {
             ) : null)}
           </div>
 
-          {/* Submitted To */}
-          <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '14px' }}>
-            <div style={{ fontSize: '8.5pt', fontWeight: 'bold', color: '#1e40af', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '6px' }}>
+          <div style={{ flex: 1, border: '1px solid #ccc', padding: '14px' }}>
+            <div style={{ fontSize: '8.5pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', borderBottom: '1px solid #ccc', paddingBottom: '6px' }}>
               Submitted To
             </div>
             {[['Name', data.submittedTo.name], ['Designation', data.submittedTo.designation], ['Department', data.submittedTo.dept], ['University', data.submittedTo.university]].map(([l, v]) => v ? (
@@ -82,8 +84,8 @@ export default function ModernTemplate({ data }: Props) {
 
         <div style={{ flex: 1 }} />
 
-        {/* Footer dates */}
-        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '10pt', color: '#555' }}>
+        {/* Footer */}
+        <div style={{ borderTop: '1px solid #000', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '10pt', color: '#333' }}>
           <span>Submission Date: <strong style={{ color: '#000' }}>{data.submissionDate || '—'}</strong></span>
           {isLab && data.experimentDate && (
             <span>Experiment Date: <strong style={{ color: '#000' }}>{data.experimentDate}</strong></span>
@@ -92,7 +94,7 @@ export default function ModernTemplate({ data }: Props) {
       </div>
 
       {/* Bottom accent bar */}
-      <div style={{ height: '6px', background: 'linear-gradient(90deg,#1e3a8a,#3b82f6)' }} />
+      <div style={{ height: '5px', background: '#000' }} />
     </div>
   )
 }

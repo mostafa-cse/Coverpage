@@ -9,42 +9,43 @@ export default function NSUTemplate({ data }: Props) {
     <div style={{
       width: '210mm', minHeight: '297mm',
       fontFamily: 'Arial, Helvetica, sans-serif',
-      fontSize: '11pt', color: '#1a1a1a', backgroundColor: '#fff',
+      fontSize: '11pt', color: '#000', backgroundColor: '#fff',
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column',
+      border: '1px solid #000',
     }}>
-      {/* Header band */}
-      <div style={{ background: '#c8102e', padding: '18px 28px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+      {/* Top accent bar */}
+      <div style={{ height: '5px', background: '#000' }} />
+
+      {/* Header */}
+      <div style={{ padding: '18px 28px', display: 'flex', alignItems: 'center', gap: '16px', borderBottom: '2px solid #000' }}>
         {university.logoUrl ? (
-          <img src={university.logoUrl} alt="Logo" style={{ height: '80px', width: '80px', objectFit: 'contain', background: '#fff', borderRadius: '4px', padding: '3px' }} />
+          <img src={university.logoUrl} alt="Logo" style={{ height: '80px', width: '80px', objectFit: 'contain', flexShrink: 0 }} />
         ) : (
-          <div style={{ height: '80px', width: '80px', borderRadius: '4px', border: '2px dashed rgba(255,255,255,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: 'rgba(255,255,255,0.7)', flexShrink: 0 }}>Logo</div>
+          <div style={{ height: '80px', width: '80px', borderRadius: '4px', border: '1px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999', flexShrink: 0 }}>Logo</div>
         )}
-        <div style={{ color: '#fff' }}>
+        <div>
           <div style={{ fontSize: '15pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             {university.name || 'North South University'}
           </div>
-          <div style={{ fontSize: '10pt', opacity: 0.9, marginTop: '3px' }}>
+          <div style={{ fontSize: '10pt', color: '#444', marginTop: '3px' }}>
             {university.dept || 'Department of Electrical & Computer Engineering'}
           </div>
         </div>
       </div>
-
-      {/* Gold accent line */}
-      <div style={{ height: '5px', background: 'linear-gradient(90deg,#8b0000,#c8102e,#e8b800,#c8102e,#8b0000)' }} />
 
       {/* Body */}
       <div style={{ flex: 1, padding: '24px 28px', display: 'flex', flexDirection: 'column' }}>
 
         {/* Doc type */}
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-          <div style={{ display: 'inline-block', background: '#f5f5f5', border: '1px solid #ddd', padding: '8px 32px', fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px', color: '#c8102e' }}>
+          <div style={{ display: 'inline-block', border: '1.5px solid #000', padding: '8px 32px', fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px' }}>
             {isLab ? 'Laboratory Report' : 'Assignment'}
           </div>
         </div>
 
         {/* Course info box */}
-        <div style={{ border: '1px solid #c8102e', borderRadius: '4px', overflow: 'hidden', marginBottom: '20px' }}>
-          <div style={{ background: '#c8102e', color: '#fff', padding: '6px 14px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        <div style={{ border: '1px solid #000', overflow: 'hidden', marginBottom: '20px' }}>
+          <div style={{ background: '#f0f0f0', borderBottom: '1px solid #000', padding: '6px 14px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Course Information
           </div>
           <div style={{ padding: '12px 16px' }}>
@@ -74,11 +75,11 @@ export default function NSUTemplate({ data }: Props) {
         {/* People */}
         <div style={{ display: 'flex', gap: '14px', marginBottom: '20px' }}>
           {[
-            { title: 'Submitted By', color: '#c8102e', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
-            { title: 'Submitted To', color: '#c8102e', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
-          ].map(({ title, color, rows }) => (
-            <div key={title} style={{ flex: 1, border: `1px solid ${color}`, borderRadius: '4px', overflow: 'hidden' }}>
-              <div style={{ background: color, color: '#fff', padding: '6px 14px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
+            { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
+          ].map(({ title, rows }) => (
+            <div key={title} style={{ flex: 1, border: '1px solid #000', overflow: 'hidden' }}>
+              <div style={{ background: '#f0f0f0', borderBottom: '1px solid #000', padding: '6px 14px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 {title}
               </div>
               <div style={{ padding: '10px 14px' }}>
@@ -101,13 +102,13 @@ export default function NSUTemplate({ data }: Props) {
         <div style={{ flex: 1 }} />
 
         {/* Footer */}
-        <div style={{ borderTop: '2px solid #c8102e', paddingTop: '10px', textAlign: 'center', fontSize: '11pt', color: '#333' }}>
+        <div style={{ borderTop: '2px solid #000', paddingTop: '10px', textAlign: 'center', fontSize: '11pt' }}>
           <strong>Date of Submission:</strong> {submissionDate || '—'}
         </div>
       </div>
 
-      {/* Bottom band */}
-      <div style={{ height: '5px', background: 'linear-gradient(90deg,#8b0000,#c8102e,#e8b800,#c8102e,#8b0000)' }} />
+      {/* Bottom accent bar */}
+      <div style={{ height: '5px', background: '#000' }} />
     </div>
   )
 }
