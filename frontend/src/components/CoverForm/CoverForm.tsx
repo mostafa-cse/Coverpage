@@ -48,21 +48,22 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
   return (
     <div className="overflow-y-auto h-full px-4 py-4">
 
-      {/* ── Style / Template ── */}
+      {/* ── Style / Template ── 2-column grid so all 10 always visible */}
       <SectionLabel>Style</SectionLabel>
-      <div className="flex flex-wrap gap-1.5 mb-1">
+      <div className="grid grid-cols-2 gap-1.5 mb-1">
         {TEMPLATES.map((t) => (
           <button
             key={t.id}
             onClick={() => onSelectTemplate(t.id)}
             className={clsx(
-              'px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all',
+              'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-left truncate',
               selectedTemplate === t.id
                 ? 'bg-gray-900 text-white border-gray-900'
                 : 'bg-white text-gray-500 border-gray-200 hover:border-gray-500 hover:text-gray-700'
             )}
           >
-            {t.thumbnail} {t.name}
+            <span className="shrink-0 text-sm">{t.thumbnail}</span>
+            <span className="truncate">{t.name}</span>
           </button>
         ))}
       </div>
@@ -81,7 +82,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
                 : 'bg-white text-gray-500 border-gray-200 hover:border-gray-500'
             )}
           >
-            {v === 'assignment' ? '\u{1F4DD} Assignment' : '\u{1F52C} Lab Report'}
+            {v === 'assignment' ? '📝 Assignment' : '🔬 Lab Report'}
           </button>
         ))}
       </div>
@@ -108,7 +109,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         <input
           className={inp}
           value={(data.university as any).address ?? ''}
-          placeholder="e.g. Jashore \u2013 7408, Bangladesh"
+          placeholder="e.g. Jashore – 7408, Bangladesh"
           onChange={(e) => onChange({ university: { ...data.university, address: e.target.value } as any })}
         />
       </Field>
