@@ -1,50 +1,59 @@
 import { useNavigate } from 'react-router-dom'
-import { FileText, Layers, Download, Zap } from 'lucide-react'
-
-const features = [
-  { icon: Layers, title: '4 Built-in Templates', desc: 'Simple, Formal, BUET-style, and Modern designs ready to use.' },
-  { icon: FileText, title: 'Assignment & Lab Report', desc: 'Switches extra fields automatically for lab reports.' },
-  { icon: Zap, title: 'Live Preview', desc: 'See your cover page update in real-time as you type.' },
-  { icon: Download, title: 'PDF Export', desc: 'Download as PDF or print directly from the browser.' },
-]
+import { FileText, Zap, Download, Upload } from 'lucide-react'
 
 export default function Home() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-50 to-white">
-      {/* Hero */}
-      <header className="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 bg-brand-100 text-brand-700 text-sm font-medium px-3 py-1 rounded-full mb-6">
-          <FileText size={14} /> Academic Cover Page Generator
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex flex-col">
+      {/* Navbar */}
+      <nav className="px-8 py-5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <FileText className="text-blue-400" size={24} />
+          <span className="text-white font-bold text-lg">CoverPage<span className="text-blue-400">Gen</span></span>
         </div>
-        <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-5">
-          Create Professional<br />
-          <span className="text-brand-600">Cover Pages</span> in Seconds
+      </nav>
+
+      {/* Hero */}
+      <div className="flex-1 flex flex-col items-center justify-center text-center px-4 py-20">
+        <div className="inline-flex items-center gap-2 bg-blue-900/40 border border-blue-700/40 px-4 py-1.5 rounded-full text-blue-300 text-sm mb-8">
+          <Zap size={14} /> Made for BD University Students
+        </div>
+
+        <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+          Academic Cover Pages<br />
+          <span className="text-blue-400">in Seconds</span>
         </h1>
-        <p className="text-lg text-gray-500 mb-10 max-w-xl mx-auto">
-          Pick a template, fill in your academic details, preview live, and export as PDF — no more manual formatting.
+
+        <p className="text-gray-300 text-lg max-w-xl mb-10 leading-relaxed">
+          Pick a template, fill your details, get a pixel-perfect cover page —
+          Assignment, Lab Report, or custom. Export as PDF or print directly.
         </p>
+
         <button
           onClick={() => navigate('/editor')}
-          className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-brand-500/30 transition-all active:scale-95"
+          className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-10 py-4 rounded-xl text-lg transition shadow-lg shadow-blue-900/40"
         >
-          Start Generating →
+          Create Cover Page →
         </button>
-      </header>
 
-      {/* Features grid */}
-      <section className="max-w-4xl mx-auto px-6 pb-20 grid grid-cols-2 md:grid-cols-4 gap-5">
-        {features.map(({ icon: Icon, title, desc }) => (
-          <div key={title} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-            <div className="w-10 h-10 bg-brand-50 rounded-xl flex items-center justify-center mb-3">
-              <Icon size={20} className="text-brand-600" />
+        {/* Feature pills */}
+        <div className="flex flex-wrap justify-center gap-3 mt-12">
+          {[
+            { icon: <FileText size={14} />, label: '4 Built-in Templates' },
+            { icon: <Download size={14} />, label: 'PDF + Print Export' },
+            { icon: <Upload size={14} />, label: 'Custom HTML Templates' },
+            { icon: <Zap size={14} />, label: 'Auto-saves Locally' },
+          ].map(({ icon, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 bg-white/5 border border-white/10 text-gray-300 text-sm px-4 py-2 rounded-full"
+            >
+              {icon} {label}
             </div>
-            <h3 className="font-semibold text-gray-800 mb-1 text-sm">{title}</h3>
-            <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
-          </div>
-        ))}
-      </section>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

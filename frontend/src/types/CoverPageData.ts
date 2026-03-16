@@ -9,17 +9,14 @@ export type Designation =
 export type CourseType = 'Theory' | 'Lab' | 'Project'
 
 export interface CoverPageData {
-  // Document type
   docType: DocType
 
-  // University & department
   university: {
     name: string
     dept: string
     logoUrl: string   // base64 or URL
   }
 
-  // Subject information
   subject: {
     name: string
     courseCode: string
@@ -27,18 +24,15 @@ export interface CoverPageData {
     session: string   // e.g. "2021-22"
   }
 
-  // Submitted by (student)
   submittedBy: {
     name: string
     roll: string
     regNo: string
-    year: string      // e.g. "2nd Year"
-    semester: string  // e.g. "1st Semester"
-    dept: string
-    groupNo?: string
+    year: string      // e.g. "3rd"
+    semester: string  // e.g. "1st"
+    groupNo: string
   }
 
-  // Submitted to (teacher)
   submittedTo: {
     name: string
     designation: Designation
@@ -46,10 +40,9 @@ export interface CoverPageData {
     university: string
   }
 
-  // Dates
   submissionDate: string
 
-  // Lab-only fields
+  // Lab report only
   experimentDate?: string
   experimentNo?: string
   experimentTitle?: string
@@ -57,9 +50,33 @@ export interface CoverPageData {
 
 export const defaultCoverPageData: CoverPageData = {
   docType: 'assignment',
-  university: { name: '', dept: '', logoUrl: '' },
-  subject: { name: '', courseCode: '', courseType: 'Theory', session: '' },
-  submittedBy: { name: '', roll: '', regNo: '', year: '', semester: '', dept: '' },
-  submittedTo: { name: '', designation: 'Lecturer', dept: '', university: '' },
-  submissionDate: new Date().toLocaleDateString('en-BD'),
+  university: {
+    name: '',
+    dept: '',
+    logoUrl: '',
+  },
+  subject: {
+    name: '',
+    courseCode: '',
+    courseType: 'Theory',
+    session: '',
+  },
+  submittedBy: {
+    name: '',
+    roll: '',
+    regNo: '',
+    year: '',
+    semester: '',
+    groupNo: '',
+  },
+  submittedTo: {
+    name: '',
+    designation: 'Lecturer',
+    dept: '',
+    university: '',
+  },
+  submissionDate: new Date().toISOString().split('T')[0],
+  experimentDate: '',
+  experimentNo: '',
+  experimentTitle: '',
 }
