@@ -14,22 +14,23 @@ export interface CoverPageData {
   university: {
     name: string
     dept: string
-    logoUrl: string   // base64 or URL
+    logoUrl: string
+    address: string   // e.g. "Jashore – 7408, Bangladesh"
   }
 
   subject: {
     name: string
     courseCode: string
     courseType: CourseType
-    session: string   // e.g. "2021-22"
+    session: string
   }
 
   submittedBy: {
     name: string
     roll: string
     regNo: string
-    year: string      // e.g. "3rd"
-    semester: string  // e.g. "1st"
+    year: string
+    semester: string
     groupNo: string
   }
 
@@ -54,6 +55,7 @@ export const defaultCoverPageData: CoverPageData = {
     name: '',
     dept: '',
     logoUrl: '',
+    address: '',
   },
   subject: {
     name: '',

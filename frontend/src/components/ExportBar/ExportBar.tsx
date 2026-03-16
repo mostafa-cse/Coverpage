@@ -18,16 +18,14 @@ export default function ExportBar({ printRef, onClear }: Props) {
   async function handlePDF() {
     try {
       await exportToPDF('printable-area', 'cover-page.pdf')
-    } catch (e) {
+    } catch {
       alert('PDF export failed. Please try the Print option.')
     }
   }
 
   function handleClear() {
-    if (confirm('Clear all form data? This cannot be undone.')) {
-      clearFormData()
-      onClear()
-    }
+    clearFormData()
+    onClear()   // confirm dialog is handled in Editor
   }
 
   return (

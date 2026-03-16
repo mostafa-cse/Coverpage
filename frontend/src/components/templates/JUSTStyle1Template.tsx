@@ -2,14 +2,6 @@ import { CoverPageData } from '@/types/CoverPageData'
 
 interface Props { data: CoverPageData }
 
-/**
- * JUST Style 1 — Based on Jashore University assignment cover:
- * Logo + University Name + Address + Dept → horizontal rule
- * → "Assignment On" / "Laboratory Report On"
- * → Bold centred title block
- * → Two-column side-by-side Submitted By | Submitted To table
- * → Submission Date centred at bottom
- */
 export default function JUSTStyle1Template({ data }: Props) {
   const isLab = data.docType === 'lab_report'
   const { university, subject, submittedBy, submittedTo, submissionDate, experimentNo, experimentTitle } = data
@@ -52,18 +44,18 @@ export default function JUSTStyle1Template({ data }: Props) {
         </div>
       </div>
 
-      {/* Horizontal rule */}
+      {/* Thick rule */}
       <div style={{ width: '100%', borderTop: '2px solid #000', margin: '14px 0 10px' }} />
 
-      {/* "Assignment On" / "Laboratory Report On" label */}
+      {/* Assignment On / Lab Report On */}
       <div style={{ fontSize: '13pt', fontWeight: 'bold', textAlign: 'center', marginBottom: '10px' }}>
         {isLab ? 'Laboratory Report On' : 'Assignment On'}
       </div>
 
-      {/* Course / experiment title block */}
+      {/* Title */}
       <div style={{ textAlign: 'center', marginBottom: '8px' }}>
         {subject.name && (
-          <div style={{ fontSize: '13pt', fontWeight: 'bold', marginBottom: '4px', lineHeight: '1.4' }}>
+          <div style={{ fontSize: '13pt', fontWeight: 'bold', lineHeight: '1.4' }}>
             {subject.name}
           </div>
         )}
@@ -74,17 +66,15 @@ export default function JUSTStyle1Template({ data }: Props) {
         )}
       </div>
 
-      {/* Course code / session / experiment no info line */}
+      {/* Course / experiment meta */}
       <div style={{ textAlign: 'center', fontSize: '11pt', marginBottom: '14px', color: '#333' }}>
         {[subject.courseCode, subject.session, isLab && experimentNo ? `Experiment No: ${experimentNo}` : ''].filter(Boolean).join('  |  ')}
       </div>
 
-      {/* Horizontal rule */}
       <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '14px' }} />
 
-      {/* Two-column Submitted By | Submitted To */}
+      {/* Two-column: Submitted By | Submitted To */}
       <div style={{ width: '100%', display: 'flex', gap: '0', marginTop: 'auto' }}>
-        {/* Submitted By */}
         <div style={{ flex: 1, paddingRight: '16px', borderRight: '1px solid #000' }}>
           <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', textDecoration: 'underline' }}>
             Submitted By:
@@ -95,7 +85,7 @@ export default function JUSTStyle1Template({ data }: Props) {
                 ['Name', submittedBy.name],
                 ['Student ID', submittedBy.roll],
                 ['Session', subject.session],
-                ['Semester', submittedBy.semester ? `${submittedBy.semester} Semester, ${submittedBy.year}` : submittedBy.year],
+                ['Year / Sem', submittedBy.year && submittedBy.semester ? `${submittedBy.semester} Semester, ${submittedBy.year} Year` : (submittedBy.year || submittedBy.semester)],
                 ['Department', university.dept],
               ].filter(([, v]) => v).map(([l, v]) => (
                 <tr key={l}>
@@ -108,7 +98,6 @@ export default function JUSTStyle1Template({ data }: Props) {
           </table>
         </div>
 
-        {/* Submitted To */}
         <div style={{ flex: 1, paddingLeft: '16px' }}>
           <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', textDecoration: 'underline' }}>
             Submitted To:
@@ -122,10 +111,8 @@ export default function JUSTStyle1Template({ data }: Props) {
         </div>
       </div>
 
-      {/* Horizontal rule */}
       <div style={{ width: '100%', borderTop: '2px solid #000', margin: '16px 0 8px' }} />
 
-      {/* Submission Date */}
       <div style={{ textAlign: 'center', fontSize: '12pt' }}>
         <strong>Submission Date:</strong> {submissionDate || '—'}
       </div>

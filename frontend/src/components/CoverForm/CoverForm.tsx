@@ -48,7 +48,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
   return (
     <div className="overflow-y-auto h-full px-4 py-4">
 
-      {/* ── Style / Template ── 2-column grid so all 10 always visible */}
+      {/* ── Style / Template ── */}
       <SectionLabel>Style</SectionLabel>
       <div className="grid grid-cols-2 gap-1.5 mb-1">
         {TEMPLATES.map((t) => (
@@ -56,7 +56,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
             key={t.id}
             onClick={() => onSelectTemplate(t.id)}
             className={clsx(
-              'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-left truncate',
+              'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-left',
               selectedTemplate === t.id
                 ? 'bg-gray-900 text-white border-gray-900'
                 : 'bg-white text-gray-500 border-gray-200 hover:border-gray-500 hover:text-gray-700'
@@ -108,9 +108,9 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <Field label="Address (optional)">
         <input
           className={inp}
-          value={(data.university as any).address ?? ''}
+          value={data.university.address}
           placeholder="e.g. Jashore – 7408, Bangladesh"
-          onChange={(e) => onChange({ university: { ...data.university, address: e.target.value } as any })}
+          onChange={(e) => onChange({ university: { ...data.university, address: e.target.value } })}
         />
       </Field>
       <Field label="Logo (optional)">
@@ -189,7 +189,6 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
       </Field>
 
-      {/* Lab-only fields */}
       {isLab && (
         <>
           <div className="flex gap-2 mb-3">
