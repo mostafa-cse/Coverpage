@@ -1,33 +1,38 @@
-import type { TemplateId } from '../types/CoverPageData';
-
 export interface TemplateMeta {
-  id: TemplateId;
-  label: string;
-  description: string;
-  accent: string;
-  icon: string;
+  id: string
+  label: string
+  description: string
+  accent: string
+  icon: string
 }
 
 export const templates: TemplateMeta[] = [
   {
-    id: 'simple',
-    label: 'Simple',
-    description: 'Clean academic layout for quick submissions.',
-    accent: 'from-sky-500 to-blue-600',
+    id: 'classic',
+    label: 'Classic Formal',
+    description: 'Clean centered layout used across most BD public universities.',
+    accent: 'from-slate-700 to-slate-900',
     icon: '📄',
   },
   {
-    id: 'formal',
-    label: 'Formal',
-    description: 'Traditional cover page with strong header and table layout.',
-    accent: 'from-slate-700 to-slate-900',
+    id: 'buet',
+    label: 'BUET Style',
+    description: 'Bold header with double border rules, BUET-inspired.',
+    accent: 'from-green-600 to-emerald-700',
+    icon: '🏛️',
+  },
+  {
+    id: 'du',
+    label: 'DU Style',
+    description: 'University of Dhaka style — serif fonts, boxed layout.',
+    accent: 'from-blue-600 to-blue-800',
     icon: '🎓',
   },
   {
     id: 'modern',
-    label: 'Modern',
-    description: 'Contemporary layout with bold accent styling.',
+    label: 'Modern Minimal',
+    description: 'Gradient accent bar, sans-serif — clean and contemporary.',
     accent: 'from-violet-600 to-indigo-700',
     icon: '✨',
   },
-];
+]
