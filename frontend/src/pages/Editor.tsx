@@ -242,7 +242,7 @@ export default function Editor() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '32px 24px',
+            padding: '100px 24px 40px', // Increased top padding to avoid overlap with floating header
             background: 'linear-gradient(160deg, var(--bg-main) 0%, var(--hover-bg) 100%)',
             position: 'relative',
           }}
