@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import {
-  FileText,
+  FileText, Github, Facebook, 
   ChevronRight, Sparkles, Star, ArrowRight
 } from 'lucide-react'
 import { TEMPLATES } from '@/types/Template'
@@ -232,22 +232,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer style={{ position: 'relative', zIndex: 1, borderTop: '1px solid var(--card-border)', padding: '40px 24px', background: 'var(--hover-bg)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <FileText size={16} color="white" />
+      {/* ── Premium Footer ── */}
+      <footer style={{ position: 'relative', zIndex: 1, borderTop: '1px solid var(--card-border)', background: 'linear-gradient(to bottom, var(--bg-main), var(--hover-bg))', padding: '80px 24px 40px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '60px', marginBottom: '60px' }}>
+            
+            {/* Brand Column */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, var(--accent), #818cf8)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px var(--accent-glow)' }}>
+                  <FileText size={20} color="white" />
+                </div>
+                <span style={{ fontSize: '22px', fontWeight: 900, color: 'var(--text-main)', letterSpacing: '-0.5px' }}>CoverPageGen</span>
+              </div>
+              <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.6, fontWeight: 500 }}>
+                The ultimate tool for students to generate perfect, print-ready academic cover pages instantly. No sign-up required.
+              </p>
+              <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+                <a href="https://github.com/mostafa-cse" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-secondary)', transition: 'all 0.2s', cursor: 'pointer' }} onMouseOver={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)' }} onMouseOut={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--card-border)'; e.currentTarget.style.transform = 'none' }}>
+                  <Github size={18} />
+                </a>
+                <a href="https://www.facebook.com/muhammadm0stafa/" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--text-secondary)', transition: 'all 0.2s', cursor: 'pointer' }} onMouseOver={e => { e.currentTarget.style.color = '#3b5998'; e.currentTarget.style.borderColor = '#3b5998'; e.currentTarget.style.transform = 'translateY(-2px)' }} onMouseOut={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--card-border)'; e.currentTarget.style.transform = 'none' }}>
+                  <Facebook size={18} />
+                </a>
+              </div>
             </div>
-            <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-main)' }}>CoverPageGen</span>
+
+            {/* Quick Links Column */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <h4 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Quick Links</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {['Home', 'Editor', 'Templates', 'About Us'].map(link => (
+                  <span key={link} onClick={() => link === 'Editor' ? navigate('/editor') : null} style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)', cursor: 'pointer', transition: 'color 0.2s', width: 'fit-content' }} onMouseOver={e => e.currentTarget.style.color = 'var(--accent)'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
+                    {link}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Support Column */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <h4 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Support</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {['Help Center', 'Privacy Policy', 'Terms of Service', 'Contact'].map(link => (
+                  <span key={link} style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)', cursor: 'pointer', transition: 'color 0.2s', width: 'fit-content' }} onMouseOver={e => e.currentTarget.style.color = 'var(--accent)'} onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
+                    {link}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <a href="https://www.facebook.com/muhammadm0stafa/" target="_blank" rel="noopener noreferrer"
-            style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s' }}
-            onMouseOver={e => (e.currentTarget.style.color = 'var(--text-main)')}
-            onMouseOut={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
-            Built by <strong style={{ color: 'var(--text-main)' }}>M0stafa</strong>, CSE, JUST
-          </a>
-          <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)' }}>© 2026 CoverPageGen. All rights reserved.</div>
+
+          <div style={{ borderTop: '1px solid var(--card-border)', paddingTop: '30px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+            <div style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text-secondary)' }}>
+              © 2026 CoverPageGen. All rights reserved.
+            </div>
+            <a href="https://www.facebook.com/muhammadm0stafa/" target="_blank" rel="noopener noreferrer"
+              style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s', background: 'var(--card-bg)', padding: '8px 16px', borderRadius: '20px', border: '1px solid var(--card-border)' }}
+              onMouseOver={e => { e.currentTarget.style.color = 'var(--text-main)'; e.currentTarget.style.borderColor = 'var(--accent)' }}
+              onMouseOut={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--card-border)' }}>
+              Built with <span style={{ color: '#ef4444' }}>❤️</span> by <strong style={{ color: 'var(--text-main)' }}>M0stafa</strong>
+            </a>
+          </div>
         </div>
       </footer>
     </div>
