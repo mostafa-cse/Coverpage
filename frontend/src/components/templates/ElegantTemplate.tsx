@@ -9,33 +9,35 @@ export default function ElegantTemplate({ data }: Props) {
     <div style={{
       width: '210mm',
       minHeight: '297mm',
-      padding: '20mm 22mm',
-      fontFamily: 'Times New Roman, Times, serif',
+      padding: '0',
+      fontFamily: '"Times New Roman", Times, serif',
       fontSize: '12pt',
       color: '#000',
       backgroundColor: '#fff',
       boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
     }}>
-      {/* Top border accent */}
-      <div style={{ height: '5px', background: '#000' }} />
-      <div style={{ height: '2px', background: '#888', marginBottom: '0' }} />
+      {/* Top accent bars */}
+      <div style={{ height: '6px', background: '#000' }} />
+      <div style={{ height: '2px', background: '#000', marginTop: '3px', marginBottom: '0' }} />
 
       {/* Header */}
-      <div style={{ padding: '28px 28px 20px', textAlign: 'center', borderBottom: '2px solid #000' }}>
+      <div style={{ padding: '22px 28px 18px', textAlign: 'center', borderBottom: '2px solid #000' }}>
         {university.logoUrl ? (
-          <img src={university.logoUrl} alt="Logo" style={{ height: '90px', width: '90px', objectFit: 'contain', marginBottom: '12px' }} />
+          <img src={university.logoUrl} alt="Logo" style={{ height: '90px', width: '90px', objectFit: 'contain', marginBottom: '12px', display: 'block', margin: '0 auto 12px' }} />
         ) : (
-          <div style={{ height: '90px', width: '90px', borderRadius: '50%', border: '1.5px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999', margin: '0 auto 12px' }}>Logo</div>
+          <div style={{ height: '90px', width: '90px', borderRadius: '50%', border: '1.5px dashed #aaa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#aaa', margin: '0 auto 12px' }}>Logo</div>
         )}
         <div style={{ fontSize: '16pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1.5px' }}>
           {university.name || 'University Name'}
         </div>
-        <div style={{ fontSize: '11pt', color: '#444', marginTop: '5px' }}>
+        <div style={{ fontSize: '11pt', marginTop: '5px' }}>
           {university.dept || 'Department Name'}
         </div>
+        {university.address && (
+          <div style={{ fontSize: '10pt', marginTop: '3px' }}>{university.address}</div>
+        )}
       </div>
 
       {/* Body */}
@@ -49,7 +51,7 @@ export default function ElegantTemplate({ data }: Props) {
         </div>
 
         {/* Subject info */}
-        <div style={{ border: '1px solid #ccc', padding: '14px 18px', marginBottom: '18px' }}>
+        <div style={{ border: '1px solid #000', padding: '14px 18px', marginBottom: '18px' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11pt' }}>
             <tbody>
               {[
@@ -62,7 +64,7 @@ export default function ElegantTemplate({ data }: Props) {
                   ['Date of Experiment', experimentDate],
                 ] : []),
               ].map(([label, val]) => (
-                <tr key={label} style={{ borderBottom: '1px solid #eee' }}>
+                <tr key={label} style={{ borderBottom: '1px solid #e0e0e0' }}>
                   <td style={{ padding: '5px 0', fontWeight: 'bold', width: '44%' }}>{label}</td>
                   <td style={{ padding: '5px 4px', width: '4%' }}>:</td>
                   <td style={{ padding: '5px 0' }}>{val || '—'}</td>
@@ -78,8 +80,8 @@ export default function ElegantTemplate({ data }: Props) {
             { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
             { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
           ].map(({ title, rows }) => (
-            <div key={title} style={{ flex: 1, border: '1px solid #ccc', overflow: 'hidden' }}>
-              <div style={{ background: '#f5f5f5', borderBottom: '1px solid #ccc', padding: '7px 14px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>
+            <div key={title} style={{ flex: 1, border: '1px solid #000', overflow: 'hidden' }}>
+              <div style={{ background: '#f5f5f5', borderBottom: '1px solid #000', padding: '7px 14px', fontSize: '10pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>
                 {title}
               </div>
               <div style={{ padding: '10px 14px' }}>
@@ -87,8 +89,8 @@ export default function ElegantTemplate({ data }: Props) {
                   <tbody>
                     {rows.filter(([, v]) => v).map(([l, v]) => (
                       <tr key={l}>
-                        <td style={{ padding: '3px 0', color: '#555', width: '45%' }}>{l}</td>
-                        <td style={{ padding: '3px 4px', width: '5%', color: '#555' }}>:</td>
+                        <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%' }}>{l}</td>
+                        <td style={{ padding: '3px 4px', width: '5%' }}>:</td>
                         <td style={{ padding: '3px 0' }}>{v}</td>
                       </tr>
                     ))}
@@ -100,14 +102,14 @@ export default function ElegantTemplate({ data }: Props) {
         </div>
 
         {/* Date */}
-        <div style={{ textAlign: 'center', padding: '8px', border: '1px solid #ccc', fontSize: '11pt' }}>
+        <div style={{ textAlign: 'center', padding: '8px', border: '1px solid #000', fontSize: '11pt' }}>
           <strong>Date of Submission:</strong> {submissionDate || '—'}
         </div>
       </div>
 
-      {/* Bottom border accent */}
-      <div style={{ height: '2px', background: '#888' }} />
-      <div style={{ height: '5px', background: '#000' }} />
+      {/* Bottom accent bars */}
+      <div style={{ height: '2px', background: '#000', marginBottom: '3px' }} />
+      <div style={{ height: '6px', background: '#000' }} />
     </div>
   )
 }

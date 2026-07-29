@@ -7,23 +7,20 @@ export default function KUETTemplate({ data }: Props) {
 
   return (
     <div style={{
-      width: '210mm', minHeight: '297mm', padding: '18mm 22mm',
+      width: '210mm', minHeight: '297mm', padding: '18mm 20mm',
       fontFamily: '"Times New Roman", Times, serif',
       fontSize: '12pt', color: '#000', backgroundColor: '#fff',
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center',
       border: '3px solid #000', position: 'relative',
     }}>
       {/* Corner decorations */}
-      {['top:4mm;left:4mm', 'top:4mm;right:4mm', 'bottom:4mm;left:4mm', 'bottom:4mm;right:4mm'].map((pos, i) => (
-        <div key={i} style={{
-          position: 'absolute',
-          ...(Object.fromEntries(pos.split(';').map(p => p.split(':')))),
-          width: '12mm', height: '12mm',
-          borderTop: i < 2 ? '2px solid #000' : 'none',
-          borderBottom: i >= 2 ? '2px solid #000' : 'none',
-          borderLeft: i % 2 === 0 ? '2px solid #000' : 'none',
-          borderRight: i % 2 === 1 ? '2px solid #000' : 'none',
-        }} />
+      {[
+        { top: '5mm', left: '5mm', borderTop: '2px solid #000', borderLeft: '2px solid #000' },
+        { top: '5mm', right: '5mm', borderTop: '2px solid #000', borderRight: '2px solid #000' },
+        { bottom: '5mm', left: '5mm', borderBottom: '2px solid #000', borderLeft: '2px solid #000' },
+        { bottom: '5mm', right: '5mm', borderBottom: '2px solid #000', borderRight: '2px solid #000' },
+      ].map((style, i) => (
+        <div key={i} style={{ position: 'absolute', width: '14mm', height: '14mm', ...style }} />
       ))}
 
       {/* Logo */}
@@ -31,30 +28,33 @@ export default function KUETTemplate({ data }: Props) {
         {university.logoUrl ? (
           <img src={university.logoUrl} alt="Logo" style={{ height: '100px', width: '100px', objectFit: 'contain' }} />
         ) : (
-          <div style={{ height: '100px', width: '100px', borderRadius: '50%', border: '2px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999' }}>Logo</div>
+          <div style={{ height: '100px', width: '100px', borderRadius: '50%', border: '2px dashed #aaa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#aaa' }}>Logo</div>
         )}
       </div>
 
       {/* University */}
       <div style={{ textAlign: 'center', marginBottom: '6px' }}>
-        <div style={{ fontSize: '16pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <div style={{ fontSize: '16pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: '1.3' }}>
           {university.name || 'Khulna University of Engineering & Technology'}
         </div>
-        <div style={{ fontSize: '11.5pt', marginTop: '3px', color: '#333' }}>
+        <div style={{ fontSize: '11.5pt', marginTop: '4px' }}>
           {university.dept || 'Department of Computer Science and Engineering'}
         </div>
+        {university.address && (
+          <div style={{ fontSize: '10.5pt', marginTop: '2px' }}>{university.address}</div>
+        )}
       </div>
 
-      {/* Double rule */}
-      <div style={{ width: '100%', borderTop: '3px double #000', margin: '12px 0' }} />
+      {/* Triple ornamental rule */}
+      <div style={{ width: '100%', borderTop: '3px double #000', margin: '14px 0' }} />
 
       {/* Doc type */}
-      <div style={{ border: '2px solid #000', padding: '7px 30px', marginBottom: '18px', letterSpacing: '2px', fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase' }}>
+      <div style={{ border: '2px solid #000', padding: '7px 32px', marginBottom: '18px', letterSpacing: '2px', fontSize: '13pt', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>
         {isLab ? 'Laboratory Report' : 'Assignment'}
       </div>
 
       {/* Subject info */}
-      <div style={{ width: '100%', border: '1px solid #000', padding: '12px 16px', marginBottom: '20px' }}>
+      <div style={{ width: '100%', border: '1.5px solid #000', padding: '12px 16px', marginBottom: '20px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11pt' }}>
           <tbody>
             {[
@@ -77,14 +77,16 @@ export default function KUETTemplate({ data }: Props) {
         </table>
       </div>
 
+      <div style={{ flexGrow: 1 }} />
+
       {/* Submitted By / To */}
-      <div style={{ width: '100%', display: 'flex', gap: '16px', marginTop: 'auto', marginBottom: '16px' }}>
+      <div style={{ width: '100%', display: 'flex', gap: '16px', marginBottom: '16px' }}>
         {[
           { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
           { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
         ].map(({ title, rows }) => (
-          <div key={title} style={{ flex: 1, border: '1px solid #000', padding: '12px 14px' }}>
-            <div style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', background: '#f0f0f0', margin: '-12px -14px 10px', padding: '6px 14px', letterSpacing: '0.5px', borderBottom: '1px solid #000', textAlign: 'center' }}>
+          <div key={title} style={{ flex: 1, border: '1.5px solid #000', padding: '12px 14px' }}>
+            <div style={{ fontWeight: 'bold', fontSize: '10.5pt', textTransform: 'uppercase', background: '#f0f0f0', margin: '-12px -14px 10px', padding: '6px 14px', letterSpacing: '0.5px', borderBottom: '1.5px solid #000', textAlign: 'center' }}>
               {title}
             </div>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>

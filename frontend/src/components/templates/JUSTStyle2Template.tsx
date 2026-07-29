@@ -14,20 +14,23 @@ export default function JUSTStyle2Template({ data }: Props) {
       fontSize: '12pt', color: '#000', backgroundColor: '#fff',
       boxSizing: 'border-box',
       display: 'flex', flexDirection: 'column', alignItems: 'center',
-      border: '1px solid #000',
+      border: '1.5px solid #000',
     }}>
 
-      {/* University block */}
+      {/* University block – no logo (Style 2 is logo-less) */}
       <div style={{ textAlign: 'center', marginBottom: '18px', width: '100%' }}>
         <div style={{ fontSize: '18pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.3px', lineHeight: '1.3' }}>
-          {university.name || 'University Name'}
+          {university.name || 'Jashore University of Science and Technology'}
         </div>
+        {university.address && (
+          <div style={{ fontSize: '10.5pt', marginTop: '4px' }}>{university.address}</div>
+        )}
         <div style={{ fontSize: '12pt', marginTop: '6px' }}>
           {university.dept || 'Department of Computer Science and Engineering'}
         </div>
       </div>
 
-      {/* Double rule */}
+      {/* Triple ornamental rule */}
       <div style={{ width: '100%', borderTop: '3px double #000', marginBottom: '18px' }} />
 
       {/* Course info table */}
@@ -58,7 +61,7 @@ export default function JUSTStyle2Template({ data }: Props) {
 
       {/* Assignment on / Lab report on + title */}
       <div style={{ textAlign: 'center', marginBottom: '24px', width: '100%' }}>
-        <div style={{ fontSize: '13pt', fontWeight: 'normal', marginBottom: '8px' }}>
+        <div style={{ fontSize: '12.5pt', fontWeight: 'normal', marginBottom: '8px' }}>
           {isLab ? 'Lab Report on' : 'Assignment on'}
         </div>
         <div style={{ fontSize: '14pt', fontWeight: 'bold', lineHeight: '1.5' }}>
@@ -71,7 +74,7 @@ export default function JUSTStyle2Template({ data }: Props) {
       <div style={{ flexGrow: 1 }} />
 
       {/* Submitted by + Submitted to side by side */}
-      <div style={{ width: '100%', display: 'flex', gap: '20px' }}>
+      <div style={{ width: '100%', display: 'flex', gap: '24px' }}>
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', borderBottom: '1px solid #000', paddingBottom: '4px' }}>
             Submitted by:
@@ -81,6 +84,7 @@ export default function JUSTStyle2Template({ data }: Props) {
               {[
                 ['Name', submittedBy.name],
                 ['Student ID', submittedBy.roll],
+                ['Reg. No.', submittedBy.regNo],
                 ['Year / Sem', submittedBy.year && submittedBy.semester ? `${submittedBy.semester} Semester, ${submittedBy.year} Year` : (submittedBy.year || submittedBy.semester)],
                 ['Group', submittedBy.groupNo],
               ].filter(([, v]) => v).map(([l, v]) => (
@@ -119,8 +123,8 @@ export default function JUSTStyle2Template({ data }: Props) {
 
       <div style={{ flexGrow: 1 }} />
 
-      <div style={{ width: '100%', borderTop: '1px solid #000', margin: '16px 0 8px' }} />
-
+      {/* Double rule + date */}
+      <div style={{ width: '100%', borderTop: '3px double #000', margin: '18px 0 10px' }} />
       <div style={{ textAlign: 'center', fontSize: '12pt' }}>
         <strong>Submission Date :</strong> {submissionDate || '—'}
       </div>

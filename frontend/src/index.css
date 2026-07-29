@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  html { font-family: "Times New Roman", Times, serif; color: #000; }
+  html {
+    font-family: "Times New Roman", Times, serif;
+    color: #000;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+  }
   * { box-sizing: border-box; }
   body { margin: 0; padding: 0; }
 }

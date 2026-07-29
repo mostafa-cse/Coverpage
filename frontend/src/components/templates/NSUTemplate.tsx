@@ -8,10 +8,10 @@ export default function NSUTemplate({ data }: Props) {
   return (
     <div style={{
       width: '210mm', minHeight: '297mm',
-      fontFamily: 'Arial, Helvetica, sans-serif',
+      fontFamily: '"Times New Roman", Times, serif',
       fontSize: '11pt', color: '#000', backgroundColor: '#fff',
       boxSizing: 'border-box', display: 'flex', flexDirection: 'column',
-      border: '1px solid #000',
+      border: '1.5px solid #000',
     }}>
       {/* Top accent bar */}
       <div style={{ height: '5px', background: '#000' }} />
@@ -21,15 +21,18 @@ export default function NSUTemplate({ data }: Props) {
         {university.logoUrl ? (
           <img src={university.logoUrl} alt="Logo" style={{ height: '80px', width: '80px', objectFit: 'contain', flexShrink: 0 }} />
         ) : (
-          <div style={{ height: '80px', width: '80px', borderRadius: '4px', border: '1px dashed #999', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#999', flexShrink: 0 }}>Logo</div>
+          <div style={{ height: '80px', width: '80px', borderRadius: '4px', border: '1.5px dashed #aaa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#aaa', flexShrink: 0 }}>Logo</div>
         )}
         <div>
           <div style={{ fontSize: '15pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             {university.name || 'North South University'}
           </div>
-          <div style={{ fontSize: '10pt', color: '#444', marginTop: '3px' }}>
+          <div style={{ fontSize: '10.5pt', marginTop: '3px' }}>
             {university.dept || 'Department of Electrical & Computer Engineering'}
           </div>
+          {university.address && (
+            <div style={{ fontSize: '10pt', marginTop: '2px' }}>{university.address}</div>
+          )}
         </div>
       </div>
 
@@ -62,9 +65,9 @@ export default function NSUTemplate({ data }: Props) {
                   ] : []),
                 ].map(([label, val]) => (
                   <tr key={label}>
-                    <td style={{ padding: '4px 0', fontWeight: 'bold', width: '44%', color: '#555' }}>{label}</td>
-                    <td style={{ padding: '4px 4px', width: '4%', color: '#555' }}>:</td>
-                    <td style={{ padding: '4px 0', fontWeight: '600' }}>{val || '—'}</td>
+                    <td style={{ padding: '4px 0', fontWeight: 'bold', width: '44%' }}>{label}</td>
+                    <td style={{ padding: '4px 4px', width: '4%' }}>:</td>
+                    <td style={{ padding: '4px 0' }}>{val || '—'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -87,9 +90,9 @@ export default function NSUTemplate({ data }: Props) {
                   <tbody>
                     {rows.filter(([, v]) => v).map(([l, v]) => (
                       <tr key={l}>
-                        <td style={{ padding: '3px 0', color: '#555', width: '45%' }}>{l}</td>
-                        <td style={{ padding: '3px 4px', width: '5%', color: '#555' }}>:</td>
-                        <td style={{ padding: '3px 0', fontWeight: '600' }}>{v}</td>
+                        <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%' }}>{l}</td>
+                        <td style={{ padding: '3px 4px', width: '5%' }}>:</td>
+                        <td style={{ padding: '3px 0' }}>{v}</td>
                       </tr>
                     ))}
                   </tbody>

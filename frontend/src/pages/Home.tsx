@@ -1,30 +1,24 @@
 import { useNavigate } from 'react-router-dom'
 import { FileText, Zap, Download, Upload, Printer, Shield, Clock, ChevronRight, CheckCircle } from 'lucide-react'
 import Footer from '@/components/Footer/Footer'
+import { TEMPLATES } from '@/types/Template'
 
 export default function Home() {
   const navigate = useNavigate()
 
   const features = [
-    { icon: <FileText size={20} />, title: '4 Professional Templates', desc: 'Classic, BUET, DU, and Modern styles — all tailored for BD universities.' },
+    { icon: <FileText size={20} />, title: '11 Professional Templates', desc: 'Classic, BUET, DU, KUET, RUET, NSU, Elegant, Modern, JUST styles + Scholarly Classic.' },
     { icon: <Zap size={20} />, title: 'Auto-saves Locally', desc: 'Your data is saved in the browser automatically. Never lose your work.' },
     { icon: <Download size={20} />, title: 'PDF Export', desc: 'Export a high-quality PDF of your cover page in one click.' },
-    { icon: <Printer size={20} />, title: 'Print Ready', desc: 'Optimized A4 layout for direct printing — no extra formatting needed.' },
+    { icon: <Printer size={20} />, title: 'Print Ready', desc: 'Optimised A4 layout for direct printing — no extra formatting needed.' },
     { icon: <Upload size={20} />, title: 'Custom Templates', desc: 'Import your own HTML template for full control over the design.' },
     { icon: <Shield size={20} />, title: '100% Private', desc: 'Everything runs in your browser. No data is sent to any server.' },
   ]
 
   const steps = [
-    { num: '01', title: 'Pick a Template', desc: 'Choose from Classic, BUET, DU, or Modern styles.' },
+    { num: '01', title: 'Pick a Template', desc: 'Choose from 11 classic academic styles.' },
     { num: '02', title: 'Fill Your Details', desc: 'Enter your university, subject, and student info.' },
     { num: '03', title: 'Export or Print', desc: 'Download as PDF or print directly from the browser.' },
-  ]
-
-  const templates = [
-    { id: 'classic', name: 'Classic Formal', tags: ['Universal', 'All Universities'], icon: '📄', color: 'from-slate-600 to-slate-800' },
-    { id: 'buet', name: 'BUET Style', tags: ['Engineering', 'BUET'], icon: '🏛️', color: 'from-emerald-600 to-green-800' },
-    { id: 'du', name: 'DU Style', tags: ['Arts', 'Science', 'DU'], icon: '🎓', color: 'from-blue-600 to-blue-800' },
-    { id: 'modern', name: 'Modern Minimal', tags: ['Contemporary', 'Clean'], icon: '✨', color: 'from-violet-600 to-indigo-800' },
   ]
 
   return (
@@ -75,7 +69,7 @@ export default function Home() {
 
           <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
             Generate pixel-perfect assignment and lab report cover pages in seconds.
-            Choose from university-specific templates, fill your details, and export as PDF.
+            Choose from 11 university-specific templates, fill your details, and export as PDF.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -123,28 +117,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Templates */}
+      {/* Templates – all 11 */}
       <section id="templates" className="py-20 px-6 border-t border-white/5">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">Built-in Designs</p>
             <h2 className="text-3xl font-bold">Choose Your Template</h2>
-            <p className="text-white/50 text-sm mt-3">All templates follow standard BD university cover page formats.</p>
+            <p className="text-white/50 text-sm mt-3">All templates follow standard BD university cover page formats. Pure Times New Roman, black text.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {templates.map((t) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+            {TEMPLATES.map((t) => (
               <button
                 key={t.id}
                 onClick={() => navigate('/editor')}
-                className="group flex flex-col items-center p-6 rounded-2xl bg-white/3 border border-white/5 hover:border-white/20 hover:bg-white/8 transition-all duration-300 text-center hover:scale-105"
+                className="group flex flex-col items-center p-5 rounded-2xl bg-white/3 border border-white/5 hover:border-white/20 hover:bg-white/8 transition-all duration-300 text-center hover:scale-105"
               >
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${t.color} flex items-center justify-center text-2xl mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  {t.icon}
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {t.thumbnail}
                 </div>
-                <h3 className="text-white font-semibold text-sm mb-2">{t.name}</h3>
-                <div className="flex flex-wrap justify-center gap-1.5">
-                  {t.tags.map(tag => (
-                    <span key={tag} className="text-xs text-white/40 bg-white/5 px-2 py-0.5 rounded-full">{tag}</span>
+                <h3 className="text-white font-semibold text-xs mb-2 leading-tight">{t.name}</h3>
+                <div className="flex flex-wrap justify-center gap-1">
+                  {t.tags.slice(0, 2).map(tag => (
+                    <span key={tag} className="text-[10px] text-white/40 bg-white/5 px-2 py-0.5 rounded-full">{tag}</span>
                   ))}
                 </div>
               </button>
