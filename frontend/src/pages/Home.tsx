@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import {
   FileText, Zap, Download, Printer, Shield,
-  ChevronRight, CheckCircle, Sparkles, Globe, Star
+  ChevronRight, CheckCircle, Sparkles, Globe, Star, ArrowRight
 } from 'lucide-react'
 import { TEMPLATES } from '@/types/Template'
 
@@ -24,143 +24,141 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#06080f] text-white flex flex-col overflow-x-hidden" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div className="min-h-screen bg-[#03050a] text-white flex flex-col overflow-x-hidden" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
 
       {/* ── Ambient Background ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div style={{ position: 'absolute', top: '-10%', left: '10%', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)', borderRadius: '50%' }} />
-        <div style={{ position: 'absolute', top: '40%', right: '-5%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%)', borderRadius: '50%' }} />
-        <div style={{ position: 'absolute', bottom: '10%', left: '20%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 70%)', borderRadius: '50%' }} />
-        {/* grid pattern */}
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '64px 64px', opacity: 0.5 }} />
+        <div className="animate-glow" style={{ position: 'absolute', top: '-15%', left: '0%', width: '800px', height: '800px', background: 'radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 60%)', borderRadius: '50%' }} />
+        <div className="animate-glow" style={{ position: 'absolute', top: '30%', right: '-10%', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 60%)', borderRadius: '50%', animationDelay: '2s' }} />
+        <div className="animate-glow" style={{ position: 'absolute', bottom: '-10%', left: '15%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 60%)', borderRadius: '50%', animationDelay: '1s' }} />
+        
+        {/* Animated grid pattern */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '64px 64px', opacity: 0.8, maskImage: 'linear-gradient(to bottom, white, transparent)' }} />
       </div>
 
       {/* ── Navbar ── */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, borderBottom: '1px solid rgba(255,255,255,0.06)', backdropFilter: 'blur(20px)', background: 'rgba(6,8,15,0.85)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
+      <nav className="glass-card" style={{ position: 'sticky', top: '16px', zIndex: 50, margin: '0 24px', borderRadius: '20px', background: 'rgba(3,5,10,0.6)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(99,102,241,0.4)' }}>
-              <FileText size={17} color="white" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 24px rgba(99,102,241,0.5), inset 0 2px 4px rgba(255,255,255,0.3)' }}>
+              <FileText size={18} color="white" />
             </div>
-            <span style={{ fontWeight: 800, fontSize: '17px', letterSpacing: '-0.3px' }}>
-              CoverPage<span style={{ color: '#818cf8' }}>Gen</span>
+            <span style={{ fontWeight: 800, fontSize: '19px', letterSpacing: '-0.5px' }}>
+              CoverPage<span className="text-gradient-shimmer">Gen</span>
             </span>
           </div>
 
           {/* Nav links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
             <a onClick={() => document.getElementById('templates')?.scrollIntoView({ behavior: 'smooth' })}
-              style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', transition: 'color 0.2s' }}
+              style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.6)', cursor: 'pointer', transition: 'color 0.2s' }}
               onMouseOver={e => (e.currentTarget.style.color = 'white')}
-              onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}>
+              onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}>
               Templates
             </a>
             <a href="https://github.com/mostafa-cse/Coverpage" target="_blank" rel="noopener noreferrer"
-              style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
+              style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
               onMouseOver={e => (e.currentTarget.style.color = 'white')}
-              onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}>
+              onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}>
               GitHub
             </a>
             <button onClick={() => navigate('/editor')}
-              style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)', color: 'white', border: 'none', padding: '9px 22px', borderRadius: '10px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 20px rgba(99,102,241,0.35)', transition: 'transform 0.2s, box-shadow 0.2s' }}
-              onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.04)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 28px rgba(99,102,241,0.5)' }}
-              onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 20px rgba(99,102,241,0.35)' }}>
-              Open Editor →
+              style={{ background: 'white', color: '#03050a', border: 'none', padding: '10px 24px', borderRadius: '12px', fontSize: '14px', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 24px rgba(255,255,255,0.2)', transition: 'transform 0.2s, box-shadow 0.2s, background 0.2s' }}
+              onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.05)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 32px rgba(255,255,255,0.3)'; (e.currentTarget as HTMLButtonElement).style.background = '#f3f4f6' }}
+              onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(255,255,255,0.2)'; (e.currentTarget as HTMLButtonElement).style.background = 'white' }}>
+              Open Editor
             </button>
           </div>
         </div>
       </nav>
 
       {/* ── Hero ── */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '100px 24px 80px', textAlign: 'center' }}>
+      <section style={{ position: 'relative', zIndex: 1, padding: '120px 24px 100px', textAlign: 'center' }}>
         {/* Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.3)', padding: '6px 16px', borderRadius: '100px', fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase', color: '#a5b4fc', marginBottom: '32px' }}>
-          <Sparkles size={11} /> Free · No Login · No Data Sent
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.4)', padding: '8px 20px', borderRadius: '100px', fontSize: '12px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: '#a5b4fc', marginBottom: '40px', backdropFilter: 'blur(10px)', boxShadow: '0 4px 24px rgba(99,102,241,0.2)' }}>
+          <Sparkles size={14} className="animate-pulse" /> Free · No Login · Private
         </div>
 
-        <h1 style={{ fontSize: 'clamp(38px, 6vw, 72px)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1.5px', marginBottom: '24px', maxWidth: '800px', margin: '0 auto 24px' }}>
-          Generate Perfect
+        <h1 style={{ fontSize: 'clamp(44px, 7vw, 84px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2.5px', marginBottom: '32px', maxWidth: '900px', margin: '0 auto 32px' }}>
+          Craft the Perfect
           <br />
-          <span style={{ background: 'linear-gradient(135deg, #60a5fa 0%, #818cf8 40%, #a78bfa 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-            Academic Cover Pages
+          <span className="text-gradient-shimmer">
+            Academic Cover Page
           </span>
         </h1>
 
-        <p style={{ fontSize: '17px', color: 'rgba(255,255,255,0.55)', maxWidth: '560px', margin: '0 auto 40px', lineHeight: 1.7 }}>
-          11 university-specific templates for BD students. Fill your details,
-          preview live, and export as PDF in under 2 minutes.
+        <p style={{ fontSize: '19px', color: 'rgba(255,255,255,0.6)', maxWidth: '640px', margin: '0 auto 48px', lineHeight: 1.7, fontWeight: 400 }}>
+          11 meticulously designed, university-specific templates for BD students. 
+          Auto-saved locally. Exported as a pristine A4 PDF in seconds.
         </p>
 
         {/* CTA Buttons */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '14px', marginBottom: '48px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', marginBottom: '64px' }}>
           <button onClick={() => navigate('/editor')}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', color: 'white', border: 'none', padding: '15px 32px', borderRadius: '14px', fontSize: '15px', fontWeight: 700, cursor: 'pointer', boxShadow: '0 8px 32px rgba(99,102,241,0.4)', transition: 'transform 0.2s, box-shadow 0.2s' }}
-            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px) scale(1.02)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 40px rgba(99,102,241,0.55)' }}
-            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'none'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 32px rgba(99,102,241,0.4)' }}>
-            Create Cover Page <ChevronRight size={16} />
+            className="glowing-border-wrapper"
+            style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', color: 'white', border: 'none', padding: '18px 40px', borderRadius: '16px', fontSize: '16px', fontWeight: 800, cursor: 'pointer', boxShadow: '0 12px 48px rgba(99,102,241,0.4), inset 0 2px 4px rgba(255,255,255,0.3)', transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
+            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-4px) scale(1.02)' }}
+            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'none' }}>
+            Start Creating <ArrowRight size={18} />
           </button>
+          
           <button onClick={() => document.getElementById('templates')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.8)', border: '1px solid rgba(255,255,255,0.1)', padding: '15px 32px', borderRadius: '14px', fontSize: '15px', fontWeight: 600, cursor: 'pointer', backdropFilter: 'blur(10px)', transition: 'background 0.2s, border-color 0.2s' }}
-            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.09)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.2)' }}
-            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.1)' }}>
-            Browse Styles
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.03)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', padding: '18px 40px', borderRadius: '16px', fontSize: '16px', fontWeight: 600, cursor: 'pointer', backdropFilter: 'blur(20px)', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
+            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-4px)' }}
+            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.03)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLButtonElement).style.transform = 'none' }}>
+            Explore Styles
           </button>
         </div>
 
-        {/* Trust badges */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
-          {['Assignment Cover', 'Lab Report Cover', 'PDF Export', 'Custom Template', '100% Free'].map(t => (
-            <span key={t} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'rgba(255,255,255,0.35)' }}>
-              <CheckCircle size={12} color="#22c55e" /> {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Hero visual – mock A4 preview cards */}
-        <div style={{ marginTop: '72px', display: 'flex', justifyContent: 'center', gap: '16px', perspective: '1000px' }}>
-          {[{ rot: '-8deg', z: -20 }, { rot: '0deg', z: 0 }, { rot: '8deg', z: -20 }].map(({ rot, z }, i) => (
-            <div key={i} style={{
-              width: '130px', height: '184px', borderRadius: '8px',
-              background: 'linear-gradient(160deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(10px)',
-              transform: `rotate(${rot}) translateZ(${z}px)`,
-              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px',
+        {/* Hero visual – 3D floating A4 preview cards */}
+        <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center', gap: '24px', perspective: '1200px' }}>
+          {[
+            { rot: '-12deg', z: '-40', delay: '0s' }, 
+            { rot: '0deg', z: '0', delay: '2s' }, 
+            { rot: '12deg', z: '-40', delay: '4s' }
+          ].map(({ rot, z, delay }, i) => (
+            <div key={i} className="animate-float glass-card" style={{
+              '--rot': rot, '--z': `${z}px`,
+              animationDelay: delay,
+              width: '180px', height: '254px', borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.2)',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.4)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px',
               flexShrink: 0,
-            }}>
-              <div style={{ width: '70%', height: '2px', background: 'rgba(255,255,255,0.12)', borderRadius: '2px' }} />
-              <div style={{ width: '50%', height: '2px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px' }} />
-              <div style={{ width: '60%', height: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px', marginTop: '6px' }} />
-              <div style={{ width: '55%', height: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }} />
-              <div style={{ width: '50%', height: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }} />
-              <FileText size={18} color="rgba(255,255,255,0.15)" style={{ marginTop: '10px' }} />
+            } as React.CSSProperties}>
+              <div style={{ width: '75%', height: '3px', background: 'rgba(255,255,255,0.2)', borderRadius: '2px' }} />
+              <div style={{ width: '60%', height: '3px', background: 'rgba(255,255,255,0.15)', borderRadius: '2px' }} />
+              <div style={{ width: '65%', height: '2px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '10px' }} />
+              <div style={{ width: '55%', height: '2px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px' }} />
+              <div style={{ width: '50%', height: '2px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px' }} />
+              <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '16px', boxShadow: '0 0 20px rgba(99,102,241,0.4)' }}>
+                <FileText size={14} color="#a5b4fc" />
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── How It Works ── */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '80px 24px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <section style={{ position: 'relative', zIndex: 1, padding: '100px 24px', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'linear-gradient(to bottom, rgba(3,5,10,0), rgba(15,23,42,0.3))' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#818cf8', marginBottom: '12px' }}>Simple Process</p>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.5px' }}>Ready in 3 Steps</h2>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <p className="text-gradient-shimmer" style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '16px' }}>Zero Friction</p>
+            <h2 style={{ fontSize: '42px', fontWeight: 900, letterSpacing: '-1px' }}>Ready in 3 Steps</h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
             {steps.map((step, i) => (
-              <div key={i} style={{ position: 'relative', padding: '32px', borderRadius: '20px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden', transition: 'border-color 0.3s, background 0.3s' }}
-                onMouseOver={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.14)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.05)' }}
-                onMouseOut={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.06)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.03)' }}>
-                {/* Gradient orb */}
-                <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', background: `linear-gradient(135deg, ${step.color.replace('from-', '').replace(' to-', ', ')})`, borderRadius: '50%', opacity: 0.08, filter: 'blur(20px)' }} />
-                <div style={{ fontSize: '52px', fontWeight: 900, background: `linear-gradient(135deg, ${step.color.replace('from-', '').replace(' to-', ', ')})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', lineHeight: 1, marginBottom: '20px', opacity: 0.6 }}>
+              <div key={i} className="glass-card glowing-border-wrapper" style={{ position: 'relative', padding: '40px', borderRadius: '24px', overflow: 'hidden', transition: 'transform 0.3s' }}
+                onMouseOver={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-8px)' }}
+                onMouseOut={e => { (e.currentTarget as HTMLDivElement).style.transform = 'none' }}>
+                <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '150px', height: '150px', background: `linear-gradient(135deg, ${step.color.replace('from-', '').replace(' to-', ', ')})`, borderRadius: '50%', opacity: 0.15, filter: 'blur(30px)' }} />
+                <div style={{ fontSize: '64px', fontWeight: 900, background: `linear-gradient(135deg, ${step.color.replace('from-', '').replace(' to-', ', ')})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', lineHeight: 1, marginBottom: '24px', opacity: 0.8, filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))' }}>
                   {step.num}
                 </div>
-                <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '10px' }}>{step.title}</h3>
-                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
+                <h3 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '12px' }}>{step.title}</h3>
+                <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, margin: 0, fontWeight: 500 }}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -168,35 +166,37 @@ export default function Home() {
       </section>
 
       {/* ── Templates Grid ── */}
-      <section id="templates" style={{ position: 'relative', zIndex: 1, padding: '80px 24px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <section id="templates" style={{ position: 'relative', zIndex: 1, padding: '100px 24px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#818cf8', marginBottom: '12px' }}>11 Unique Designs</p>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '12px' }}>Pick Your Style</h2>
-            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)', maxWidth: '480px', margin: '0 auto' }}>
-              All templates use Times New Roman, pure black ink — perfect for academic printing.
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <p className="text-gradient-shimmer" style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '16px' }}>11 Unique Designs</p>
+            <h2 style={{ fontSize: '42px', fontWeight: 900, letterSpacing: '-1px', marginBottom: '16px' }}>Find Your Perfect Style</h2>
+            <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.4)', maxWidth: '520px', margin: '0 auto' }}>
+              Every template is built with pure Times New Roman and strict academic spacing. Pixel-perfect for print.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
             {TEMPLATES.map((t, i) => (
               <button key={t.id} onClick={() => navigate('/editor')}
-                style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '24px 16px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', cursor: 'pointer', transition: 'all 0.25s', textAlign: 'center', overflow: 'hidden' }}
-                onMouseOver={e => { const el = e.currentTarget as HTMLButtonElement; el.style.background = 'rgba(99,102,241,0.1)'; el.style.borderColor = 'rgba(99,102,241,0.35)'; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = '0 16px 40px rgba(0,0,0,0.3)' }}
-                onMouseOut={e => { const el = e.currentTarget as HTMLButtonElement; el.style.background = 'rgba(255,255,255,0.03)'; el.style.borderColor = 'rgba(255,255,255,0.07)'; el.style.transform = 'none'; el.style.boxShadow = 'none' }}>
-                {/* Number badge */}
-                <div style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.5px' }}>
+                className="glass-card glowing-border-wrapper"
+                style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '32px 20px', borderRadius: '20px', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', textAlign: 'center' }}
+                onMouseOver={e => { const el = e.currentTarget as HTMLButtonElement; el.style.transform = 'translateY(-8px) scale(1.02)'; el.style.background = 'rgba(99,102,241,0.08)' }}
+                onMouseOut={e => { const el = e.currentTarget as HTMLButtonElement; el.style.transform = 'none'; el.style.background = 'rgba(20,24,39,0.6)' }}>
+                
+                <div style={{ position: 'absolute', top: '12px', right: '14px', fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.15)', letterSpacing: '1px' }}>
                   #{String(i + 1).padStart(2, '0')}
                 </div>
-                {/* Icon */}
-                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '14px', transition: 'transform 0.2s' }}>
+                
+                <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02))', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', marginBottom: '20px', boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.2)' }}>
                   {t.thumbnail}
                 </div>
-                <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.9)', marginBottom: '10px', display: 'block' }}>{t.name}</span>
-                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5, margin: 0 }}>{t.description.split('—')[0].trim()}</p>
-                {/* Use button */}
-                <div style={{ marginTop: '14px', fontSize: '11px', color: '#818cf8', fontWeight: 600, opacity: 0, transition: 'opacity 0.2s' }} className="use-label">
-                  Use This Style →
+                
+                <span style={{ fontSize: '15px', fontWeight: 800, color: 'white', marginBottom: '12px', display: 'block' }}>{t.name}</span>
+                <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>{t.description.split('—')[0].trim()}</p>
+                
+                <div style={{ marginTop: '20px', fontSize: '12px', color: '#818cf8', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  Use Layout <ChevronRight size={14} />
                 </div>
               </button>
             ))}
@@ -205,23 +205,23 @@ export default function Home() {
       </section>
 
       {/* ── Features ── */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '80px 24px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <section style={{ position: 'relative', zIndex: 1, padding: '100px 24px', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'linear-gradient(to top, rgba(3,5,10,0), rgba(59,130,246,0.05))' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: '#818cf8', marginBottom: '12px' }}>Why Use This</p>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.5px' }}>Built for Students</h2>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <p className="text-gradient-shimmer" style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '16px' }}>Everything You Need</p>
+            <h2 style={{ fontSize: '42px', fontWeight: 900, letterSpacing: '-1px' }}>Engineered for Academics</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
             {features.map((f, i) => (
-              <div key={i} style={{ display: 'flex', gap: '16px', padding: '24px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'all 0.25s', alignItems: 'flex-start' }}
-                onMouseOver={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(99,102,241,0.25)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(99,102,241,0.05)' }}
-                onMouseOut={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.06)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.03)' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#818cf8', flexShrink: 0 }}>
+              <div key={i} className="glass-card glowing-border-wrapper" style={{ display: 'flex', gap: '20px', padding: '32px', borderRadius: '24px', transition: 'transform 0.3s', alignItems: 'flex-start' }}
+                onMouseOver={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)' }}
+                onMouseOut={e => { (e.currentTarget as HTMLDivElement).style.transform = 'none' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.1))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#818cf8', flexShrink: 0, boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.1)' }}>
                   {f.icon}
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '14px', fontWeight: 700, marginBottom: '6px', color: 'rgba(255,255,255,0.95)' }}>{f.title}</h3>
-                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.42)', lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
+                  <h3 style={{ fontSize: '16px', fontWeight: 800, marginBottom: '8px', color: 'white' }}>{f.title}</h3>
+                  <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, margin: 0, fontWeight: 500 }}>{f.desc}</p>
                 </div>
               </div>
             ))}
@@ -229,66 +229,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Stats Bar ── */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '48px 24px', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '32px', textAlign: 'center' }}>
-          {[
-            { value: '11', label: 'Templates' },
-            { value: '2 min', label: 'Average Time' },
-            { value: '100%', label: 'Free & Private' },
-            { value: 'A4', label: 'Print Standard' },
-          ].map(stat => (
-            <div key={stat.label}>
-              <div style={{ fontSize: '36px', fontWeight: 900, background: 'linear-gradient(135deg, #60a5fa, #818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', letterSpacing: '-1px', marginBottom: '6px' }}>
-                {stat.value}
-              </div>
-              <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ── Premium CTA Banner ── */}
+      <section style={{ position: 'relative', zIndex: 1, padding: '120px 24px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <div className="glass-card" style={{ padding: '80px 48px', borderRadius: '40px', background: 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(99,102,241,0.1) 50%, rgba(139,92,246,0.15) 100%)', border: '1px solid rgba(99,102,241,0.3)', textAlign: 'center', position: 'relative', overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.5)' }}>
+            
+            {/* Dramatic Glows */}
+            <div className="animate-glow" style={{ position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '300px', background: 'radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            <div className="animate-glow" style={{ position: 'absolute', bottom: '-100px', right: '-100px', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)', pointerEvents: 'none', animationDelay: '2s' }} />
 
-      {/* ── CTA Banner ── */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '80px 24px' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-          <div style={{ padding: '56px 48px', borderRadius: '28px', background: 'linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(99,102,241,0.08) 50%, rgba(139,92,246,0.12) 100%)', border: '1px solid rgba(99,102,241,0.25)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-            {/* Glow */}
-            <div style={{ position: 'absolute', top: '-40px', left: '50%', transform: 'translateX(-50%)', width: '300px', height: '200px', background: 'radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '2px', marginBottom: '16px' }}>
-              {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#facc15" color="#facc15" />)}
+            <div style={{ display: 'flex', justifyCenter: 'center', justifyContent: 'center', gap: '4px', marginBottom: '24px' }}>
+              {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="#facc15" color="#facc15" style={{ filter: 'drop-shadow(0 0 8px rgba(250,204,21,0.5))' }} />)}
             </div>
-            <h2 style={{ fontSize: '32px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '14px' }}>
-              Create Your Cover Page Now
+            
+            <h2 style={{ fontSize: '48px', fontWeight: 900, letterSpacing: '-1.5px', marginBottom: '20px', textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+              Transform Your Assignments
             </h2>
-            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.5)', marginBottom: '36px', maxWidth: '440px', margin: '0 auto 36px', lineHeight: 1.7 }}>
-              No sign-up. No ads. No tracking. Just your perfect academic cover page in minutes.
+            
+            <p style={{ fontSize: '18px', color: 'rgba(255,255,255,0.6)', marginBottom: '48px', maxWidth: '500px', margin: '0 auto 48px', lineHeight: 1.7, fontWeight: 500 }}>
+              Join thousands of students creating professional, print-ready cover pages in seconds. 100% Free.
             </p>
+            
             <button onClick={() => navigate('/editor')}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', color: 'white', border: 'none', padding: '16px 40px', borderRadius: '14px', fontSize: '15px', fontWeight: 700, cursor: 'pointer', boxShadow: '0 8px 40px rgba(99,102,241,0.5)', transition: 'transform 0.2s, box-shadow 0.2s' }}
-              onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px) scale(1.03)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 16px 48px rgba(99,102,241,0.6)' }}
-              onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'none'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 40px rgba(99,102,241,0.5)' }}>
-              Get Started Free <ChevronRight size={16} />
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', background: 'white', color: '#03050a', border: 'none', padding: '20px 48px', borderRadius: '20px', fontSize: '18px', fontWeight: 800, cursor: 'pointer', boxShadow: '0 12px 48px rgba(255,255,255,0.25)', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
+              onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-4px) scale(1.05)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 20px 60px rgba(255,255,255,0.4)' }}
+              onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'none'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 48px rgba(255,255,255,0.25)' }}>
+              Get Started <ArrowRight size={20} />
             </button>
           </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.05)', padding: '28px 24px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <FileText size={13} color="white" />
+      <footer style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.05)', padding: '40px 24px', background: 'rgba(3,5,10,0.8)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <FileText size={16} color="white" />
             </div>
-            <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>CoverPageGen</span>
+            <span style={{ fontSize: '15px', fontWeight: 800, color: 'white' }}>CoverPageGen</span>
           </div>
           <a href="https://www.facebook.com/muhammadm0stafa/" target="_blank" rel="noopener noreferrer"
-            style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s' }}
-            onMouseOver={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
-            onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}>
-            Built by <strong style={{ color: 'rgba(255,255,255,0.6)' }}>M0stafa</strong>, CSE, JUST
+            style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.4)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s' }}
+            onMouseOver={e => (e.currentTarget.style.color = 'white')}
+            onMouseOut={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}>
+            Built by <strong style={{ color: 'white' }}>M0stafa</strong>, CSE, JUST
           </a>
-          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.2)' }}>© 2025 CoverPageGen. All rights reserved.</div>
+          <div style={{ fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.2)' }}>© 2026 CoverPageGen. All rights reserved.</div>
         </div>
       </footer>
     </div>
