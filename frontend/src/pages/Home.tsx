@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import {
   FileText, Zap, Download, Printer, Shield,
-  ChevronRight, CheckCircle, Sparkles, Globe, Star, ArrowRight
+  ChevronRight, Sparkles, Globe, Star, ArrowRight
 } from 'lucide-react'
 import { TEMPLATES } from '@/types/Template'
 
@@ -238,7 +238,7 @@ export default function Home() {
             <div className="animate-glow" style={{ position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)', width: '400px', height: '300px', background: 'radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)', pointerEvents: 'none' }} />
             <div className="animate-glow" style={{ position: 'absolute', bottom: '-100px', right: '-100px', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)', pointerEvents: 'none', animationDelay: '2s' }} />
 
-            <div style={{ display: 'flex', justifyCenter: 'center', justifyContent: 'center', gap: '4px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginBottom: '24px' }}>
               {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="#facc15" color="#facc15" style={{ filter: 'drop-shadow(0 0 8px rgba(250,204,21,0.5))' }} />)}
             </div>
             

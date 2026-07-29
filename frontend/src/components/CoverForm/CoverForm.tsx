@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { CoverPageData, DocType, CourseType, Designation } from '@/types/CoverPageData'
-import clsx from 'clsx'
 import { TEMPLATES } from '@/types/Template'
 
 interface Props {
