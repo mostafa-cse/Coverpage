@@ -16,11 +16,11 @@ export default function ClassicTemplate({ data }: Props) {
       }}
     >
       {/* Logo */}
-      <div style={{ marginBottom: '12px' }}>
+      <div style={{ marginBottom: '16px' }}>
         {data.university.logoUrl ? (
-          <img src={data.university.logoUrl} alt="Logo" style={{ height: '88px', width: '88px', objectFit: 'contain' }} />
+          <img src={data.university.logoUrl} alt="Logo" style={{ height: '110px', width: '110px', objectFit: 'contain' }} />
         ) : (
-          <div style={{ height: '88px', width: '88px', borderRadius: '50%', border: '1.5px dashed #aaa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#aaa' }}>
+          <div style={{ height: '110px', width: '110px', borderRadius: '50%', border: '1.5px dashed #aaa', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9pt', color: '#aaa' }}>
             Logo
           </div>
         )}

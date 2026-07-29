@@ -20,10 +20,10 @@ export default function JUSTStyle1Template({ data }: Props) {
       <div style={{ marginBottom: '10px' }}>
         {university.logoUrl ? (
           <img src={university.logoUrl} alt="University Logo"
-            style={{ height: '100px', width: '100px', objectFit: 'contain' }} />
+            style={{ height: '120px', width: '120px', objectFit: 'contain' }} />
         ) : (
           <div style={{
-            height: '100px', width: '100px', borderRadius: '50%',
+            height: '120px', width: '120px', borderRadius: '50%',
             border: '1.5px dashed #aaa',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '9pt', color: '#aaa',
