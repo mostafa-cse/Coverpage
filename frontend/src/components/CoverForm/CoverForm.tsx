@@ -15,11 +15,11 @@ const courseTypes: CourseType[] = ['Theory', 'Lab', 'Project']
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '24px', marginBottom: '12px' }}>
-      <div style={{ width: '12px', height: '1px', background: 'rgba(255,255,255,0.1)' }} />
-      <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(255,255,255,0.4)' }}>
+      <div style={{ width: '12px', height: '1px', background: 'var(--card-border)' }} />
+      <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--text-secondary)' }}>
         {children}
       </span>
-      <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.05)' }} />
+      <div style={{ flex: 1, height: '1px', background: 'var(--card-border)' }} />
     </div>
   )
 }
@@ -27,7 +27,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ marginBottom: '16px' }}>
-      <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>{label}</label>
+      <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>{label}</label>
       {children}
     </div>
   )
@@ -35,15 +35,15 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 const inp = {
   width: '100%',
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.08)',
+  background: 'var(--input-bg)',
+  border: '1px solid var(--input-border)',
   borderRadius: '8px',
   padding: '8px 12px',
   fontSize: '13px',
-  color: 'white',
+  color: 'var(--text-main)',
   outline: 'none',
   transition: 'border-color 0.2s, background 0.2s',
-  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.2)'
+  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
 }
 
 export default function CoverForm({ data, onChange, selectedTemplate, onSelectTemplate }: Props) {
@@ -75,13 +75,13 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
                 display: 'flex', alignItems: 'center', gap: '8px', padding: '10px',
                 borderRadius: '10px', fontSize: '11px', fontWeight: 600,
                 textAlign: 'left', cursor: 'pointer', transition: 'all 0.2s',
-                background: isSelected ? 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(99,102,241,0.15))' : 'rgba(255,255,255,0.02)',
-                border: isSelected ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.05)',
-                color: isSelected ? 'white' : 'rgba(255,255,255,0.5)',
-                boxShadow: isSelected ? '0 4px 12px rgba(0,0,0,0.2)' : 'none'
+                background: isSelected ? 'var(--accent-glow)' : 'var(--input-bg)',
+                border: isSelected ? '1px solid var(--accent)' : '1px solid var(--input-border)',
+                color: isSelected ? 'var(--accent)' : 'var(--text-secondary)',
+                boxShadow: isSelected ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'
               }}
-              onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.1)' } }}
-              onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.02)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.05)' } }}
+              onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--hover-bg)' } }}
+              onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--input-bg)' } }}
             >
               <span style={{ fontSize: '16px', opacity: isSelected ? 1 : 0.7 }}>{t.thumbnail}</span>
               <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{t.name}</span>
@@ -102,12 +102,12 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
               style={{
                 flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px', fontWeight: 600,
                 cursor: 'pointer', transition: 'all 0.2s',
-                background: isSelected ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.02)',
-                border: isSelected ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.05)',
-                color: isSelected ? 'white' : 'rgba(255,255,255,0.5)',
+                background: isSelected ? 'var(--text-main)' : 'var(--input-bg)',
+                border: '1px solid var(--input-border)',
+                color: isSelected ? 'var(--bg-main)' : 'var(--text-secondary)',
               }}
-              onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.1)' } }}
-              onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.02)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.05)' } }}
+              onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--hover-bg)' } }}
+              onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--input-bg)' } }}
             >
               {v === 'assignment' ? '📝 Assignment' : '🔬 Lab Report'}
             </button>
@@ -120,35 +120,35 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <Field label="University Name">
         <input style={inp} value={data.university.name} placeholder="e.g. Dhaka University"
           onChange={(e) => onChange({ university: { ...data.university, name: e.target.value } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="Department">
         <input style={inp} value={data.university.dept} placeholder="e.g. Computer Science"
           onChange={(e) => onChange({ university: { ...data.university, dept: e.target.value } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="Address (optional)">
         <input style={inp} value={data.university.address} placeholder="e.g. Dhaka – 1000"
           onChange={(e) => onChange({ university: { ...data.university, address: e.target.value } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="University Logo (optional)">
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {data.university.logoUrl && (
-            <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'white', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'white', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--input-border)' }}>
               <img src={data.university.logoUrl} alt="Logo" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             </div>
           )}
           <button onClick={() => fileRef.current?.click()}
-            style={{ fontSize: '11px', fontWeight: 600, background: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.7)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s' }}
-            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.4)' }}
-            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.2)' }}>
+            style={{ fontSize: '11px', fontWeight: 600, background: 'var(--input-bg)', border: '1px dashed var(--card-border)', color: 'var(--text-secondary)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s' }}
+            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--hover-bg)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)' }}
+            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--input-bg)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--card-border)' }}>
             {data.university.logoUrl ? 'Change Logo' : 'Upload Logo'}
           </button>
           {data.university.logoUrl && (
@@ -166,25 +166,25 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <Field label="Course Title">
         <input style={inp} value={data.subject.name} placeholder="e.g. Data Structures"
           onChange={(e) => onChange({ subject: { ...data.subject, name: e.target.value } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Course Code</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Course Code</label>
           <input style={inp} value={data.subject.courseCode} placeholder="CSE 301"
             onChange={(e) => onChange({ subject: { ...data.subject, courseCode: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Session</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Session</label>
           <input style={inp} value={data.subject.session} placeholder="2021-22"
             onChange={(e) => onChange({ subject: { ...data.subject, session: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
       </div>
@@ -196,13 +196,13 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
               <button key={ct} onClick={() => onChange({ subject: { ...data.subject, courseType: ct } })}
                 style={{
                   padding: '6px 12px', borderRadius: '100px', fontSize: '11px', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s',
-                  background: isSelected ? 'white' : 'rgba(255,255,255,0.05)',
+                  background: isSelected ? 'var(--text-main)' : 'var(--input-bg)',
                   border: '1px solid',
-                  borderColor: isSelected ? 'white' : 'rgba(255,255,255,0.1)',
-                  color: isSelected ? 'black' : 'rgba(255,255,255,0.6)',
+                  borderColor: isSelected ? 'var(--text-main)' : 'var(--input-border)',
+                  color: isSelected ? 'var(--bg-main)' : 'var(--text-secondary)',
                 }}
-                onMouseOver={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)' }}
-                onMouseOut={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)' }}
+                onMouseOver={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = 'var(--hover-bg)' }}
+                onMouseOut={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = 'var(--input-bg)' }}
               >
                 {ct}
               </button>
@@ -212,31 +212,31 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       </Field>
 
       {isLab && (
-        <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', marginBottom: '16px' }}>
+        <div style={{ padding: '16px', background: 'var(--input-bg)', borderRadius: '12px', border: '1px solid var(--input-border)', marginBottom: '16px' }}>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
             <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Exp. No.</label>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Exp. No.</label>
               <input style={inp} value={data.experimentNo ?? ''} placeholder="03"
                 onChange={(e) => onChange({ experimentNo: e.target.value })}
-                onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-                onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+                onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+                onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
               />
             </div>
             <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Date</label>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Date</label>
               <input type="date" style={inp} value={data.experimentDate ?? ''}
                 onChange={(e) => onChange({ experimentDate: e.target.value })}
-                onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-                onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+                onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+                onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
               />
             </div>
           </div>
           <div style={{ marginBottom: 0 }}>
-            <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Experiment Title</label>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Experiment Title</label>
             <input style={inp} value={data.experimentTitle ?? ''} placeholder="Title"
               onChange={(e) => onChange({ experimentTitle: e.target.value })}
-              onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-              onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+              onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+              onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
             />
           </div>
         </div>
@@ -247,55 +247,55 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <Field label="Full Name">
         <input style={inp} value={data.submittedBy.name} placeholder="Your name"
           onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, name: e.target.value } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Roll No.</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Roll No.</label>
           <input style={inp} value={data.submittedBy.roll} placeholder="2101001"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, roll: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Reg. No.</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Reg. No.</label>
           <input style={inp} value={data.submittedBy.regNo} placeholder="21101001"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, regNo: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
       </div>
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Year</label>
-          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.year ? 'white' : 'rgba(255,255,255,0.4)' }} value={data.submittedBy.year}
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Year</label>
+          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.year ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submittedBy.year}
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, year: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}>
-            <option value="" disabled style={{ color: 'black' }}>Select</option>
-            {['1st', '2nd', '3rd', '4th'].map(y => <option key={y} value={y} style={{ color: 'black' }}>{y} Year</option>)}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}>
+            <option value="" disabled style={{ color: 'var(--text-main)' }}>Select</option>
+            {['1st', '2nd', '3rd', '4th'].map(y => <option key={y} value={y} style={{ color: 'var(--text-main)' }}>{y} Year</option>)}
           </select>
         </div>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Sem</label>
-          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.semester ? 'white' : 'rgba(255,255,255,0.4)' }} value={data.submittedBy.semester}
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Sem</label>
+          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.semester ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submittedBy.semester}
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, semester: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}>
-            <option value="" disabled style={{ color: 'black' }}>Select</option>
-            {['1st', '2nd'].map(s => <option key={s} value={s} style={{ color: 'black' }}>{s} Sem</option>)}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}>
+            <option value="" disabled style={{ color: 'var(--text-main)' }}>Select</option>
+            {['1st', '2nd'].map(s => <option key={s} value={s} style={{ color: 'var(--text-main)' }}>{s} Sem</option>)}
           </select>
         </div>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Group</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Group</label>
           <input style={inp} value={data.submittedBy.groupNo} placeholder="A1"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, groupNo: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
       </div>
@@ -305,33 +305,33 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <Field label="Teacher's Name">
         <input style={inp} value={data.submittedTo.name} placeholder="Dr. Ali"
           onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, name: e.target.value } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="Designation">
         <select style={{ ...inp, appearance: 'none' }} value={data.submittedTo.designation}
           onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, designation: e.target.value as Designation } })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}>
-          {designations.map(d => <option key={d} value={d} style={{ color: 'black' }}>{d}</option>)}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}>
+          {designations.map(d => <option key={d} value={d} style={{ color: 'var(--text-main)' }}>{d}</option>)}
         </select>
       </Field>
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Dept</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Dept</label>
           <input style={inp} value={data.submittedTo.dept} placeholder="CSE"
             onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, dept: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Uni</label>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Uni</label>
           <input style={inp} value={data.submittedTo.university} placeholder="JUST"
             onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, university: e.target.value } })}
-            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
           />
         </div>
       </div>
@@ -339,10 +339,10 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       {/* ── Dates ── */}
       <SectionLabel>Submission</SectionLabel>
       <Field label="Date of Submission">
-        <input type="date" style={{ ...inp, color: data.submissionDate ? 'white' : 'rgba(255,255,255,0.4)' }} value={data.submissionDate}
+        <input type="date" style={{ ...inp, color: data.submissionDate ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submissionDate}
           onChange={(e) => onChange({ submissionDate: e.target.value })}
-          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
-          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+          onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
     </div>

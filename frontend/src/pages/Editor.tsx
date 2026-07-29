@@ -6,6 +6,7 @@ import CoverForm from '@/components/CoverForm/CoverForm'
 import PreviewPanel from '@/components/PreviewPanel/PreviewPanel'
 import ExportBar from '@/components/ExportBar/ExportBar'
 import CustomTemplateImport from '@/components/CustomTemplateImport/CustomTemplateImport'
+import ThemeToggle from '@/components/ThemeToggle'
 import { FileText, ArrowLeft, Eye, EyeOff, Layers } from 'lucide-react'
 
 export default function Editor() {
@@ -45,12 +46,12 @@ export default function Editor() {
   }
 
   return (
-    <div style={{ height: '100vh', overflow: 'hidden', background: '#0d1117', display: 'flex', flexDirection: 'column', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div style={{ height: '100vh', overflow: 'hidden', background: 'var(--bg-main)', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', fontFamily: 'Inter, system-ui, sans-serif', transition: 'background-color 0.3s' }}>
 
       {/* ── Header ── */}
       <header style={{
-        background: 'rgba(13,17,23,0.95)',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        background: 'var(--card-bg)',
+        borderBottom: '1px solid var(--card-border)',
         backdropFilter: 'blur(20px)',
         padding: '0 20px',
         height: '56px',
@@ -59,35 +60,37 @@ export default function Editor() {
         justifyContent: 'space-between',
         flexShrink: 0,
         zIndex: 30,
-        boxShadow: '0 1px 0 rgba(255,255,255,0.04)',
+        boxShadow: '0 1px 0 var(--card-border)',
       }}>
         {/* Left: logo + back */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <button onClick={() => navigate('/')}
-            style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 500, padding: '5px 8px', borderRadius: '6px', transition: 'color 0.2s, background 0.2s' }}
-            onMouseOver={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = 'white'; el.style.background = 'rgba(255,255,255,0.06)' }}
-            onMouseOut={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = 'rgba(255,255,255,0.4)'; el.style.background = 'none' }}>
+            style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--text-secondary)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 500, padding: '5px 8px', borderRadius: '6px', transition: 'color 0.2s, background 0.2s' }}
+            onMouseOver={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = 'var(--text-main)'; el.style.background = 'var(--hover-bg)' }}
+            onMouseOut={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = 'var(--text-secondary)'; el.style.background = 'none' }}>
             <ArrowLeft size={13} /> Home
           </button>
-          <div style={{ width: '1px', height: '18px', background: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ width: '1px', height: '18px', background: 'var(--card-border)' }} />
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 12px rgba(99,102,241,0.35)' }}>
+            <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 12px var(--accent-glow)' }}>
               <FileText size={13} color="white" />
             </div>
-            <span style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.9)', letterSpacing: '-0.2px' }}>
-              CoverPage<span style={{ color: '#818cf8' }}>Gen</span>
+            <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '-0.2px' }}>
+              CoverPage<span style={{ color: 'var(--accent)' }}>Gen</span>
             </span>
           </div>
         </div>
 
         {/* Right: actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {/* Mobile preview toggle */}
           <button onClick={() => setShowPreview(!showPreview)}
-            style={{ display: 'none', alignItems: 'center', gap: '5px', color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px', fontWeight: 500 }}
+            style={{ display: 'none', alignItems: 'center', gap: '5px', color: 'var(--text-secondary)', background: 'var(--hover-bg)', border: '1px solid var(--card-border)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px', fontWeight: 500 }}
             className="mobile-preview-btn">
             {showPreview ? <><EyeOff size={13} /> Form</> : <><Eye size={13} /> Preview</>}
           </button>
+
+          <ThemeToggle />
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <CustomTemplateImport
@@ -108,16 +111,16 @@ export default function Editor() {
         <aside style={{
           width: '320px',
           flexShrink: 0,
-          background: '#0d1117',
-          borderRight: '1px solid rgba(255,255,255,0.06)',
+          background: 'var(--bg-main)',
+          borderRight: '1px solid var(--card-border)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
         }}>
           {/* Sidebar header */}
-          <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-            <Layers size={13} color="rgba(255,255,255,0.35)" />
-            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(255,255,255,0.3)' }}>Cover Page Editor</span>
+          <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid var(--card-border)', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+            <Layers size={13} color="var(--text-secondary)" />
+            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--text-secondary)' }}>Cover Page Editor</span>
           </div>
 
           {/* Scrollable form */}
@@ -141,17 +144,17 @@ export default function Editor() {
             flexDirection: 'column',
             alignItems: 'center',
             padding: '32px 24px',
-            background: 'linear-gradient(160deg, #0d1117 0%, #111827 100%)',
+            background: 'linear-gradient(160deg, var(--bg-main) 0%, var(--hover-bg) 100%)',
             position: 'relative',
           }}
         >
           {/* Subtle grid overlay */}
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(var(--card-border) 1px, transparent 1px), linear-gradient(90deg, var(--card-border) 1px, transparent 1px)', backgroundSize: '32px 32px', pointerEvents: 'none' }} />
 
           {/* Preview label */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px', flexShrink: 0, zIndex: 1 }}>
             <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px #22c55e' }} />
-            <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', fontWeight: 500, letterSpacing: '0.5px' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 500, letterSpacing: '0.5px' }}>
               Live Preview · A4 (210mm × 297mm)
             </span>
           </div>
@@ -159,7 +162,7 @@ export default function Editor() {
           {/* A4 paper with premium shadow */}
           <div style={{ position: 'relative', flexShrink: 0, zIndex: 1 }}>
             {/* Glow beneath paper */}
-            <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%)', width: '60%', height: '40px', background: 'rgba(99,102,241,0.15)', filter: 'blur(20px)', borderRadius: '50%', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%)', width: '60%', height: '40px', background: 'var(--accent-glow)', filter: 'blur(20px)', borderRadius: '50%', pointerEvents: 'none' }} />
 
             <div
               className="preview-scaler"
@@ -169,7 +172,7 @@ export default function Editor() {
                 marginBottom: `${(1130 * previewScale) - 1130 + 32}px`,
               }}
             >
-              <div style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05)', borderRadius: '4px' }}>
+              <div style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.15), 0 0 0 1px var(--card-border)', borderRadius: '4px' }}>
                 <PreviewPanel
                   ref={printRef}
                   data={formData}
