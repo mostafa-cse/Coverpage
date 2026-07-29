@@ -20,6 +20,8 @@ export default function Editor() {
   const [showPreview, setShowPreview] = useState(false)
   const [previewScale, setPreviewScale] = useState(0.5)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [sidebarWidth, setSidebarWidth] = useState(340)
+  const [isResizing, setIsResizing] = useState(false)
 
   useEffect(() => { saveFormData(formData) }, [formData])
 
@@ -38,7 +40,30 @@ export default function Editor() {
       window.removeEventListener('resize', calcScale)
       clearTimeout(timeout)
     }
-  }, [showPreview, isSidebarOpen])
+  }, [showPreview, isSidebarOpen, sidebarWidth])
+
+  useEffect(() => {
+    if (!isResizing) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      // Limit sidebar width between 280px and 600px
+      const newWidth = Math.max(280, Math.min(600, e.clientX));
+      setSidebarWidth(newWidth);
+    };
+    
+    const handleMouseUp = () => {
+      setIsResizing(false);
+      document.body.style.cursor = 'default';
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isResizing]);
 
   const handleChange = useCallback((updated: Partial<CoverPageData>) => {
     setFormData((prev) => ({ ...prev, ...updated }))
@@ -115,7 +140,7 @@ export default function Editor() {
 
         {/* ── Left Sidebar – Form ── */}
         <aside style={{
-          width: isSidebarOpen ? '340px' : '0px',
+          width: isSidebarOpen ? `${sidebarWidth}px` : '0px',
           opacity: isSidebarOpen ? 1 : 0,
           flexShrink: 0,
           background: 'var(--card-bg)',
@@ -124,7 +149,7 @@ export default function Editor() {
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
-          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: isResizing ? 'none' : 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           boxShadow: isSidebarOpen ? '10px 0 30px rgba(0,0,0,0.05)' : 'none',
           position: 'relative',
           zIndex: 10
@@ -148,6 +173,27 @@ export default function Editor() {
               />
             </div>
           </div>
+          {/* Resizer Handle */}
+          <div
+            onMouseDown={(e) => {
+              e.preventDefault();
+              setIsResizing(true);
+              document.body.style.cursor = 'col-resize';
+            }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: '6px',
+              height: '100%',
+              cursor: 'col-resize',
+              zIndex: 30,
+              backgroundColor: isResizing ? 'var(--accent)' : 'transparent',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseOver={(e) => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'var(--accent-glow)' }}
+            onMouseOut={(e) => { if (!isResizing) (e.currentTarget as HTMLDivElement).style.backgroundColor = 'transparent' }}
+          />
         </aside>
 
         {/* Sidebar Toggle Button */}
@@ -155,7 +201,7 @@ export default function Editor() {
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           style={{
             position: 'absolute',
-            left: isSidebarOpen ? '340px' : '0px',
+            left: isSidebarOpen ? `${sidebarWidth}px` : '0px',
             top: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 20,
@@ -168,7 +214,7 @@ export default function Editor() {
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: isResizing ? 'none' : 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
             color: 'var(--text-secondary)',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             backdropFilter: 'blur(10px)'
