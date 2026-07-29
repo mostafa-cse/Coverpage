@@ -1,4 +1,6 @@
-import { CoverPageData } from '@/types/CoverPageData'
+import ClassicTemplate from './ClassicTemplate';
+export default ClassicTemplate;
+
 
 interface Props { data: CoverPageData }
 

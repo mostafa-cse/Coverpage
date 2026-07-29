@@ -7,11 +7,17 @@ export default function ElegantTemplate({ data }: Props) {
 
   return (
     <div style={{
-      width: '210mm', minHeight: '297mm', padding: '0',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      fontSize: '12pt', color: '#000', backgroundColor: '#fff',
-      boxSizing: 'border-box', display: 'flex', flexDirection: 'column',
-      border: '1px solid #000',
+      width: '210mm',
+      minHeight: '297mm',
+      padding: '20mm 22mm',
+      fontFamily: 'Times New Roman, Times, serif',
+      fontSize: '12pt',
+      color: '#000',
+      backgroundColor: '#fff',
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     }}>
       {/* Top border accent */}
       <div style={{ height: '5px', background: '#000' }} />

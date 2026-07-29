@@ -7,12 +7,18 @@ export default function ModernTemplate({ data }: Props) {
 
   return (
     <div style={{
-      width: '210mm', minHeight: '297mm',
-      fontFamily: 'Inter, system-ui, sans-serif',
-      fontSize: '12pt', color: '#000', backgroundColor: '#fff',
-      boxSizing: 'border-box', display: 'flex', flexDirection: 'column',
-      border: '1px solid #000',
-    }}>
+        width: '210mm',
+        minHeight: '297mm',
+        padding: '20mm',
+        fontFamily: 'Times New Roman, Times, serif',
+        fontSize: '12pt',
+        color: '#000',
+        backgroundColor: '#fff',
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
       {/* Top accent bar */}
       <div style={{ height: '5px', background: '#000' }} />
 
