@@ -7,26 +7,30 @@
     --bg-main: #f8fafc;
     --text-main: #0f172a;
     --text-secondary: #475569;
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --card-border: rgba(0, 0, 0, 0.1);
-    --hover-bg: rgba(0, 0, 0, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --hover-bg: rgba(0, 0, 0, 0.04);
     --accent: #3b82f6;
-    --accent-glow: rgba(59, 130, 246, 0.1);
-    --input-bg: rgba(0, 0, 0, 0.03);
-    --input-border: rgba(0, 0, 0, 0.15);
+    --accent-glow: rgba(59, 130, 246, 0.15);
+    --input-bg: #ffffff;
+    --input-border: rgba(0, 0, 0, 0.12);
+    --shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.1);
+    --paper-glow: 0 32px 80px rgba(0,0,0,0.15), 0 0 0 1px var(--card-border);
   }
 
   [data-theme='dark'] {
-    --bg-main: #0d1117;
-    --text-main: #ffffff;
-    --text-secondary: #8b949e;
-    --card-bg: #161b22;
-    --card-border: #30363d;
-    --hover-bg: rgba(255, 255, 255, 0.1);
-    --accent: #58a6ff;
-    --accent-glow: rgba(88, 166, 255, 0.1);
-    --input-bg: #0d1117;
-    --input-border: #30363d;
+    --bg-main: #09090b; /* Deep premium black */
+    --text-main: #f8fafc;
+    --text-secondary: #94a3b8;
+    --card-bg: #18181b; /* Subtle elevation */
+    --card-border: #27272a;
+    --hover-bg: rgba(255, 255, 255, 0.05);
+    --accent: #818cf8; /* Soft indigo accent */
+    --accent-glow: rgba(129, 140, 248, 0.15);
+    --input-bg: rgba(255, 255, 255, 0.05); /* Frosted elevation */
+    --input-border: rgba(255, 255, 255, 0.1);
+    --shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.6);
+    --paper-glow: 0 0 120px rgba(255,255,255,0.02), 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px var(--card-border);
   }
 
   [data-theme='black-glass'] {
@@ -40,6 +44,8 @@
     --accent-glow: rgba(99, 102, 241, 0.2);
     --input-bg: rgba(255, 255, 255, 0.03);
     --input-border: rgba(255, 255, 255, 0.1);
+    --shadow-premium: 0 20px 40px -10px rgba(0,0,0,0.8);
+    --paper-glow: 0 0 100px rgba(99,102,241,0.08), 0 32px 80px rgba(0,0,0,0.9), 0 0 0 1px var(--card-border);
   }
 
   html {

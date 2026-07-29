@@ -97,7 +97,7 @@ export default function Editor() {
         flexShrink: 0,
         zIndex: 50,
         border: '1px solid var(--card-border)',
-        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.15)',
+        boxShadow: 'var(--shadow-premium)',
       }}>
         {/* Left: logo + back */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -271,7 +271,7 @@ export default function Editor() {
                 marginBottom: `${(1130 * previewScale) - 1130 + 32}px`,
               }}
             >
-              <div style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.15), 0 0 0 1px var(--card-border)', borderRadius: '4px' }}>
+              <div style={{ boxShadow: 'var(--paper-glow)', borderRadius: '4px' }}>
                 <PreviewPanel
                   ref={printRef}
                   data={formData}
