@@ -169,6 +169,8 @@ export default function Editor() {
             <span style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px', color: 'var(--text-main)' }}>Editor Controls</span>
           </div>
 
+          <div style={{ height: '1px', background: 'var(--card-border)', margin: '0 24px 24px', opacity: 0.5 }} />
+
           {/* Scrollable form */}
           <div className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
             <div style={{ minWidth: '340px' }}>
