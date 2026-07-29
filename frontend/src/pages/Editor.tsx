@@ -7,7 +7,7 @@ import PreviewPanel from '@/components/PreviewPanel/PreviewPanel'
 import ExportBar from '@/components/ExportBar/ExportBar'
 import CustomTemplateImport from '@/components/CustomTemplateImport/CustomTemplateImport'
 import ThemeToggle from '@/components/ThemeToggle'
-import { FileText, ArrowLeft, Eye, EyeOff, Layers } from 'lucide-react'
+import { FileText, ArrowLeft, Eye, EyeOff, ChevronLeft, ChevronRight, Settings } from 'lucide-react'
 
 export default function Editor() {
   const navigate = useNavigate()
@@ -19,6 +19,7 @@ export default function Editor() {
   const [customHtml, setCustomHtml] = useState<string | undefined>(undefined)
   const [showPreview, setShowPreview] = useState(false)
   const [previewScale, setPreviewScale] = useState(0.5)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
   useEffect(() => { saveFormData(formData) }, [formData])
 
@@ -30,9 +31,14 @@ export default function Editor() {
       }
     }
     calcScale()
+    // small delay to let sidebar animation finish before recalculating
+    const timeout = setTimeout(calcScale, 350)
     window.addEventListener('resize', calcScale)
-    return () => window.removeEventListener('resize', calcScale)
-  }, [showPreview])
+    return () => {
+      window.removeEventListener('resize', calcScale)
+      clearTimeout(timeout)
+    }
+  }, [showPreview, isSidebarOpen])
 
   const handleChange = useCallback((updated: Partial<CoverPageData>) => {
     setFormData((prev) => ({ ...prev, ...updated }))
@@ -109,30 +115,70 @@ export default function Editor() {
 
         {/* ── Left Sidebar – Form ── */}
         <aside style={{
-          width: '320px',
+          width: isSidebarOpen ? '340px' : '0px',
+          opacity: isSidebarOpen ? 1 : 0,
           flexShrink: 0,
-          background: 'var(--bg-main)',
+          background: 'var(--card-bg)',
+          backdropFilter: 'blur(20px)',
           borderRight: '1px solid var(--card-border)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          boxShadow: isSidebarOpen ? '10px 0 30px rgba(0,0,0,0.05)' : 'none',
+          position: 'relative',
+          zIndex: 10
         }}>
           {/* Sidebar header */}
-          <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid var(--card-border)', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-            <Layers size={13} color="var(--text-secondary)" />
-            <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--text-secondary)' }}>Cover Page Editor</span>
+          <div style={{ padding: '16px', borderBottom: '1px solid var(--card-border)', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)' }}>
+            <div style={{ width: '24px', height: '24px', borderRadius: '6px', background: 'var(--accent-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Settings size={14} color="var(--accent)" />
+            </div>
+            <span style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-main)' }}>Editor Controls</span>
           </div>
 
           {/* Scrollable form */}
           <div style={{ flex: 1, overflowY: 'auto' }}>
-            <CoverForm
-              data={formData}
-              onChange={handleChange}
-              selectedTemplate={selectedTemplate}
-              onSelectTemplate={(id) => { setSelectedTemplate(id); setCustomHtml(undefined) }}
-            />
+            <div style={{ minWidth: '340px' }}>
+              <CoverForm
+                data={formData}
+                onChange={handleChange}
+                selectedTemplate={selectedTemplate}
+                onSelectTemplate={(id) => { setSelectedTemplate(id); setCustomHtml(undefined) }}
+              />
+            </div>
           </div>
         </aside>
+
+        {/* Sidebar Toggle Button */}
+        <button 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          style={{
+            position: 'absolute',
+            left: isSidebarOpen ? '340px' : '0px',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 20,
+            width: '28px',
+            height: '48px',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            color: 'var(--text-secondary)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            backdropFilter: 'blur(10px)'
+          }}
+          className="sidebar-toggle-btn"
+          onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--accent)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.05)' }}
+          onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-secondary)'; (e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)' }}
+        >
+          {isSidebarOpen ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+        </button>
 
         {/* ── Right Panel – Preview ── */}
         <main
@@ -188,8 +234,9 @@ export default function Editor() {
       <style>{`
         @media (max-width: 768px) {
           .mobile-preview-btn { display: flex !important; }
-          aside { display: ${showPreview ? 'none' : 'flex'} !important; width: 100% !important; }
+          aside { display: ${showPreview ? 'none' : 'flex'} !important; width: 100% !important; opacity: 1 !important; border-right: none !important; }
           main { display: ${showPreview ? 'flex' : 'none'} !important; }
+          .sidebar-toggle-btn { display: none !important; }
         }
       `}</style>
     </div>
