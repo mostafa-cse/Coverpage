@@ -15,22 +15,37 @@ const courseTypes: CourseType[] = ['Theory', 'Lab', 'Project']
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 mt-5">
-      {children}
-    </p>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '24px', marginBottom: '12px' }}>
+      <div style={{ width: '12px', height: '1px', background: 'rgba(255,255,255,0.1)' }} />
+      <span style={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(255,255,255,0.4)' }}>
+        {children}
+      </span>
+      <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.05)' }} />
+    </div>
   )
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="mb-3">
-      <label className="block text-xs font-medium text-gray-500 mb-1">{label}</label>
+    <div style={{ marginBottom: '16px' }}>
+      <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>{label}</label>
       {children}
     </div>
   )
 }
 
-const inp = 'w-full border border-gray-200 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-gray-400 bg-white'
+const inp = {
+  width: '100%',
+  background: 'rgba(255,255,255,0.03)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  borderRadius: '8px',
+  padding: '8px 12px',
+  fontSize: '13px',
+  color: 'white',
+  outline: 'none',
+  transition: 'border-color 0.2s, background 0.2s',
+  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.2)'
+}
 
 export default function CoverForm({ data, onChange, selectedTemplate, onSelectTemplate }: Props) {
   const fileRef = useRef<HTMLInputElement>(null)
@@ -46,316 +61,291 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
   }
 
   return (
-    <div className="overflow-y-auto h-full px-4 py-4 scrollbar-thin scrollbar-track-gray">
+    <div style={{ padding: '0 16px 32px' }} className="custom-scrollbar">
 
       {/* ── Style / Template ── */}
-      <SectionLabel>Style</SectionLabel>
-      <div className="grid grid-cols-2 gap-1.5 mb-1">
-        {TEMPLATES.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => onSelectTemplate(t.id)}
-            className={clsx(
-              'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-left',
-              selectedTemplate === t.id
-                ? 'bg-gray-900 text-white border-gray-900'
-                : 'bg-white text-gray-500 border-gray-200 hover:border-gray-500 hover:text-gray-700'
-            )}
-          >
-            <span className="shrink-0 text-sm">{t.thumbnail}</span>
-            <span className="truncate">{t.name}</span>
-          </button>
-        ))}
+      <SectionLabel>Layout Style</SectionLabel>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '8px' }}>
+        {TEMPLATES.map((t) => {
+          const isSelected = selectedTemplate === t.id
+          return (
+            <button
+              key={t.id}
+              onClick={() => onSelectTemplate(t.id)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '8px', padding: '10px',
+                borderRadius: '10px', fontSize: '11px', fontWeight: 600,
+                textAlign: 'left', cursor: 'pointer', transition: 'all 0.2s',
+                background: isSelected ? 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(99,102,241,0.15))' : 'rgba(255,255,255,0.02)',
+                border: isSelected ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.05)',
+                color: isSelected ? 'white' : 'rgba(255,255,255,0.5)',
+                boxShadow: isSelected ? '0 4px 12px rgba(0,0,0,0.2)' : 'none'
+              }}
+              onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.1)' } }}
+              onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.02)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.05)' } }}
+            >
+              <span style={{ fontSize: '16px', opacity: isSelected ? 1 : 0.7 }}>{t.thumbnail}</span>
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{t.name}</span>
+            </button>
+          )
+        })}
       </div>
 
       {/* ── Document Type ── */}
       <SectionLabel>Document Type</SectionLabel>
-      <div className="flex gap-2 mb-1">
-        {(['assignment', 'lab_report'] as DocType[]).map((v) => (
-          <button
-            key={v}
-            onClick={() => onChange({ docType: v })}
-            className={clsx(
-              'flex-1 py-1.5 rounded-md text-xs font-medium border transition-all',
-              data.docType === v
-                ? 'bg-gray-900 text-white border-gray-900'
-                : 'bg-white text-gray-500 border-gray-200 hover:border-gray-500'
-            )}
-          >
-            {v === 'assignment' ? '📝 Assignment' : '🔬 Lab Report'}
-          </button>
-        ))}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+        {(['assignment', 'lab_report'] as DocType[]).map((v) => {
+          const isSelected = data.docType === v
+          return (
+            <button
+              key={v}
+              onClick={() => onChange({ docType: v })}
+              style={{
+                flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px', fontWeight: 600,
+                cursor: 'pointer', transition: 'all 0.2s',
+                background: isSelected ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.02)',
+                border: isSelected ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.05)',
+                color: isSelected ? 'white' : 'rgba(255,255,255,0.5)',
+              }}
+              onMouseOver={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.1)' } }}
+              onMouseOut={e => { if (!isSelected) { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.02)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.05)' } }}
+            >
+              {v === 'assignment' ? '📝 Assignment' : '🔬 Lab Report'}
+            </button>
+          )
+        })}
       </div>
 
       {/* ── University ── */}
-      <SectionLabel>University</SectionLabel>
+      <SectionLabel>University Info</SectionLabel>
       <Field label="University Name">
-        <input
-          className={inp}
-          value={data.university.name}
-          placeholder="e.g. Jashore University of Science and Technology"
+        <input style={inp} value={data.university.name} placeholder="e.g. Dhaka University"
           onChange={(e) => onChange({ university: { ...data.university, name: e.target.value } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
       <Field label="Department">
-        <input
-          className={inp}
-          value={data.university.dept}
-          placeholder="e.g. Computer Science and Engineering"
+        <input style={inp} value={data.university.dept} placeholder="e.g. Computer Science"
           onChange={(e) => onChange({ university: { ...data.university, dept: e.target.value } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
       <Field label="Address (optional)">
-        <input
-          className={inp}
-          value={data.university.address}
-          placeholder="e.g. Jashore – 7408, Bangladesh"
+        <input style={inp} value={data.university.address} placeholder="e.g. Dhaka – 1000"
           onChange={(e) => onChange({ university: { ...data.university, address: e.target.value } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
-      <Field label="Logo (optional)">
-        <div className="flex items-center gap-2">
+      <Field label="University Logo (optional)">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {data.university.logoUrl && (
-            <img
-              src={data.university.logoUrl}
-              alt="Logo"
-              className="w-9 h-9 object-contain rounded border border-gray-200"
-            />
+            <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'white', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img src={data.university.logoUrl} alt="Logo" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            </div>
           )}
-          <button
-            onClick={() => fileRef.current?.click()}
-            className="text-xs border border-dashed border-gray-300 px-3 py-1 rounded-md hover:border-gray-500 transition-colors text-gray-500"
-          >
-            {data.university.logoUrl ? 'Change' : 'Upload Logo'}
+          <button onClick={() => fileRef.current?.click()}
+            style={{ fontSize: '11px', fontWeight: 600, background: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.7)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s' }}
+            onMouseOver={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.4)' }}
+            onMouseOut={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.2)' }}>
+            {data.university.logoUrl ? 'Change Logo' : 'Upload Logo'}
           </button>
           {data.university.logoUrl && (
-            <button
-              onClick={() => onChange({ university: { ...data.university, logoUrl: '' } })}
-              className="text-xs text-red-400 hover:text-red-600"
-            >
+            <button onClick={() => onChange({ university: { ...data.university, logoUrl: '' } })}
+              style={{ fontSize: '11px', fontWeight: 600, background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px' }}>
               Remove
             </button>
           )}
         </div>
-        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
+        <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleLogoUpload} />
       </Field>
 
       {/* ── Subject ── */}
-      <SectionLabel>Subject</SectionLabel>
-      <Field label="Course / Subject Name">
-        <input
-          className={inp}
-          value={data.subject.name}
-          placeholder="e.g. Data Structures and Algorithms"
+      <SectionLabel>Course Details</SectionLabel>
+      <Field label="Course Title">
+        <input style={inp} value={data.subject.name} placeholder="e.g. Data Structures"
           onChange={(e) => onChange({ subject: { ...data.subject, name: e.target.value } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
-      <div className="flex gap-2 mb-3">
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Course Code</label>
-          <input
-            className={inp}
-            value={data.subject.courseCode}
-            placeholder="CSE 301"
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Course Code</label>
+          <input style={inp} value={data.subject.courseCode} placeholder="CSE 301"
             onChange={(e) => onChange({ subject: { ...data.subject, courseCode: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Session</label>
-          <input
-            className={inp}
-            value={data.subject.session}
-            placeholder="2021-22"
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Session</label>
+          <input style={inp} value={data.subject.session} placeholder="2021-22"
             onChange={(e) => onChange({ subject: { ...data.subject, session: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
       </div>
       <Field label="Course Type">
-        <div className="flex gap-1.5">
-          {courseTypes.map((ct) => (
-            <button
-              key={ct}
-              onClick={() => onChange({ subject: { ...data.subject, courseType: ct } })}
-              className={clsx(
-                'px-3 py-1 rounded-full text-xs border transition-all',
-                data.subject.courseType === ct
-                  ? 'bg-gray-900 text-white border-gray-900'
-                  : 'bg-white text-gray-500 border-gray-200 hover:border-gray-500'
-              )}
-            >
-              {ct}
-            </button>
-          ))}
+        <div style={{ display: 'flex', gap: '6px' }}>
+          {courseTypes.map((ct) => {
+            const isSelected = data.subject.courseType === ct
+            return (
+              <button key={ct} onClick={() => onChange({ subject: { ...data.subject, courseType: ct } })}
+                style={{
+                  padding: '6px 12px', borderRadius: '100px', fontSize: '11px', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s',
+                  background: isSelected ? 'white' : 'rgba(255,255,255,0.05)',
+                  border: '1px solid',
+                  borderColor: isSelected ? 'white' : 'rgba(255,255,255,0.1)',
+                  color: isSelected ? 'black' : 'rgba(255,255,255,0.6)',
+                }}
+                onMouseOver={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)' }}
+                onMouseOut={e => { if (!isSelected) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)' }}
+              >
+                {ct}
+              </button>
+            )
+          })}
         </div>
       </Field>
 
       {isLab && (
-        <>
-          <div className="flex gap-2 mb-3">
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-500 mb-1">Experiment No.</label>
-              <input
-                className={inp}
-                value={data.experimentNo ?? ''}
-                placeholder="03"
+        <div style={{ padding: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Exp. No.</label>
+              <input style={inp} value={data.experimentNo ?? ''} placeholder="03"
                 onChange={(e) => onChange({ experimentNo: e.target.value })}
+                onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+                onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
               />
             </div>
-            <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-500 mb-1">Date of Experiment</label>
-              <input
-                type="date"
-                className={inp}
-                value={data.experimentDate ?? ''}
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Date</label>
+              <input type="date" style={inp} value={data.experimentDate ?? ''}
                 onChange={(e) => onChange({ experimentDate: e.target.value })}
+                onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+                onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
               />
             </div>
           </div>
-          <Field label="Experiment Title">
-            <input
-              className={inp}
-              value={data.experimentTitle ?? ''}
-              placeholder="e.g. Implementation of Bubble Sort"
+          <div style={{ marginBottom: 0 }}>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Experiment Title</label>
+            <input style={inp} value={data.experimentTitle ?? ''} placeholder="Title"
               onChange={(e) => onChange({ experimentTitle: e.target.value })}
+              onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+              onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
             />
-          </Field>
-        </>
+          </div>
+        </div>
       )}
 
       {/* ── Submitted By ── */}
-      <SectionLabel>Submitted By</SectionLabel>
+      <SectionLabel>Student Info (Submitted By)</SectionLabel>
       <Field label="Full Name">
-        <input
-          className={inp}
-          value={data.submittedBy.name}
-          placeholder="Your full name"
+        <input style={inp} value={data.submittedBy.name} placeholder="Your name"
           onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, name: e.target.value } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
-      <div className="flex gap-2 mb-3">
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Roll No.</label>
-          <input
-            className={inp}
-            value={data.submittedBy.roll}
-            placeholder="2101001"
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Roll No.</label>
+          <input style={inp} value={data.submittedBy.roll} placeholder="2101001"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, roll: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Reg. No.</label>
-          <input
-            className={inp}
-            value={data.submittedBy.regNo}
-            placeholder="21101001"
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Reg. No.</label>
+          <input style={inp} value={data.submittedBy.regNo} placeholder="21101001"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, regNo: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
       </div>
-      <div className="flex gap-2 mb-3">
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Year</label>
-          <select
-            className={inp}
-            value={data.submittedBy.year}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Year</label>
+          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.year ? 'white' : 'rgba(255,255,255,0.4)' }} value={data.submittedBy.year}
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, year: e.target.value } })}
-          >
-            <option value="">Year</option>
-            {['1st', '2nd', '3rd', '4th'].map((y) => (
-              <option key={y} value={y}>{y} Year</option>
-            ))}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}>
+            <option value="" disabled style={{ color: 'black' }}>Select</option>
+            {['1st', '2nd', '3rd', '4th'].map(y => <option key={y} value={y} style={{ color: 'black' }}>{y} Year</option>)}
           </select>
         </div>
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Semester</label>
-          <select
-            className={inp}
-            value={data.submittedBy.semester}
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Sem</label>
+          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.semester ? 'white' : 'rgba(255,255,255,0.4)' }} value={data.submittedBy.semester}
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, semester: e.target.value } })}
-          >
-            <option value="">Sem.</option>
-            {['1st', '2nd'].map((s) => (
-              <option key={s} value={s}>{s} Sem</option>
-            ))}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}>
+            <option value="" disabled style={{ color: 'black' }}>Select</option>
+            {['1st', '2nd'].map(s => <option key={s} value={s} style={{ color: 'black' }}>{s} Sem</option>)}
           </select>
         </div>
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Group</label>
-          <input
-            className={inp}
-            value={data.submittedBy.groupNo}
-            placeholder="A1"
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Group</label>
+          <input style={inp} value={data.submittedBy.groupNo} placeholder="A1"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, groupNo: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
       </div>
 
       {/* ── Submitted To ── */}
-      <SectionLabel>Submitted To</SectionLabel>
-      <Field label="Teacher's Full Name">
-        <input
-          className={inp}
-          value={data.submittedTo.name}
-          placeholder="e.g. Dr. Mohammad Ali"
+      <SectionLabel>Teacher Info (Submitted To)</SectionLabel>
+      <Field label="Teacher's Name">
+        <input style={inp} value={data.submittedTo.name} placeholder="Dr. Ali"
           onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, name: e.target.value } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
       <Field label="Designation">
-        <select
-          className={inp}
-          value={data.submittedTo.designation}
-          onChange={(e) =>
-            onChange({ submittedTo: { ...data.submittedTo, designation: e.target.value as Designation } })
-          }
-        >
-          {designations.map((d) => (
-            <option key={d} value={d}>{d}</option>
-          ))}
+        <select style={{ ...inp, appearance: 'none' }} value={data.submittedTo.designation}
+          onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, designation: e.target.value as Designation } })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}>
+          {designations.map(d => <option key={d} value={d} style={{ color: 'black' }}>{d}</option>)}
         </select>
       </Field>
-      <div className="flex gap-2 mb-3">
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Department</label>
-          <input
-            className={inp}
-            value={data.submittedTo.dept}
-            placeholder="CSE"
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Dept</label>
+          <input style={inp} value={data.submittedTo.dept} placeholder="CSE"
             onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, dept: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
-        <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">University</label>
-          <input
-            className={inp}
-            value={data.submittedTo.university}
-            placeholder="University"
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>Uni</label>
+          <input style={inp} value={data.submittedTo.university} placeholder="JUST"
             onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, university: e.target.value } })}
+            onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+            onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
           />
         </div>
       </div>
 
       {/* ── Dates ── */}
-      <SectionLabel>Dates</SectionLabel>
+      <SectionLabel>Submission</SectionLabel>
       <Field label="Date of Submission">
-        <input
-          type="date"
-          className={inp}
-          value={data.submissionDate}
+        <input type="date" style={{ ...inp, color: data.submissionDate ? 'white' : 'rgba(255,255,255,0.4)' }} value={data.submissionDate}
           onChange={(e) => onChange({ submissionDate: e.target.value })}
+          onFocus={e => (e.target.style.borderColor = 'rgba(99,102,241,0.5)')}
+          onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
       </Field>
-      {isLab && (
-        <Field label="Date of Experiment">
-          <input
-            type="date"
-            className={inp}
-            value={data.experimentDate ?? ''}
-            onChange={(e) => onChange({ experimentDate: e.target.value })}
-          />
-        </Field>
-      )}
-
-      <div className="h-8" />
     </div>
   )
 }
