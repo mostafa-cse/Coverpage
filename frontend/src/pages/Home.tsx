@@ -21,17 +21,17 @@ export default function Home() {
     <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ fontFamily: 'Inter, system-ui, sans-serif', backgroundColor: 'var(--bg-main)', color: 'var(--text-main)', transition: 'background-color 0.3s, color 0.3s' }}>
 
       {/* ── Ambient Background ── */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="animate-glow" style={{ position: 'absolute', top: '-15%', left: '0%', width: '800px', height: '800px', background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 60%)', borderRadius: '50%' }} />
-        <div className="animate-glow" style={{ position: 'absolute', top: '30%', right: '-10%', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 60%)', borderRadius: '50%', animationDelay: '2s' }} />
-        <div className="animate-glow" style={{ position: 'absolute', bottom: '-10%', left: '15%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 60%)', borderRadius: '50%', animationDelay: '1s' }} />
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" style={{ opacity: 0.8 }}>
+        <div className="animate-mesh" style={{ position: 'absolute', top: '-20%', left: '-10%', width: '70vw', height: '70vw', background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 60%)', borderRadius: '50%' }} />
+        <div className="animate-mesh" style={{ position: 'absolute', top: '30%', right: '-15%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 60%)', borderRadius: '50%', animationDelay: '-4s' }} />
+        <div className="animate-mesh" style={{ position: 'absolute', bottom: '-20%', left: '10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 60%)', borderRadius: '50%', animationDelay: '-8s' }} />
         
         {/* Animated grid pattern */}
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(var(--card-border) 1px, transparent 1px), linear-gradient(90deg, var(--card-border) 1px, transparent 1px)', backgroundSize: '64px 64px', opacity: 0.8, maskImage: 'linear-gradient(to bottom, white, transparent)' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(var(--card-border) 1px, transparent 1px), linear-gradient(90deg, var(--card-border) 1px, transparent 1px)', backgroundSize: '64px 64px', opacity: 0.6, maskImage: 'linear-gradient(to bottom, white, transparent)' }} />
       </div>
 
-      {/* ── Navbar ── */}
-      <nav style={{ position: 'sticky', top: '16px', zIndex: 50, margin: '0 24px', borderRadius: '20px', background: 'var(--card-bg)', backdropFilter: 'blur(20px)', border: '1px solid var(--card-border)' }}>
+      {/* ── Floating Navbar ── */}
+      <nav style={{ position: 'sticky', top: '24px', zIndex: 50, margin: '0 auto', maxWidth: '1000px', width: 'calc(100% - 48px)', borderRadius: '100px', background: 'var(--card-bg)', backdropFilter: 'blur(30px)', border: '1px solid var(--card-border)', boxShadow: '0 10px 40px -10px rgba(0,0,0,0.1)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -138,25 +138,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── How It Works ── */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '100px 24px', borderTop: '1px solid var(--card-border)', background: 'linear-gradient(to bottom, var(--bg-main), var(--hover-bg))' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <p className="text-gradient-shimmer" style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '16px' }}>Zero Friction</p>
-            <h2 style={{ fontSize: '42px', fontWeight: 900, letterSpacing: '-1px' }}>Ready in 3 Steps</h2>
+      {/* ── Bento Box Grid: How It Works ── */}
+      <section style={{ position: 'relative', zIndex: 1, padding: '120px 24px', borderTop: '1px solid var(--card-border)', background: 'linear-gradient(to bottom, var(--bg-main), var(--hover-bg))' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <p className="text-gradient-shimmer" style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '20px' }}>Zero Friction Workflow</p>
+            <h2 style={{ fontSize: '48px', fontWeight: 900, letterSpacing: '-1.5px' }}>Ready in 3 Steps</h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
+          <div className="bento-grid">
             {steps.map((step, i) => (
-              <div key={i} className="glowing-border-wrapper" style={{ position: 'relative', padding: '40px', borderRadius: '24px', overflow: 'hidden', transition: 'transform 0.3s', background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
-                onMouseOver={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-8px)' }}
+              <div key={i} className="glass-card glowing-border-wrapper" style={{ position: 'relative', padding: '48px 40px', borderRadius: '32px', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                onMouseOver={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-8px) scale(1.02)' }}
                 onMouseOut={e => { (e.currentTarget as HTMLDivElement).style.transform = 'none' }}>
-                <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '150px', height: '150px', background: `linear-gradient(135deg, ${step.color.replace('from-', '').replace(' to-', ', ')})`, borderRadius: '50%', opacity: 0.15, filter: 'blur(30px)' }} />
-                <div style={{ fontSize: '64px', fontWeight: 900, background: `linear-gradient(135deg, ${step.color.replace('from-', '').replace(' to-', ', ')})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', lineHeight: 1, marginBottom: '24px', opacity: 0.8, filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }}>
-                  {step.num}
+                
+                {/* Huge atmospheric glow */}
+                <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '250px', height: '250px', background: `radial-gradient(circle, ${step.color.includes('blue') ? 'rgba(59,130,246,0.15)' : step.color.includes('violet') ? 'rgba(139,92,246,0.15)' : 'rgba(16,185,129,0.15)'} 0%, transparent 70%)`, pointerEvents: 'none' }} />
+                
+                <div>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '56px', height: '56px', borderRadius: '16px', background: 'var(--hover-bg)', border: '1px solid var(--card-border)', marginBottom: '32px', fontSize: '20px', fontWeight: 900, color: 'var(--text-main)' }}>
+                    {step.num}
+                  </div>
+                  <h3 style={{ fontSize: '28px', fontWeight: 800, marginBottom: '16px', letterSpacing: '-0.5px' }}>{step.title}</h3>
+                  <p style={{ fontSize: '16px', color: 'var(--text-secondary)', lineHeight: 1.8, margin: 0, fontWeight: 500 }}>{step.desc}</p>
                 </div>
-                <h3 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '12px' }}>{step.title}</h3>
-                <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.8, margin: 0, fontWeight: 500 }}>{step.desc}</p>
               </div>
             ))}
           </div>

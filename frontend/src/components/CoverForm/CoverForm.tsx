@@ -33,17 +33,12 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   )
 }
 
-const inp = {
+// Using .premium-input from index.css instead of inline styles
+const inpStyle = {
   width: '100%',
-  background: 'var(--input-bg)',
-  border: '1px solid var(--input-border)',
-  borderRadius: '8px',
-  padding: '8px 12px',
+  padding: '10px 14px',
+  borderRadius: '10px',
   fontSize: '13px',
-  color: 'var(--text-main)',
-  outline: 'none',
-  transition: 'border-color 0.2s, background 0.2s',
-  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)'
 }
 
 export default function CoverForm({ data, onChange, selectedTemplate, onSelectTemplate }: Props) {
@@ -118,21 +113,21 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       {/* ── University ── */}
       <SectionLabel>University Info</SectionLabel>
       <Field label="University Name">
-        <input style={inp} value={data.university.name} placeholder="e.g. Dhaka University"
+        <input className="premium-input" style={inpStyle} value={data.university.name} placeholder="e.g. Dhaka University"
           onChange={(e) => onChange({ university: { ...data.university, name: e.target.value } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="Department">
-        <input style={inp} value={data.university.dept} placeholder="e.g. Computer Science"
+        <input className="premium-input" style={inpStyle} value={data.university.dept} placeholder="e.g. Computer Science"
           onChange={(e) => onChange({ university: { ...data.university, dept: e.target.value } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="Address (optional)">
-        <input style={inp} value={data.university.address} placeholder="e.g. Dhaka – 1000"
+        <input className="premium-input" style={inpStyle} value={data.university.address} placeholder="e.g. Dhaka – 1000"
           onChange={(e) => onChange({ university: { ...data.university, address: e.target.value } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -164,7 +159,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       {/* ── Subject ── */}
       <SectionLabel>Course Details</SectionLabel>
       <Field label="Course Title">
-        <input style={inp} value={data.subject.name} placeholder="e.g. Data Structures"
+        <input className="premium-input" style={inpStyle} value={data.subject.name} placeholder="e.g. Data Structures"
           onChange={(e) => onChange({ subject: { ...data.subject, name: e.target.value } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -173,7 +168,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Course Code</label>
-          <input style={inp} value={data.subject.courseCode} placeholder="CSE 301"
+          <input className="premium-input" style={inpStyle} value={data.subject.courseCode} placeholder="CSE 301"
             onChange={(e) => onChange({ subject: { ...data.subject, courseCode: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -181,7 +176,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Session</label>
-          <input style={inp} value={data.subject.session} placeholder="2021-22"
+          <input className="premium-input" style={inpStyle} value={data.subject.session} placeholder="2021-22"
             onChange={(e) => onChange({ subject: { ...data.subject, session: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -216,7 +211,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
           <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Exp. No.</label>
-              <input style={inp} value={data.experimentNo ?? ''} placeholder="03"
+              <input className="premium-input" style={inpStyle} value={data.experimentNo ?? ''} placeholder="03"
                 onChange={(e) => onChange({ experimentNo: e.target.value })}
                 onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                 onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -224,7 +219,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
             </div>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Date</label>
-              <input type="date" style={inp} value={data.experimentDate ?? ''}
+              <input type="date" className="premium-input" style={inpStyle} value={data.experimentDate ?? ''}
                 onChange={(e) => onChange({ experimentDate: e.target.value })}
                 onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                 onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -233,7 +228,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
           </div>
           <div style={{ marginBottom: 0 }}>
             <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Experiment Title</label>
-            <input style={inp} value={data.experimentTitle ?? ''} placeholder="Title"
+            <input className="premium-input" style={inpStyle} value={data.experimentTitle ?? ''} placeholder="Title"
               onChange={(e) => onChange({ experimentTitle: e.target.value })}
               onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
               onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -245,7 +240,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       {/* ── Submitted By ── */}
       <SectionLabel>Student Info (Submitted By)</SectionLabel>
       <Field label="Full Name">
-        <input style={inp} value={data.submittedBy.name} placeholder="Your name"
+        <input className="premium-input" style={inpStyle} value={data.submittedBy.name} placeholder="Your name"
           onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, name: e.target.value } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -254,7 +249,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Roll No.</label>
-          <input style={inp} value={data.submittedBy.roll} placeholder="2101001"
+          <input className="premium-input" style={inpStyle} value={data.submittedBy.roll} placeholder="2101001"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, roll: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -262,7 +257,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Reg. No.</label>
-          <input style={inp} value={data.submittedBy.regNo} placeholder="21101001"
+          <input className="premium-input" style={inpStyle} value={data.submittedBy.regNo} placeholder="21101001"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, regNo: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -272,7 +267,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Year</label>
-          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.year ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submittedBy.year}
+          <select className="premium-input" style={{ ...inpStyle, appearance: 'none', color: data.submittedBy.year ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submittedBy.year}
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, year: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}>
@@ -282,7 +277,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Sem</label>
-          <select style={{ ...inp, appearance: 'none', color: data.submittedBy.semester ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submittedBy.semester}
+          <select className="premium-input" style={{ ...inpStyle, appearance: 'none', color: data.submittedBy.semester ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submittedBy.semester}
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, semester: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}>
@@ -292,7 +287,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Group</label>
-          <input style={inp} value={data.submittedBy.groupNo} placeholder="A1"
+          <input className="premium-input" style={inpStyle} value={data.submittedBy.groupNo} placeholder="A1"
             onChange={(e) => onChange({ submittedBy: { ...data.submittedBy, groupNo: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -303,14 +298,14 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       {/* ── Submitted To ── */}
       <SectionLabel>Teacher Info (Submitted To)</SectionLabel>
       <Field label="Teacher's Name">
-        <input style={inp} value={data.submittedTo.name} placeholder="Dr. Ali"
+        <input className="premium-input" style={inpStyle} value={data.submittedTo.name} placeholder="Dr. Ali"
           onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, name: e.target.value } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
         />
       </Field>
       <Field label="Designation">
-        <select style={{ ...inp, appearance: 'none' }} value={data.submittedTo.designation}
+        <select className="premium-input" style={{ ...inpStyle, appearance: 'none' }} value={data.submittedTo.designation}
           onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, designation: e.target.value as Designation } })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}>
@@ -320,7 +315,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Dept</label>
-          <input style={inp} value={data.submittedTo.dept} placeholder="CSE"
+          <input className="premium-input" style={inpStyle} value={data.submittedTo.dept} placeholder="CSE"
             onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, dept: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -328,7 +323,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
         <div style={{ flex: 1 }}>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '6px' }}>Uni</label>
-          <input style={inp} value={data.submittedTo.university} placeholder="JUST"
+          <input className="premium-input" style={inpStyle} value={data.submittedTo.university} placeholder="JUST"
             onChange={(e) => onChange({ submittedTo: { ...data.submittedTo, university: e.target.value } })}
             onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
             onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
@@ -339,7 +334,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
       {/* ── Dates ── */}
       <SectionLabel>Submission</SectionLabel>
       <Field label="Date of Submission">
-        <input type="date" style={{ ...inp, color: data.submissionDate ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submissionDate}
+        <input type="date" className="premium-input" style={{ ...inpStyle, color: data.submissionDate ? 'var(--text-main)' : 'var(--text-secondary)' }} value={data.submissionDate}
           onChange={(e) => onChange({ submissionDate: e.target.value })}
           onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
           onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}

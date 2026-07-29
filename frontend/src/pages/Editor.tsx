@@ -79,19 +79,25 @@ export default function Editor() {
   return (
     <div style={{ height: '100vh', overflow: 'hidden', background: 'var(--bg-main)', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', fontFamily: 'Inter, system-ui, sans-serif', transition: 'background-color 0.3s' }}>
 
-      {/* ── Header ── */}
+      {/* ── Floating Command Bar ── */}
       <header style={{
+        position: 'absolute',
+        top: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
         background: 'var(--card-bg)',
-        borderBottom: '1px solid var(--card-border)',
-        backdropFilter: 'blur(20px)',
-        padding: '0 20px',
-        height: '56px',
+        backdropFilter: 'blur(30px)',
+        padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        width: 'calc(100% - 40px)',
+        maxWidth: '900px',
+        borderRadius: '100px',
         flexShrink: 0,
-        zIndex: 30,
-        boxShadow: '0 1px 0 var(--card-border)',
+        zIndex: 50,
+        border: '1px solid var(--card-border)',
+        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.15)',
       }}>
         {/* Left: logo + back */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -144,22 +150,23 @@ export default function Editor() {
           opacity: isSidebarOpen ? 1 : 0,
           flexShrink: 0,
           background: 'var(--card-bg)',
-          backdropFilter: 'blur(20px)',
+          backdropFilter: 'blur(40px)',
           borderRight: '1px solid var(--card-border)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
           transition: isResizing ? 'none' : 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-          boxShadow: isSidebarOpen ? '10px 0 30px rgba(0,0,0,0.05)' : 'none',
+          boxShadow: isSidebarOpen ? '20px 0 40px rgba(0,0,0,0.05)' : 'none',
           position: 'relative',
-          zIndex: 10
+          zIndex: 10,
+          paddingTop: '80px', /* space for floating header */
         }}>
           {/* Sidebar header */}
-          <div style={{ padding: '16px', borderBottom: '1px solid var(--card-border)', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, background: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)' }}>
-            <div style={{ width: '24px', height: '24px', borderRadius: '6px', background: 'var(--accent-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Settings size={14} color="var(--accent)" />
+          <div style={{ padding: '20px 24px 16px', display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+            <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'var(--accent-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Settings size={16} color="var(--accent)" />
             </div>
-            <span style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-main)' }}>Editor Controls</span>
+            <span style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px', color: 'var(--text-main)' }}>Editor Controls</span>
           </div>
 
           {/* Scrollable form */}
