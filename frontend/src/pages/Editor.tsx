@@ -163,7 +163,7 @@ export default function Editor() {
           </div>
 
           {/* Scrollable form */}
-          <div style={{ flex: 1, overflowY: 'auto' }}>
+          <div className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
             <div style={{ minWidth: '340px' }}>
               <CoverForm
                 data={formData}
