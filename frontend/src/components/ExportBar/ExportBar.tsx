@@ -32,15 +32,15 @@ export default function ExportBar({ printRef, onClear }: Props) {
     <div className="flex items-center gap-2">
       <button
         onClick={handlePDF}
-        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
+        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition"
       >
-        <Download size={15} /> Download PDF
+        <Download size={15} /> <span className="hidden sm:inline">Download PDF</span>
       </button>
       <button
         onClick={handlePrint}
-        className="flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
+        className="flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition"
       >
-        <Printer size={15} /> Print
+        <Printer size={15} /> <span className="hidden sm:inline">Print</span>
       </button>
       <button
         onClick={handleClear}

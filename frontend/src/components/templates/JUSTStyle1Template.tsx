@@ -73,8 +73,10 @@ export default function JUSTStyle1Template({ data }: Props) {
 
       <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '14px' }} />
 
+      <div style={{ flexGrow: 1 }} />
+
       {/* Two-column: Submitted By | Submitted To */}
-      <div style={{ width: '100%', display: 'flex', gap: '0', marginTop: 'auto' }}>
+      <div style={{ width: '100%', display: 'flex', gap: '0' }}>
         <div style={{ flex: 1, paddingRight: '16px', borderRight: '1px solid #000' }}>
           <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', textDecoration: 'underline' }}>
             Submitted By:
@@ -111,7 +113,9 @@ export default function JUSTStyle1Template({ data }: Props) {
         </div>
       </div>
 
-      <div style={{ width: '100%', borderTop: '2px solid #000', margin: '16px 0 8px' }} />
+      <div style={{ flexGrow: 1 }} />
+
+      <div style={{ width: '100%', borderTop: '2px solid #000', paddingBottom: '8px' }} />
 
       <div style={{ textAlign: 'center', fontSize: '12pt' }}>
         <strong>Submission Date:</strong> {submissionDate || '—'}

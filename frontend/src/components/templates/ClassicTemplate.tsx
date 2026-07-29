@@ -73,8 +73,10 @@ export default function ClassicTemplate({ data }: Props) {
 
       <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '14px' }} />
 
+      <div style={{ flexGrow: 1 }} />
+
       {/* Submitted By / To */}
-      <div style={{ width: '100%', display: 'flex', gap: '12px', marginTop: 'auto' }}>
+      <div style={{ width: '100%', display: 'flex', gap: '12px' }}>
         <div style={{ flex: 1, border: '1px solid #000', padding: '10px 12px' }}>
           <p style={{ fontWeight: 'bold', fontSize: '11pt', textTransform: 'uppercase', borderBottom: '1px solid #000', paddingBottom: '5px', marginBottom: '8px', textAlign: 'center' }}>Submitted By</p>
           {[['Name', data.submittedBy.name], ['Roll No.', data.submittedBy.roll], ['Reg. No.', data.submittedBy.regNo], ['Year', data.submittedBy.year], ['Semester', data.submittedBy.semester], ['Group', data.submittedBy.groupNo]].map(([l, v]) => v ? (
@@ -89,7 +91,9 @@ export default function ClassicTemplate({ data }: Props) {
         </div>
       </div>
 
-      <div style={{ width: '100%', borderTop: '2px solid #000', marginTop: '14px', paddingTop: '8px', textAlign: 'center', fontSize: '11pt' }}>
+      <div style={{ flexGrow: 1 }} />
+
+      <div style={{ width: '100%', borderTop: '2px solid #000', paddingTop: '8px', textAlign: 'center', fontSize: '11pt' }}>
         <strong>Date of Submission: </strong>{data.submissionDate || '—'}
       </div>
     </div>

@@ -68,8 +68,10 @@ export default function JUSTStyle2Template({ data }: Props) {
 
       <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '18px' }} />
 
+      <div style={{ flexGrow: 1 }} />
+
       {/* Submitted by + Submitted to side by side */}
-      <div style={{ width: '100%', display: 'flex', gap: '20px', marginTop: 'auto' }}>
+      <div style={{ width: '100%', display: 'flex', gap: '20px' }}>
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', borderBottom: '1px solid #000', paddingBottom: '4px' }}>
             Submitted by:
@@ -78,14 +80,14 @@ export default function JUSTStyle2Template({ data }: Props) {
             <tbody>
               {[
                 ['Name', submittedBy.name],
-                ['Roll No', submittedBy.roll],
-                ['Session', subject.session],
-                ['Year / Sem', submittedBy.year && submittedBy.semester ? `${submittedBy.year} Year, ${submittedBy.semester} Sem` : (submittedBy.year || submittedBy.semester)],
+                ['Student ID', submittedBy.roll],
+                ['Year / Sem', submittedBy.year && submittedBy.semester ? `${submittedBy.semester} Semester, ${submittedBy.year} Year` : (submittedBy.year || submittedBy.semester)],
+                ['Group', submittedBy.groupNo],
               ].filter(([, v]) => v).map(([l, v]) => (
                 <tr key={l}>
-                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '38%', verticalAlign: 'top' }}>{l}</td>
-                  <td style={{ padding: '3px 4px', width: '4%', verticalAlign: 'top' }}>:</td>
-                  <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{v}</td>
+                  <td style={{ padding: '2px 0', fontWeight: 'bold', verticalAlign: 'top', whiteSpace: 'nowrap', width: '40%' }}>{l}</td>
+                  <td style={{ padding: '2px 4px', verticalAlign: 'top', width: '4%' }}>:</td>
+                  <td style={{ padding: '2px 0', verticalAlign: 'top' }}>{v}</td>
                 </tr>
               ))}
             </tbody>
@@ -114,6 +116,8 @@ export default function JUSTStyle2Template({ data }: Props) {
           </table>
         </div>
       </div>
+
+      <div style={{ flexGrow: 1 }} />
 
       <div style={{ width: '100%', borderTop: '1px solid #000', margin: '16px 0 8px' }} />
 

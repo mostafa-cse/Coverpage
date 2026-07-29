@@ -46,7 +46,7 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
   }
 
   return (
-    <div className="overflow-y-auto h-full px-4 py-4">
+    <div className="overflow-y-auto h-full px-4 py-4 scrollbar-thin scrollbar-track-gray">
 
       {/* ── Style / Template ── */}
       <SectionLabel>Style</SectionLabel>
