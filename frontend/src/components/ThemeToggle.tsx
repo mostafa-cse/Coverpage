@@ -33,8 +33,9 @@ export default function ThemeToggle() {
         className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all"
         style={{
           background: 'var(--card-bg)',
-          border: '1px solid var(--border-color)',
-          color: 'var(--text-main)'
+          border: '1px solid var(--card-border)',
+          color: 'var(--text-main)',
+          cursor: 'pointer'
         }}
       >
         {currentTheme.icon}
@@ -46,8 +47,9 @@ export default function ThemeToggle() {
           className="absolute right-0 mt-2 w-40 rounded-xl overflow-hidden shadow-2xl z-50 animate-in fade-in zoom-in-95"
           style={{
             background: 'var(--card-bg)',
-            border: '1px solid var(--border-color)',
-            backdropFilter: 'blur(20px)'
+            border: '1px solid var(--card-border)',
+            backdropFilter: 'blur(20px)',
+            boxShadow: '0 20px 40px -10px rgba(0,0,0,0.2)'
           }}
         >
           {themes.map((t) => (

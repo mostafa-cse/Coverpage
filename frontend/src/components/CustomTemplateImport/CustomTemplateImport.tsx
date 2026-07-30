@@ -28,19 +28,58 @@ export default function CustomTemplateImport({ data, onLoad, onClear, hasCustom 
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <input ref={fileRef} type="file" accept=".html" className="hidden" onChange={handleFile} />
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <input ref={fileRef} type="file" accept=".html" style={{ display: 'none' }} onChange={handleFile} />
       {!hasCustom ? (
         <button
           onClick={() => fileRef.current?.click()}
-          className="flex items-center gap-2 border border-dashed border-gray-400 text-gray-600 hover:border-blue-400 hover:text-blue-600 text-sm px-3 py-2 rounded-lg transition"
+          style={{
+            display: 'flex', alignItems: 'center', gap: '6px',
+            border: '1px dashed var(--card-border)',
+            background: 'var(--input-bg)',
+            color: 'var(--text-secondary)',
+            fontSize: '12px', fontWeight: 500,
+            padding: '8px 14px',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+          }}
+          onMouseOver={e => { 
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--accent)';
+          }}
+          onMouseOut={e => { 
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--card-border)';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-secondary)';
+          }}
         >
-          <Upload size={14} /> Import HTML Template
+          <Upload size={14} /> Import Template
         </button>
       ) : (
-        <div className="flex items-center gap-2 border border-green-300 bg-green-50 text-green-700 text-sm px-3 py-2 rounded-lg">
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '8px',
+          border: '1px solid #22c55e',
+          background: 'rgba(34, 197, 94, 0.1)',
+          color: '#22c55e',
+          fontSize: '12px', fontWeight: 500,
+          padding: '8px 14px',
+          borderRadius: '8px',
+        }}>
           <span>Custom template active</span>
-          <button onClick={onClear} className="hover:text-red-500 transition">
+          <button 
+            onClick={onClear}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#22c55e',
+              cursor: 'pointer',
+              display: 'flex',
+              padding: '2px',
+              transition: 'color 0.2s',
+            }}
+            onMouseOver={e => (e.currentTarget as HTMLButtonElement).style.color = '#ef4444'}
+            onMouseOut={e => (e.currentTarget as HTMLButtonElement).style.color = '#22c55e'}
+          >
             <X size={14} />
           </button>
         </div>
