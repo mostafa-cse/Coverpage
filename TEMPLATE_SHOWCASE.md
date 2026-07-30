@@ -329,23 +329,23 @@ Department: CSE       │
 ║ ║   UNIVERSITY NAME          ║   ║
 ║ ║   (Small Caps)             ║   ║
 ║ ║   Department of CSE        ║   ║
-║ ║━━━━━━━━━━━━━━━━━━━━━━━━━━║   ║
+║ ║━━━━━━━━━━━━━━━━━━━━━━━━━━  ║   ║
 ║ ║                            ║   ║
 ║ ║  ┌──────────────────────┐  ║   ║
 ║ ║  │  Laboratory Report   │  ║   ║
 ║ ║  │     (Italic)         │  ║   ║
 ║ ║  └──────────────────────┘  ║   ║
 ║ ║                            ║   ║
-║ ║ Course Title │ Thesis Work║   ║
-║ ║ Course Code  │ CSE 499    ║   ║
-║ ║ Exp. No.     │ Final      ║   ║
+║ ║ Course Title │ Thesis Work ║   ║
+║ ║ Course Code  │ CSE 499     ║   ║
+║ ║ Exp. No.     │ Final       ║   ║
 ║ ║                            ║   ║
-║ ║ ┌──────────┐ ┌──────────┐ ║   ║
-║ ║ │▓Submitted│ │▓Submitted│ ║   ║
-║ ║ │▓   By    │ │▓   To    │ ║   ║
-║ ║ │  (Table) │ │  (Table) │ ║   ║
-║ ║ └──────────┘ └──────────┘ ║   ║
-║ ║━━━━━━━━━━━━━━━━━━━━━━━━━━║   ║
+║ ║ ┌──────────┐ ┌──────────┐  ║   ║
+║ ║ │▓Submitted│ │▓Submitted│  ║   ║
+║ ║ │▓   By    │ │▓   To    │  ║   ║
+║ ║ │  (Table) │ │  (Table) │  ║   ║
+║ ║ └──────────┘ └──────────┘  ║   ║
+║ ║ ━━━━━━━━━━━━━━━━━━━━━━━━━━ ║   ║
 ║ ║   Date of Submission:      ║   ║
 ║ ║      2024-01-15            ║   ║
 ║ ╚════════════════════════════╝   ║
