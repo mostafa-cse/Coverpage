@@ -92,58 +92,60 @@ export default function ScholarlyClassicTemplate({ data }: Props) {
         <div style={{ flexGrow: 1 }} />
 
         {/* ── Two-column submission section ── */}
-        <div style={{ width: '100%', display: 'flex', gap: '14px', marginBottom: '18px' }}>
-          {[
-            {
-              title: 'Submitted By',
-              rows: [
-                ['Name', submittedBy.name],
-                ['Roll No.', submittedBy.roll],
-                ['Reg. No.', submittedBy.regNo],
-                ['Year', submittedBy.year],
-                ['Semester', submittedBy.semester],
-                ['Group', submittedBy.groupNo],
-              ],
-            },
-            {
-              title: 'Submitted To',
-              rows: [
-                ['Name', submittedTo.name],
-                ['Designation', submittedTo.designation],
-                ['Department', submittedTo.dept],
-                ['University', submittedTo.university],
-              ],
-            },
-          ].map(({ title, rows }) => (
-            <div key={title} style={{ flex: 1, border: '1.5px solid #000', overflow: 'hidden' }}>
-              {/* Grey title bar */}
-              <div style={{
-                background: '#e8e8e8', borderBottom: '1.5px solid #000',
-                padding: '6px 14px', fontSize: '10.5pt', fontWeight: 'bold',
-                textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center',
-                fontVariant: 'small-caps',
-              }}>
-                {title}
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '18px' }}>
+          <div style={{ display: 'flex', gap: '14px', maxWidth: '90%' }}>
+            {[
+              {
+                title: 'Submitted By',
+                rows: [
+                  ['Name', submittedBy.name],
+                  ['Roll No.', submittedBy.roll],
+                  ['Reg. No.', submittedBy.regNo],
+                  ['Year', submittedBy.year],
+                  ['Semester', submittedBy.semester],
+                  ['Group', submittedBy.groupNo],
+                ],
+              },
+              {
+                title: 'Submitted To',
+                rows: [
+                  ['Name', submittedTo.name],
+                  ['Designation', submittedTo.designation],
+                  ['Department', submittedTo.dept],
+                  ['University', submittedTo.university],
+                ],
+              },
+            ].map(({ title, rows }) => (
+              <div key={title} style={{ flex: 1, border: '1.5px solid #000', overflow: 'hidden' }}>
+                {/* Grey title bar */}
+                <div style={{
+                  background: '#e8e8e8', borderBottom: '1.5px solid #000',
+                  padding: '6px 14px', fontSize: '10.5pt', fontWeight: 'bold',
+                  textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center',
+                  fontVariant: 'small-caps',
+                }}>
+                  {title}
+                </div>
+                <div style={{ padding: '10px 14px' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>
+                    <tbody>
+                      {rows.filter(([, v]) => v).map(([l, v]) => (
+                        <tr key={l}>
+                          <td style={{ padding: '3px 0', fontWeight: 'bold', width: '44%' }}>{l}</td>
+                          <td style={{ padding: '3px 4px', width: '4%' }}>:</td>
+                          <td style={{ padding: '3px 0' }}>{v}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <div style={{ padding: '10px 14px' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>
-                  <tbody>
-                    {rows.filter(([, v]) => v).map(([l, v]) => (
-                      <tr key={l}>
-                        <td style={{ padding: '3px 0', fontWeight: 'bold', width: '44%' }}>{l}</td>
-                        <td style={{ padding: '3px 4px', width: '4%' }}>:</td>
-                        <td style={{ padding: '3px 0' }}>{v}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* ── Footer date ── */}
-        <div style={{ width: '100%', textAlign: 'center', borderTop: '3px double #000', paddingTop: '10px', fontSize: '11pt' }}>
+        <div style={{ textAlign: 'center', fontSize: '11pt' }}>
           <strong>Date of Submission:</strong> {submissionDate || '—'}
         </div>
       </div>

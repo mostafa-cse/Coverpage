@@ -73,30 +73,32 @@ export default function ModernTemplate({ data }: Props) {
         <div style={{ flex: 1 }} />
 
         {/* People cards */}
-        <div style={{ display: 'flex', gap: '14px', marginBottom: '22px' }}>
-          <div style={{ flex: 1, border: '1.5px solid #000', padding: '14px' }}>
-            <div style={{ fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px', borderBottom: '1px solid #000', paddingBottom: '6px' }}>
-              Submitted By
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '22px' }}>
+          <div style={{ display: 'flex', gap: '14px', maxWidth: '90%' }}>
+            <div style={{ flex: 1, border: '1.5px solid #000', padding: '14px' }}>
+              <div style={{ fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px', borderBottom: '1px solid #000', paddingBottom: '6px' }}>
+                Submitted By
+              </div>
+              {[['Name', data.submittedBy.name], ['Roll No.', data.submittedBy.roll], ['Reg. No.', data.submittedBy.regNo], ['Year', data.submittedBy.year], ['Semester', data.submittedBy.semester], ['Group', data.submittedBy.groupNo]].map(([l, v]) => v ? (
+                <div key={l} style={{ fontSize: '10.5pt', margin: '3px 0' }}><strong>{l}: </strong>{v}</div>
+              ) : null)}
             </div>
-            {[['Name', data.submittedBy.name], ['Roll No.', data.submittedBy.roll], ['Reg. No.', data.submittedBy.regNo], ['Year', data.submittedBy.year], ['Semester', data.submittedBy.semester], ['Group', data.submittedBy.groupNo]].map(([l, v]) => v ? (
-              <div key={l} style={{ fontSize: '10.5pt', margin: '3px 0' }}><strong>{l}: </strong>{v}</div>
-            ) : null)}
-          </div>
-          <div style={{ flex: 1, border: '1.5px solid #000', padding: '14px' }}>
-            <div style={{ fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px', borderBottom: '1px solid #000', paddingBottom: '6px' }}>
-              Submitted To
+            <div style={{ flex: 1, border: '1.5px solid #000', padding: '14px' }}>
+              <div style={{ fontSize: '9pt', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px', borderBottom: '1px solid #000', paddingBottom: '6px' }}>
+                Submitted To
+              </div>
+              {[['Name', data.submittedTo.name], ['Designation', data.submittedTo.designation], ['Department', data.submittedTo.dept], ['University', data.submittedTo.university]].map(([l, v]) => v ? (
+                <div key={l} style={{ fontSize: '10.5pt', margin: '3px 0' }}><strong>{l}: </strong>{v}</div>
+              ) : null)}
             </div>
-            {[['Name', data.submittedTo.name], ['Designation', data.submittedTo.designation], ['Department', data.submittedTo.dept], ['University', data.submittedTo.university]].map(([l, v]) => v ? (
-              <div key={l} style={{ fontSize: '10.5pt', margin: '3px 0' }}><strong>{l}: </strong>{v}</div>
-            ) : null)}
           </div>
         </div>
 
-        {/* Footer */}
-        <div style={{ borderTop: '1.5px solid #000', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', fontSize: '10.5pt' }}>
+        {/* Submission date centered */}
+        <div style={{ textAlign: 'center', fontSize: '10.5pt' }}>
           <span>Submission Date: <strong>{data.submissionDate || '—'}</strong></span>
           {isLab && data.experimentDate && (
-            <span>Experiment Date: <strong>{data.experimentDate}</strong></span>
+            <span style={{ marginLeft: '32px' }}>Experiment Date: <strong>{data.experimentDate}</strong></span>
           )}
         </div>
       </div>

@@ -77,33 +77,33 @@ export default function RUETTemplate({ data }: Props) {
         <div style={{ flexGrow: 1 }} />
 
         {/* Submitted By / To */}
-        <div style={{ width: '100%', display: 'flex', gap: '16px', marginBottom: '16px' }}>
-          {[
-            { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
-            { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
-          ].map(({ title, rows }) => (
-            <div key={title} style={{ flex: 1, border: '1.5px solid #000', padding: '12px 14px' }}>
-              <div style={{ fontWeight: 'bold', fontSize: '10.5pt', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid #000', paddingBottom: '6px', marginBottom: '10px' }}>
-                {title}
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', gap: '16px', maxWidth: '90%' }}>
+            {[
+              { title: 'Submitted By', rows: [['Name', submittedBy.name], ['Student ID', submittedBy.roll], ['Reg. No.', submittedBy.regNo], ['Year', submittedBy.year], ['Semester', submittedBy.semester], ['Group', submittedBy.groupNo]] },
+              { title: 'Submitted To', rows: [['Name', submittedTo.name], ['Designation', submittedTo.designation], ['Department', submittedTo.dept], ['University', submittedTo.university]] },
+            ].map(({ title, rows }) => (
+              <div key={title} style={{ flex: 1, border: '1.5px solid #000', padding: '12px 14px' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '10.5pt', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid #000', paddingBottom: '6px', marginBottom: '10px' }}>
+                  {title}
+                </div>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>
+                  <tbody>
+                    {rows.filter(([, v]) => v).map(([l, v]) => (
+                      <tr key={l}>
+                        <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%' }}>{l}</td>
+                        <td style={{ padding: '3px 4px', width: '5%' }}>:</td>
+                        <td style={{ padding: '3px 0' }}>{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '10.5pt' }}>
-                <tbody>
-                  {rows.filter(([, v]) => v).map(([l, v]) => (
-                    <tr key={l}>
-                      <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%' }}>{l}</td>
-                      <td style={{ padding: '3px 4px', width: '5%' }}>:</td>
-                      <td style={{ padding: '3px 0' }}>{v}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Double rule + date */}
-        <div style={{ width: '100%', borderTop: '2px solid #000', marginBottom: '2px' }} />
-        <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '10px' }} />
+        {/* Submission date centered below tables */}
         <div style={{ textAlign: 'center', fontSize: '11pt' }}>
           <strong>Date of Submission:</strong> {submissionDate || '—'}
         </div>

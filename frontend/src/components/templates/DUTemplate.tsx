@@ -98,65 +98,63 @@ export default function DUTemplate({ data }: Props) {
         </tbody>
       </table>
 
-      {/* Rule */}
-      <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '16px' }} />
+      <div style={{ flexGrow: 1 }} />
 
       {/* Submitted By */}
-      <div style={{ width: '100%', marginBottom: '14px' }}>
-        <div style={{ fontWeight: 'bold', fontSize: '12pt', textTransform: 'uppercase', textDecoration: 'underline', marginBottom: '8px' }}>
-          Submitted By:
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '14px' }}>
+        <div style={{ width: '85%' }}>
+          <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', textDecoration: 'underline' }}>
+            Submitted By:
+          </div>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5pt' }}>
+            <tbody>
+              {[
+                ['Name', submittedBy.name],
+                ['Roll No.', submittedBy.roll],
+                ['Registration No.', submittedBy.regNo],
+                ['Year & Semester', submittedBy.year && submittedBy.semester ? `${submittedBy.year} Year, ${submittedBy.semester} Semester` : (submittedBy.year || submittedBy.semester)],
+                ['Group', submittedBy.groupNo],
+              ].filter(([, v]) => v).map(([label, val]) => (
+                <tr key={label}>
+                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%' }}>{label}</td>
+                  <td style={{ padding: '3px 0', width: '3%' }}>:</td>
+                  <td style={{ padding: '3px 0' }}>{val}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5pt' }}>
-          <tbody>
-            {[
-              ['Name', submittedBy.name],
-              ['Roll No.', submittedBy.roll],
-              ['Registration No.', submittedBy.regNo],
-              ['Year & Semester', submittedBy.year && submittedBy.semester ? `${submittedBy.year} Year, ${submittedBy.semester} Semester` : (submittedBy.year || submittedBy.semester)],
-              ['Group', submittedBy.groupNo],
-            ].filter(([, v]) => v).map(([label, val]) => (
-              <tr key={label}>
-                <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%' }}>{label}</td>
-                <td style={{ padding: '3px 0', width: '3%' }}>:</td>
-                <td style={{ padding: '3px 0' }}>{val}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
 
-      {/* Rule */}
-      <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '14px' }} />
-
       {/* Submitted To */}
-      <div style={{ width: '100%', marginBottom: '12px' }}>
-        <div style={{ fontWeight: 'bold', fontSize: '12pt', textTransform: 'uppercase', textDecoration: 'underline', marginBottom: '8px' }}>
-          Submitted To:
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '12px' }}>
+        <div style={{ width: '85%' }}>
+          <div style={{ fontWeight: 'bold', fontSize: '12pt', marginBottom: '10px', textDecoration: 'underline' }}>
+            Submitted To:
+          </div>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5pt' }}>
+            <tbody>
+              {[
+                ['Name', submittedTo.name],
+                ['Designation', submittedTo.designation],
+                ['Department', submittedTo.dept],
+                ['University', submittedTo.university],
+              ].filter(([, v]) => v).map(([label, val]) => (
+                <tr key={label}>
+                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%' }}>{label}</td>
+                  <td style={{ padding: '3px 0', width: '3%' }}>:</td>
+                  <td style={{ padding: '3px 0' }}>{val}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5pt' }}>
-          <tbody>
-            {[
-              ['Name', submittedTo.name],
-              ['Designation', submittedTo.designation],
-              ['Department', submittedTo.dept],
-              ['University', submittedTo.university],
-            ].filter(([, v]) => v).map(([label, val]) => (
-              <tr key={label}>
-                <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%' }}>{label}</td>
-                <td style={{ padding: '3px 0', width: '3%' }}>:</td>
-                <td style={{ padding: '3px 0' }}>{val}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
 
       {/* Spacer */}
       <div style={{ flexGrow: 1 }} />
 
-      {/* Double Rule + Date */}
-      <div style={{ width: '100%', borderTop: '2px solid #000', marginBottom: '2px' }} />
-      <div style={{ width: '100%', borderTop: '1px solid #000', marginBottom: '10px' }} />
+      {/* Submission date centered */}
       <div style={{ textAlign: 'center', fontSize: '11pt' }}>
         <strong>Date of Submission:</strong> {submissionDate || '—'}
       </div>
