@@ -81,9 +81,9 @@ export default function ScholarlyClassicTemplate({ data }: Props) {
               ] : []),
             ].map(([label, val]) => (
               <tr key={label} style={{ borderBottom: '1px solid #ddd' }}>
-                <td style={{ padding: '5px 6px', fontWeight: 'bold', width: '40%' }}>{label}</td>
-                <td style={{ padding: '5px 4px', width: '4%' }}>:</td>
-                <td style={{ padding: '5px 6px' }}>{val || '—'}</td>
+                <td style={{ padding: '5px 6px', fontWeight: 'bold', width: '40%', verticalAlign: 'top' }}>{label}</td>
+                <td style={{ padding: '5px 4px', width: '4%', verticalAlign: 'top' }}>:</td>
+                <td style={{ padding: '5px 6px', verticalAlign: 'top' }}>{val || '—'}</td>
               </tr>
             ))}
           </tbody>
@@ -131,9 +131,9 @@ export default function ScholarlyClassicTemplate({ data }: Props) {
                     <tbody>
                       {rows.filter(([, v]) => v).map(([l, v]) => (
                         <tr key={l}>
-                          <td style={{ padding: '3px 0', fontWeight: 'bold', width: '44%' }}>{l}</td>
-                          <td style={{ padding: '3px 4px', width: '4%' }}>:</td>
-                          <td style={{ padding: '3px 0' }}>{v}</td>
+                          <td style={{ padding: '3px 0', fontWeight: 'bold', width: '44%', verticalAlign: 'top' }}>{l}</td>
+                          <td style={{ padding: '3px 4px', width: '4%', verticalAlign: 'top' }}>:</td>
+                          <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{v}</td>
                         </tr>
                       ))}
                     </tbody>

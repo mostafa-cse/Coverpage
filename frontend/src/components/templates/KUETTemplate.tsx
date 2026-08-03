@@ -68,9 +68,9 @@ export default function KUETTemplate({ data }: Props) {
               ] : []),
             ].map(([label, val]) => (
               <tr key={label}>
-                <td style={{ padding: '4px 0', fontWeight: 'bold', width: '44%' }}>{label}</td>
-                <td style={{ padding: '4px 4px', width: '4%' }}>:</td>
-                <td style={{ padding: '4px 0' }}>{val || '—'}</td>
+                <td style={{ padding: '4px 0', fontWeight: 'bold', width: '44%', verticalAlign: 'top' }}>{label}</td>
+                <td style={{ padding: '4px 4px', width: '4%', verticalAlign: 'top' }}>:</td>
+                <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{val || '—'}</td>
               </tr>
             ))}
           </tbody>
@@ -94,9 +94,9 @@ export default function KUETTemplate({ data }: Props) {
                 <tbody>
                   {rows.filter(([, v]) => v).map(([l, v]) => (
                     <tr key={l}>
-                      <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%' }}>{l}</td>
-                      <td style={{ padding: '3px 4px', width: '5%' }}>:</td>
-                      <td style={{ padding: '3px 0' }}>{v}</td>
+                      <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%', verticalAlign: 'top' }}>{l}</td>
+                      <td style={{ padding: '3px 4px', width: '5%', verticalAlign: 'top' }}>:</td>
+                      <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{v}</td>
                     </tr>
                   ))}
                 </tbody>

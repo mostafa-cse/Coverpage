@@ -206,6 +206,16 @@ export default function CoverForm({ data, onChange, selectedTemplate, onSelectTe
         </div>
       </Field>
 
+      {!isLab && (
+        <Field label="Assignment Title / Topic (optional)">
+          <input className="premium-input" style={inpStyle} value={data.assignmentTitle ?? ''} placeholder="e.g. Details Explain on the graphics of each Monitor"
+            onChange={(e) => onChange({ assignmentTitle: e.target.value })}
+            onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
+            onBlur={e => (e.target.style.borderColor = 'var(--input-border)')}
+          />
+        </Field>
+      )}
+
       {isLab && (
         <div style={{ padding: '16px', background: 'var(--input-bg)', borderRadius: '12px', border: '1px solid var(--input-border)', marginBottom: '16px' }}>
           <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>

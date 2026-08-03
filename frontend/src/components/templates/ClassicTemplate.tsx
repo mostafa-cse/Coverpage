@@ -57,9 +57,9 @@ export default function ClassicTemplate({ data }: Props) {
             ['Session', data.subject.session],
           ].map(([label, val]) => (
             <tr key={label}>
-              <td style={{ padding: '3px 0', fontWeight: 'bold', width: '40%' }}>{label}</td>
-              <td style={{ padding: '3px 4px', width: '4%' }}>:</td>
-              <td style={{ padding: '3px 0' }}>{val || '—'}</td>
+              <td style={{ padding: '3px 0', fontWeight: 'bold', width: '40%', verticalAlign: 'top' }}>{label}</td>
+              <td style={{ padding: '3px 4px', width: '4%', verticalAlign: 'top' }}>:</td>
+              <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{val || '—'}</td>
             </tr>
           ))}
           {isLab && [
@@ -68,9 +68,9 @@ export default function ClassicTemplate({ data }: Props) {
             ['Date of Experiment', data.experimentDate],
           ].map(([label, val]) => (
             <tr key={label}>
-              <td style={{ padding: '3px 0', fontWeight: 'bold' }}>{label}</td>
-              <td style={{ padding: '3px 4px' }}>:</td>
-              <td style={{ padding: '3px 0' }}>{val || '—'}</td>
+              <td style={{ padding: '3px 0', fontWeight: 'bold', verticalAlign: 'top' }}>{label}</td>
+              <td style={{ padding: '3px 4px', verticalAlign: 'top' }}>:</td>
+              <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{val || '—'}</td>
             </tr>
           ))}
         </tbody>

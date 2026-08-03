@@ -62,36 +62,36 @@ export default function DUTemplate({ data }: Props) {
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5pt', marginBottom: '14px' }}>
         <tbody>
           <tr>
-            <td style={{ padding: '4px 0', fontWeight: 'bold', width: '42%' }}>Course Title</td>
-            <td style={{ padding: '4px 0', width: '3%' }}>:</td>
-            <td style={{ padding: '4px 0' }}>{subject.name || '—'}</td>
+            <td style={{ padding: '4px 0', fontWeight: 'bold', width: '42%', verticalAlign: 'top' }}>Course Title</td>
+            <td style={{ padding: '4px 0', width: '3%', verticalAlign: 'top' }}>:</td>
+            <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{subject.name || '—'}</td>
           </tr>
           <tr>
-            <td style={{ padding: '4px 0', fontWeight: 'bold' }}>Course Code</td>
-            <td>:</td>
-            <td style={{ padding: '4px 0' }}>{subject.courseCode || '—'}</td>
+            <td style={{ padding: '4px 0', fontWeight: 'bold', verticalAlign: 'top' }}>Course Code</td>
+            <td style={{ verticalAlign: 'top' }}>:</td>
+            <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{subject.courseCode || '—'}</td>
           </tr>
           <tr>
-            <td style={{ padding: '4px 0', fontWeight: 'bold' }}>Session</td>
-            <td>:</td>
-            <td style={{ padding: '4px 0' }}>{subject.session || '—'}</td>
+            <td style={{ padding: '4px 0', fontWeight: 'bold', verticalAlign: 'top' }}>Session</td>
+            <td style={{ verticalAlign: 'top' }}>:</td>
+            <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{subject.session || '—'}</td>
           </tr>
           {isLab && (
             <>
               <tr>
-                <td style={{ padding: '4px 0', fontWeight: 'bold' }}>Experiment No.</td>
-                <td>:</td>
-                <td style={{ padding: '4px 0' }}>{experimentNo || '—'}</td>
+                <td style={{ padding: '4px 0', fontWeight: 'bold', verticalAlign: 'top' }}>Experiment No.</td>
+                <td style={{ verticalAlign: 'top' }}>:</td>
+                <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{experimentNo || '—'}</td>
               </tr>
               <tr>
-                <td style={{ padding: '4px 0', fontWeight: 'bold' }}>Experiment Title</td>
-                <td>:</td>
-                <td style={{ padding: '4px 0' }}>{experimentTitle || '—'}</td>
+                <td style={{ padding: '4px 0', fontWeight: 'bold', verticalAlign: 'top' }}>Experiment Title</td>
+                <td style={{ verticalAlign: 'top' }}>:</td>
+                <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{experimentTitle || '—'}</td>
               </tr>
               <tr>
-                <td style={{ padding: '4px 0', fontWeight: 'bold' }}>Date of Experiment</td>
-                <td>:</td>
-                <td style={{ padding: '4px 0' }}>{experimentDate || '—'}</td>
+                <td style={{ padding: '4px 0', fontWeight: 'bold', verticalAlign: 'top' }}>Date of Experiment</td>
+                <td style={{ verticalAlign: 'top' }}>:</td>
+                <td style={{ padding: '4px 0', verticalAlign: 'top' }}>{experimentDate || '—'}</td>
               </tr>
             </>
           )}
@@ -116,9 +116,9 @@ export default function DUTemplate({ data }: Props) {
                 ['Group', submittedBy.groupNo],
               ].filter(([, v]) => v).map(([label, val]) => (
                 <tr key={label}>
-                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%' }}>{label}</td>
-                  <td style={{ padding: '3px 0', width: '3%' }}>:</td>
-                  <td style={{ padding: '3px 0' }}>{val}</td>
+                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%', verticalAlign: 'top' }}>{label}</td>
+                  <td style={{ padding: '3px 0', width: '3%', verticalAlign: 'top' }}>:</td>
+                  <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{val}</td>
                 </tr>
               ))}
             </tbody>
@@ -141,9 +141,9 @@ export default function DUTemplate({ data }: Props) {
                 ['University', submittedTo.university],
               ].filter(([, v]) => v).map(([label, val]) => (
                 <tr key={label}>
-                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%' }}>{label}</td>
-                  <td style={{ padding: '3px 0', width: '3%' }}>:</td>
-                  <td style={{ padding: '3px 0' }}>{val}</td>
+                  <td style={{ padding: '3px 0', fontWeight: 'bold', width: '42%', verticalAlign: 'top' }}>{label}</td>
+                  <td style={{ padding: '3px 0', width: '3%', verticalAlign: 'top' }}>:</td>
+                  <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{val}</td>
                 </tr>
               ))}
             </tbody>

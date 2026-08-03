@@ -65,9 +65,9 @@ export default function ElegantTemplate({ data }: Props) {
                 ] : []),
               ].map(([label, val]) => (
                 <tr key={label} style={{ borderBottom: '1px solid #e0e0e0' }}>
-                  <td style={{ padding: '5px 0', fontWeight: 'bold', width: '44%' }}>{label}</td>
-                  <td style={{ padding: '5px 4px', width: '4%' }}>:</td>
-                  <td style={{ padding: '5px 0' }}>{val || '—'}</td>
+                  <td style={{ padding: '5px 0', fontWeight: 'bold', width: '44%', verticalAlign: 'top' }}>{label}</td>
+                  <td style={{ padding: '5px 4px', width: '4%', verticalAlign: 'top' }}>:</td>
+                  <td style={{ padding: '5px 0', verticalAlign: 'top' }}>{val || '—'}</td>
                 </tr>
               ))}
             </tbody>
@@ -90,9 +90,9 @@ export default function ElegantTemplate({ data }: Props) {
                     <tbody>
                       {rows.filter(([, v]) => v).map(([l, v]) => (
                         <tr key={l}>
-                          <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%' }}>{l}</td>
-                          <td style={{ padding: '3px 4px', width: '5%' }}>:</td>
-                          <td style={{ padding: '3px 0' }}>{v}</td>
+                          <td style={{ padding: '3px 0', fontWeight: 'bold', width: '45%', verticalAlign: 'top' }}>{l}</td>
+                          <td style={{ padding: '3px 4px', width: '5%', verticalAlign: 'top' }}>:</td>
+                          <td style={{ padding: '3px 0', verticalAlign: 'top' }}>{v}</td>
                         </tr>
                       ))}
                     </tbody>

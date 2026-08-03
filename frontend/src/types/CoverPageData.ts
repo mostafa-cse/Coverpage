@@ -43,6 +43,9 @@ export interface CoverPageData {
 
   submissionDate: string
 
+  // Assignment only
+  assignmentTitle?: string
+
   // Lab report only
   experimentDate?: string
   experimentNo?: string
@@ -78,6 +81,7 @@ export const defaultCoverPageData: CoverPageData = {
     university: '',
   },
   submissionDate: new Date().toISOString().split('T')[0],
+  assignmentTitle: '',
   experimentDate: '',
   experimentNo: '',
   experimentTitle: '',
