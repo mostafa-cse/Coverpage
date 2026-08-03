@@ -12,7 +12,7 @@ export default function Home() {
 
 
   const steps = [
-    { num: '01', title: 'Pick a Style', desc: 'Choose from 11 classic academic cover page styles.', color: 'from-blue-500 to-cyan-500' },
+    { num: '01', title: 'Pick a Style', desc: 'Choose from 12 classic academic cover page styles.', color: 'from-blue-500 to-cyan-500' },
     { num: '02', title: 'Fill Details', desc: 'Enter university, course, student and teacher info.', color: 'from-violet-500 to-purple-500' },
     { num: '03', title: 'Export & Print', desc: 'Download PDF or print directly in one click.', color: 'from-emerald-500 to-teal-500' },
   ]
@@ -86,7 +86,7 @@ export default function Home() {
         </h1>
 
         <p style={{ fontSize: '19px', color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto 48px', lineHeight: 1.7, fontWeight: 400 }}>
-          11 meticulously designed, university-specific templates for BD students. 
+          12 meticulously designed, university-specific templates for BD students.
           Auto-saved locally. Exported as a pristine A4 PDF in seconds.
         </p>
 
@@ -172,7 +172,7 @@ export default function Home() {
       <section id="templates" style={{ position: 'relative', zIndex: 1, padding: '100px 24px', borderTop: '1px solid var(--card-border)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <p className="text-gradient-shimmer" style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '16px' }}>11 Unique Designs</p>
+            <p className="text-gradient-shimmer" style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '16px' }}>12 Unique Designs</p>
             <h2 style={{ fontSize: '42px', fontWeight: 900, letterSpacing: '-1px', marginBottom: '16px' }}>Find Your Perfect Style</h2>
             <p style={{ fontSize: '16px', color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto' }}>
               Every template is built with pure Times New Roman and strict academic spacing. Pixel-perfect for print.

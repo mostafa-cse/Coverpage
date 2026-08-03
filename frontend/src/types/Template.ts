@@ -7,6 +7,7 @@ export interface TemplateConfig {
 }
 
 export const TEMPLATES: TemplateConfig[] = [
+  { id: 'standard',  name: 'Standard', description: 'Official JUST-style standard cover page — logo header with underline, centred topic/course block, boxed submission table.', thumbnail: '🏫', tags: ['JUST', 'standard', 'official'] },
   { id: 'classic',   name: 'Style 1',  description: 'Clean centred serif layout — classic A4 format for all BD universities.', thumbnail: '📄', tags: ['universal', 'formal'] },
   { id: 'buet',      name: 'Style 2',  description: 'Double border frame, boxed layout — BUET engineering standard.', thumbnail: '🏛️', tags: ['BUET', 'engineering'] },
   { id: 'du',        name: 'Style 3',  description: 'Underline headings, double rules — DU compact serif academic format.', thumbnail: '🎓', tags: ['DU', 'arts', 'science'] },

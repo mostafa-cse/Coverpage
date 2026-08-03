@@ -15,7 +15,7 @@ export default function Editor() {
   const previewContainerRef = useRef<HTMLDivElement>(null)
 
   const [formData, setFormData] = useState<CoverPageData>(loadFormData)
-  const [selectedTemplate, setSelectedTemplate] = useState('classic')
+  const [selectedTemplate, setSelectedTemplate] = useState('standard')
   const [customHtml, setCustomHtml] = useState<string | undefined>(undefined)
   const [showPreview, setShowPreview] = useState(false)
   const [previewScale, setPreviewScale] = useState(0.5)

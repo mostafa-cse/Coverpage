@@ -1,3 +1,4 @@
+export { default as StandardTemplate } from './StandardTemplate'
 export { default as ClassicTemplate } from './ClassicTemplate'
 export { default as BUETTemplate } from './BUETTemplate'
 export { default as DUTemplate } from './DUTemplate'
